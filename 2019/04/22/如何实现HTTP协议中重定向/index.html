@@ -51,16 +51,18 @@
   };
 </script>
 
-  <meta name="description" content="Record what you want!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yang&#39;s Blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;tags&#x2F;%E9%87%8D%E5%AE%9A%E5%90%91-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86&#x2F;index.html">
+  <meta name="description" content="我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！">
+<meta name="keywords" content="重定向,实现原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现http协议中的重定向？">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;04&#x2F;22&#x2F;%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="Record what you want!">
+<meta property="og:description" content="我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-31T04:32:39.393Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://youngyang.top/tags/%E9%87%8D%E5%AE%9A%E5%90%91-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+<link rel="canonical" href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/">
 
 
 <script id="page-configurations">
@@ -68,13 +70,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: 重定向,实现原理 | Yang's Blog</title>
+  <title>如何实现http协议中的重定向？ | Yang's Blog</title>
   
 
 
@@ -149,7 +151,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">5</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -183,50 +185,180 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">重定向,实现原理
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何实现http协议中的重定向？
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-31 12:32:39" itemprop="dateModified" datetime="2019-10-31T12:32:39+08:00">2019-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-web/" itemprop="url" rel="index">
+                    <span itemprop="name">java web</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+        <p>我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！</p>
+<a id="more"></a>
+<p>在学java web的时候遇到一个重定向的问题。</p>
+<p>首先讲解下什么是重定向：在 HTTP 协议中，重定向操作由服务器通过发送特殊的响应（即 redirects）而触发。HTTP 协议的重定向响应的状态码为 3xx 。浏览器在接收到重定向响应的时候，会采用该响应提供的新的 URL ，并立即进行加载；大多数情况下，除了会有一小部分性能损失之外，重定向操作对于用户来说是不可见的。</p>
+<p>简单的说就是：客户端向服务器发送请求，但是服务器的某个资源完成不了这个请求，让客户端去请求另一个资源来完成请求。就是一个请求转发的过程。</p>
+<p>我是采用IntelliJ IDEA来完成的，首先先new两个Servlet，在这里实现httpServlet，起名responseDemo1和responseDemo2。</p>
+<pre><code>其实重定向有两种方式：
+第一种：</code></pre><p> 1、设置状态码为302：response.setStatus(302);<br> 2、设置响应头的location，设置请求资源路径 response.setHeader(“location”,”资源路径”);<br>   第二种 ：<br>   直接调用response.sendRedirect(“资源路径”)</p>
+<pre><code>第一个Servlet代码如下：
+`package cn.itcast.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(&quot;/responseDemo1&quot;)
+public class responseDemo1 extends HttpServlet {
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws         ServletException, IOException {
+    System.out.println(request.getMethod());
+    System.out.println(&quot;responseDemo1.....&quot;);
+   /* //设置状态码302
+    response.setStatus(302);
+    //设置资源路径
+    response.setHeader(&quot;location&quot;, &quot;/day15/responseDemo2&quot;);*/
+   response.sendRedirect(&quot;/day15/responseDemo2&quot;);
+}
+
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    this.doPost(request,response);
+}</code></pre><p>}<br>`<br>    第二个如下：</p>
+<pre><code>`    package cn.itcast.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(&quot;/responseDemo2&quot;)
+public class responseDemo2 extends HttpServlet {
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    System.out.println(request.getMethod());
+    System.out.println(&quot;responseDemo2.......&quot;);
+}
+
+ protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    this.doPost(request,response);
+}</code></pre><p>}<br>`</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
+		
+	</div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91%EF%BC%9F/" itemprop="url">
-            <span itemprop="name">如何实现http协议中的重定向？</span>
-          </a>
-      </h2>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag"># 重定向</a>
+              <a href="/tags/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" rel="tag"># 实现原理</a>
+          </div>
 
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="如何在Linux中安装MySQL数据库">
+                  <i class="fa fa-chevron-left"></i> 如何在Linux中安装MySQL数据库
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" rel="prev" title="夯实Java基础系列：深入理解Java内部类及其实现原理">
+                  夯实Java基础系列：深入理解Java内部类及其实现原理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -283,7 +415,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
