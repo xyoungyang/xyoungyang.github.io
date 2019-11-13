@@ -54,7 +54,7 @@
   <meta name="description" content="MySQL总体概览)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL逻辑架构">
-<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;07&#x2F;13&#x2F;MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="MySQL总体概览)">
 <meta property="og:locale" content="zh-CN">
@@ -64,11 +64,11 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191108105833580.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191108110055368.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191108110246628.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-13T15:30:13.951Z">
+<meta property="og:updated_time" content="2019-11-13T15:35:40.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191108103653857.png">
 
-<link rel="canonical" href="https://youngyang.top/2019/11/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/">
+<link rel="canonical" href="https://youngyang.top/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/">
 
 
 <script id="page-configurations">
@@ -196,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/11/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -218,10 +218,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-11-13 23:27:30 / 修改时间：23:30:13" itemprop="dateCreated datePublished" datetime="2019-11-13T23:27:30+08:00">2019-11-13</time>
+              <time title="创建时间：2019-07-13 09:23:22" itemprop="dateCreated datePublished" datetime="2019-07-13T09:23:22+08:00">2019-07-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-13 23:35:40" itemprop="dateModified" datetime="2019-11-13T23:35:40+08:00">2019-11-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -252,10 +258,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="MySQL总体概览"><a href="#MySQL总体概览" class="headerlink" title="MySQL总体概览"></a>MySQL总体概览</h1><p><img src="https://img-blog.csdnimg.cn/20191108103653857.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20191108103640296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191108105813554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong><img src="https://img-blog.csdnimg.cn/20191108105833580.png" alt="加粗样式"></strong></p>
+        <h1 id="MySQL总体概览"><a href="#MySQL总体概览" class="headerlink" title="MySQL总体概览"></a>MySQL总体概览</h1><p><img src="https://img-blog.csdnimg.cn/20191108103653857.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20191108103640296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <a id="more"></a>
 
-<p><strong>了解：</strong><br>1.Connectors<br>指的是不同语言中与SQL的交互<br>2 Management Serveices &amp; Utilities：<br>系统管理和控制工具<br>3 Connection Pool: 连接池<br>管理缓冲用户连接，线程处理等需要缓存的需求。<br>负责监听对 MySQL Server 的各种请求，接收连接请求，转发所有连接请求到线程管理模块。每一个连接上 MySQL Server 的客户端请求都会被分配（或创建）一个连接线程为其单独服务。而连接线程的主要工作就是负责 MySQL Server 与客户端的通信，<br>接受客户端的命令请求，传递 Server 端的结果信息等。线程管理模块则负责管理维护这些连接线程。包括线程的创建，线程的 cache 等。<br>4 SQL Interface: SQL接口。<br>接受用户的SQL命令，并且返回用户需要查询的结果。比如select from就是调用SQL Interface<br>5 Parser: 解析器。<br>SQL命令传递到解析器的时候会被解析器验证和解析。解析器是由Lex和YACC实现的，是一个很长的脚本。<br>在 MySQL中我们习惯将所有 Client 端发送给 Server 端的命令都称为 query ，在 MySQL Server 里面，连接线程接收到客户端的一个 Query 后，会直接将该 query 传递给专门负责将各种 Query 进行分类然后转发给各个对应的处理模块。<br>主要功能：<br>a . 将SQL语句进行语义和语法的分析，分解成数据结构，然后按照不同的操作类型进行分类，然后做出针对性的转发到后续步骤，以后SQL语句的传递和处理就是基于这个结构的。<br>b.  如果在分解构成中遇到错误，那么就说明这个sql语句是不合理的<br>6 Optimizer: 查询优化器。<br>SQL语句在查询之前会使用查询优化器对查询进行优化。就是优化客户端请求的 query（sql语句） ，根据客户端请求的 query 语句，和数据库中的一些统计信息，在一系列算法的基础上进行分析，得出一个最优的策略，告诉后面的程序如何取得这个 query 语句的结果<br>他使用的是“选取-投影-联接”策略进行查询。<br>       用一个例子就可以理解： select uid,name from user where gender = 1;<br>       这个select 查询先根据where 语句进行选取，而不是先将表全部查询出来以后再进行gender过滤<br>       这个select查询先根据uid和name进行属性投影，而不是将属性全部取出以后再进行过滤<br>       将这两个查询条件联接起来生成最终查询结果<br>7 Cache和Buffer： 查询缓存。<br>他的主要功能是将客户端提交 给MySQL 的 Select 类 query 请求的返回结果集 cache 到内存中，与该 query 的一个 hash 值 做一个对应。该 Query 所取数据的基表发生任何数据的变化之后， MySQL 会自动使该 query 的Cache 失效。在读写比例非常高的应用系统中， Query Cache 对性能的提高是非常显著的。当然它对内存的消耗也是非常大的。<br>如果查询缓存有命中的查询结果，查询语句就可以直接去查询缓存中取数据。这个缓存机制是由一系列小缓存组成的。比如表缓存，记录缓存，key缓存，权限缓存等<br>8 、存储引擎接口<br>存储引擎接口模块可以说是 MySQL 数据库中最有特色的一点了。目前各种数据库产品中，基本上只有 MySQL 可以实现其底层数据存储引擎的插件式管理。这个模块实际上只是 一个抽象类，但正是因为它成功地将各种数据处理高度抽象化，才成就了今天 MySQL 可插拔存储引擎的特色。<br>     从图2还可以看出，MySQL区别于其他数据库的最重要的特点就是其插件式的表存储引擎。MySQL插件式的存储引擎架构提供了一系列标准的管理和服务支持，这些标准与存储引擎本身无关，可能是每个数据库系统本身都必需的，如SQL分析器和优化器等，而存储引擎是底层物理结构的实现，每个存储引擎开发者都可以按照自己的意愿来进行开发。<br>    注意：存储引擎是基于表的，而不是数据库。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191108105813554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong><img src="https://img-blog.csdnimg.cn/20191108105833580.png" alt="加粗样式"></strong><br><strong>了解：</strong><br>1.Connectors<br>指的是不同语言中与SQL的交互<br>2 Management Serveices &amp; Utilities：<br>系统管理和控制工具<br>3 Connection Pool: 连接池<br>管理缓冲用户连接，线程处理等需要缓存的需求。<br>负责监听对 MySQL Server 的各种请求，接收连接请求，转发所有连接请求到线程管理模块。每一个连接上 MySQL Server 的客户端请求都会被分配（或创建）一个连接线程为其单独服务。而连接线程的主要工作就是负责 MySQL Server 与客户端的通信，<br>接受客户端的命令请求，传递 Server 端的结果信息等。线程管理模块则负责管理维护这些连接线程。包括线程的创建，线程的 cache 等。<br>4 SQL Interface: SQL接口。<br>接受用户的SQL命令，并且返回用户需要查询的结果。比如select from就是调用SQL Interface<br>5 Parser: 解析器。<br>SQL命令传递到解析器的时候会被解析器验证和解析。解析器是由Lex和YACC实现的，是一个很长的脚本。<br>在 MySQL中我们习惯将所有 Client 端发送给 Server 端的命令都称为 query ，在 MySQL Server 里面，连接线程接收到客户端的一个 Query 后，会直接将该 query 传递给专门负责将各种 Query 进行分类然后转发给各个对应的处理模块。<br>主要功能：<br>a . 将SQL语句进行语义和语法的分析，分解成数据结构，然后按照不同的操作类型进行分类，然后做出针对性的转发到后续步骤，以后SQL语句的传递和处理就是基于这个结构的。<br>b.  如果在分解构成中遇到错误，那么就说明这个sql语句是不合理的<br>6 Optimizer: 查询优化器。<br>SQL语句在查询之前会使用查询优化器对查询进行优化。就是优化客户端请求的 query（sql语句） ，根据客户端请求的 query 语句，和数据库中的一些统计信息，在一系列算法的基础上进行分析，得出一个最优的策略，告诉后面的程序如何取得这个 query 语句的结果<br>他使用的是“选取-投影-联接”策略进行查询。<br>       用一个例子就可以理解： select uid,name from user where gender = 1;<br>       这个select 查询先根据where 语句进行选取，而不是先将表全部查询出来以后再进行gender过滤<br>       这个select查询先根据uid和name进行属性投影，而不是将属性全部取出以后再进行过滤<br>       将这两个查询条件联接起来生成最终查询结果<br>7 Cache和Buffer： 查询缓存。<br>他的主要功能是将客户端提交 给MySQL 的 Select 类 query 请求的返回结果集 cache 到内存中，与该 query 的一个 hash 值 做一个对应。该 Query 所取数据的基表发生任何数据的变化之后， MySQL 会自动使该 query 的Cache 失效。在读写比例非常高的应用系统中， Query Cache 对性能的提高是非常显著的。当然它对内存的消耗也是非常大的。<br>如果查询缓存有命中的查询结果，查询语句就可以直接去查询缓存中取数据。这个缓存机制是由一系列小缓存组成的。比如表缓存，记录缓存，key缓存，权限缓存等<br>8 、存储引擎接口<br>存储引擎接口模块可以说是 MySQL 数据库中最有特色的一点了。目前各种数据库产品中，基本上只有 MySQL 可以实现其底层数据存储引擎的插件式管理。这个模块实际上只是 一个抽象类，但正是因为它成功地将各种数据处理高度抽象化，才成就了今天 MySQL 可插拔存储引擎的特色。<br>     从图2还可以看出，MySQL区别于其他数据库的最重要的特点就是其插件式的表存储引擎。MySQL插件式的存储引擎架构提供了一系列标准的管理和服务支持，这些标准与存储引擎本身无关，可能是每个数据库系统本身都必需的，如SQL分析器和优化器等，而存储引擎是底层物理结构的实现，每个存储引擎开发者都可以按照自己的意愿来进行开发。<br>    注意：存储引擎是基于表的，而不是数据库。</p>
 <h1 id="MySQL存储引擎"><a href="#MySQL存储引擎" class="headerlink" title="MySQL存储引擎"></a>MySQL存储引擎</h1><h2 id="查看提供的引擎"><a href="#查看提供的引擎" class="headerlink" title="查看提供的引擎"></a>查看提供的引擎</h2><p><img src="https://img-blog.csdnimg.cn/20191108110055368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="查看自己的MySQL已提供什么存储引擎"></p>
 <h2 id="MyISAM和InnoDB对比"><a href="#MyISAM和InnoDB对比" class="headerlink" title="MyISAM和InnoDB对比"></a>MyISAM和InnoDB对比</h2><p> <img src="https://img-blog.csdnimg.cn/20191108110246628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
@@ -281,14 +287,17 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/" rel="next" title="MySQL性能优化之explain">
-                  <i class="fa fa-chevron-left"></i> MySQL性能优化之explain
+                <a href="/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/" rel="next" title="Your password does not satisfy the current policy requirements">
+                  <i class="fa fa-chevron-left"></i> Your password does not satisfy the current policy requirements
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/" rel="prev" title="MySQL性能优化之查询截取分析">
+                  MySQL性能优化之查询截取分析 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
