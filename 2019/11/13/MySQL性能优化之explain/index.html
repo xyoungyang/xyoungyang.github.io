@@ -66,7 +66,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191108121936141.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111151347727.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111152036632.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-13T15:27:15.662Z">
+<meta property="og:updated_time" content="2019-11-13T15:30:40.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191108121101440.png">
 
@@ -222,7 +222,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-11-13 23:26:17 / 修改时间：23:27:15" itemprop="dateCreated datePublished" datetime="2019-11-13T23:26:17+08:00">2019-11-13</time>
+              <time title="创建时间：2019-11-13 23:26:17 / 修改时间：23:30:40" itemprop="dateCreated datePublished" datetime="2019-11-13T23:26:17+08:00">2019-11-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>977</span>
+              <span>963</span>
             </span>
 
         </div>
@@ -255,7 +255,8 @@
 
       
         <p>在日常工作中，我们会有时会开慢查询去记录一些执行时间比较久的SQL语句，找出这些SQL语句并不意味着完事了，些时我们常常用到explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上索引，有没有做全表扫描，这都可以通过explain命令来查看。所以我们深入了解MySQL的基于开销的优化器，还可以获得很多可能被优化器考虑到的访问策略的细节，以及当运行SQL语句时哪种策略预计会被优化器采用。</p>
-<p>&lt;–more–&gt;</p>
+<a id="more"></a>
+
 <h1 id="explain是什么"><a href="#explain是什么" class="headerlink" title="explain是什么"></a>explain是什么</h1><p>使用EXPLAIN关键字可以模拟优化器执行SQL语句，从而知道MySQL是如何处理你的SQL语句的。分析你的查询语句或是结构的性能瓶颈。</p>
 <h1 id="explain能干什么"><a href="#explain能干什么" class="headerlink" title="explain能干什么"></a>explain能干什么</h1><p><img src="https://img-blog.csdnimg.cn/20191108121101440.png" alt="在这里插入图片描述"></p>
 <h1 id="explain怎么玩"><a href="#explain怎么玩" class="headerlink" title="explain怎么玩"></a>explain怎么玩</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain + SQL语句</span><br></pre></td></tr></table></figure>

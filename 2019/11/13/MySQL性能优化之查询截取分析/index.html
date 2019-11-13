@@ -51,13 +51,13 @@
   };
 </script>
 
-  <meta name="description" content="MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。&amp;lt;–more–&amp;gt; 查询优化永远小表驱动大表案例： order by关键字优化1、ORDER BY子句，尽量使用Index方式排序，避免使用FileSort方式排序。2、尽可能在索引列上完成排序操作，遵照索引建的最佳左前缀。3、如果不在索引列上，filesort有两种算法：mysql就要启动双路排序和单路排序。">
+  <meta name="description" content="MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。">
 <meta name="keywords" content="mysql,性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL性能优化之查询截取分析">
 <meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。&amp;lt;–more–&amp;gt; 查询优化永远小表驱动大表案例： order by关键字优化1、ORDER BY子句，尽量使用Index方式排序，避免使用FileSort方式排序。2、尽可能在索引列上完成排序操作，遵照索引建的最佳左前缀。3、如果不在索引列上，filesort有两种算法：mysql就要启动双路排序和单路排序。">
+<meta property="og:description" content="MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019111117225492.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111172305469.png">
@@ -67,7 +67,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111172919262.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111173318258.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191111173758860.png">
-<meta property="og:updated_time" content="2019-11-13T15:24:14.098Z">
+<meta property="og:updated_time" content="2019-11-13T15:30:48.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019111117225492.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 
@@ -223,7 +223,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-11-13 23:20:55 / 修改时间：23:24:14" itemprop="dateCreated datePublished" datetime="2019-11-13T23:20:55+08:00">2019-11-13</time>
+              <time title="创建时间：2019-11-13 23:20:55 / 修改时间：23:30:48" itemprop="dateCreated datePublished" datetime="2019-11-13T23:20:55+08:00">2019-11-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。<br>&lt;–more–&gt;</p>
+        <p>MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。</p>
+<a id="more"></a>
 <h1 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h1><h2 id="永远小表驱动大表"><a href="#永远小表驱动大表" class="headerlink" title="永远小表驱动大表"></a>永远小表驱动大表</h2><p>案例：<br><img src="https://img-blog.csdnimg.cn/2019111117225492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191111172305469.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191111172310517.png" alt="在这里插入图片描述"></p>
 <h2 id="order-by关键字优化"><a href="#order-by关键字优化" class="headerlink" title="order by关键字优化"></a>order by关键字优化</h2><p>1、ORDER BY子句，尽量使用Index方式排序，避免使用FileSort方式排序。<br>2、尽可能在索引列上完成排序操作，遵照索引建的最佳左前缀。<br>3、如果不在索引列上，filesort有两种算法：mysql就要启动双路排序和单路排序。</p>
 <p><strong>双路排序</strong>：MySQL4.1之前是使用双路排序，字面意思是两次扫描磁盘，最终得到数据。读取行指针和orderby列，对他们进行排序，然后扫描已经排序好的列表，按照列表中的值重新从列表中读取对应的数据传输。</p>
