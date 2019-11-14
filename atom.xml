@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://www.youngyang.top/"/>
+  <link href="https://youngyang.top/"/>
   <updated>2019-11-13T15:30:59.492Z</updated>
-  <id>https://www.youngyang.top/</id>
+  <id>https://youngyang.top/</id>
   
   <author>
     <name>youngyang</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>MySQL性能优化之索引优化分析</title>
-    <link href="https://www.youngyang.top/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/"/>
-    <id>https://www.youngyang.top/2019/11/13/MySQL性能优化之索引优化分析/</id>
+    <link href="https://youngyang.top/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/"/>
+    <id>https://youngyang.top/2019/11/13/MySQL性能优化之索引优化分析/</id>
     <published>2019-11-13T15:24:41.137Z</published>
     <updated>2019-11-13T15:30:59.492Z</updated>
     
@@ -32,21 +32,21 @@
     </summary>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/categories/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/categories/mysql/"/>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/tags/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
     
-      <category term="性能优化" scheme="https://www.youngyang.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+      <category term="性能优化" scheme="https://youngyang.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-      <category term="索引" scheme="https://www.youngyang.top/tags/%E7%B4%A2%E5%BC%95/"/>
+      <category term="索引" scheme="https://youngyang.top/tags/%E7%B4%A2%E5%BC%95/"/>
     
   </entry>
   
   <entry>
     <title>mysql锁机制</title>
-    <link href="https://www.youngyang.top/2019/11/13/MySQL%E9%94%81%E6%9C%BA%E5%88%B6/"/>
-    <id>https://www.youngyang.top/2019/11/13/MySQL锁机制/</id>
+    <link href="https://youngyang.top/2019/11/13/MySQL%E9%94%81%E6%9C%BA%E5%88%B6/"/>
+    <id>https://youngyang.top/2019/11/13/MySQL锁机制/</id>
     <published>2019-11-13T15:20:00.514Z</published>
     <updated>2019-11-13T15:30:34.762Z</updated>
     
@@ -61,19 +61,19 @@
     </summary>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/categories/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/categories/mysql/"/>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/tags/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
     
-      <category term="锁" scheme="https://www.youngyang.top/tags/%E9%94%81/"/>
+      <category term="锁" scheme="https://youngyang.top/tags/%E9%94%81/"/>
     
   </entry>
   
   <entry>
     <title>MySQL性能优化之explain</title>
-    <link href="https://www.youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/"/>
-    <id>https://www.youngyang.top/2019/07/17/MySQL性能优化之explain/</id>
+    <link href="https://youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/"/>
+    <id>https://youngyang.top/2019/07/17/MySQL性能优化之explain/</id>
     <published>2019-07-17T09:43:54.000Z</published>
     <updated>2019-11-13T15:36:16.390Z</updated>
     
@@ -86,21 +86,21 @@
     </summary>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/categories/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/categories/mysql/"/>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/tags/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
     
-      <category term="性能优化" scheme="https://www.youngyang.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+      <category term="性能优化" scheme="https://youngyang.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-      <category term="explain" scheme="https://www.youngyang.top/tags/explain/"/>
+      <category term="explain" scheme="https://youngyang.top/tags/explain/"/>
     
   </entry>
   
   <entry>
     <title>MySQL性能优化之查询截取分析</title>
-    <link href="https://www.youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/"/>
-    <id>https://www.youngyang.top/2019/07/17/MySQL性能优化之查询截取分析/</id>
+    <link href="https://youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/"/>
+    <id>https://youngyang.top/2019/07/17/MySQL性能优化之查询截取分析/</id>
     <published>2019-07-17T09:22:45.000Z</published>
     <updated>2019-11-13T15:36:44.175Z</updated>
     
@@ -113,19 +113,19 @@
     </summary>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/categories/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/categories/mysql/"/>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/tags/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
     
-      <category term="性能优化" scheme="https://www.youngyang.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+      <category term="性能优化" scheme="https://youngyang.top/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>MySQL逻辑架构</title>
-    <link href="https://www.youngyang.top/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/"/>
-    <id>https://www.youngyang.top/2019/07/13/MySQL逻辑架构/</id>
+    <link href="https://youngyang.top/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/"/>
+    <id>https://youngyang.top/2019/07/13/MySQL逻辑架构/</id>
     <published>2019-07-13T01:23:22.000Z</published>
     <updated>2019-11-13T15:35:40.007Z</updated>
     
@@ -138,15 +138,15 @@
     </summary>
     
     
-      <category term="mysql" scheme="https://www.youngyang.top/categories/mysql/"/>
+      <category term="mysql" scheme="https://youngyang.top/categories/mysql/"/>
     
     
   </entry>
   
   <entry>
     <title>Your password does not satisfy the current policy requirements</title>
-    <link href="https://www.youngyang.top/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/"/>
-    <id>https://www.youngyang.top/2019/04/22/ERROR 1819 (HY000)_ Your password does not satisfy the current policy requirements/</id>
+    <link href="https://youngyang.top/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/"/>
+    <id>https://youngyang.top/2019/04/22/ERROR 1819 (HY000)_ Your password does not satisfy the current policy requirements/</id>
     <published>2019-04-22T06:47:40.000Z</published>
     <updated>2019-10-31T04:34:42.958Z</updated>
     
@@ -159,73 +159,21 @@
     </summary>
     
     
-      <category term="linux" scheme="https://www.youngyang.top/categories/linux/"/>
+      <category term="linux" scheme="https://youngyang.top/categories/linux/"/>
     
-      <category term="mysql" scheme="https://www.youngyang.top/categories/linux/mysql/"/>
-    
-    
-      <category term="linux" scheme="https://www.youngyang.top/tags/linux/"/>
-    
-      <category term="mysql" scheme="https://www.youngyang.top/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何在Linux中安装MySQL数据库</title>
-    <link href="https://www.youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    <id>https://www.youngyang.top/2019/04/22/如何在Linux中安装MySQL数据库/</id>
-    <published>2019-04-22T06:47:40.000Z</published>
-    <updated>2019-10-31T04:33:02.595Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近在阿里云买了一个云服务器，centos 7.3。打算把自己写的项目部署进去来玩一玩，熟悉线上部署的流程。部署项目之前肯定要搭建好环境，比如jdk、tomcat、maven、mysql等等的安装。因为之前没有用过linux系统，对其中的原理和各种命令不尽熟悉，所以遇到了许多困难。</p><a id="more"></a><p>说出来大家可能不信，光是装mysql就装了两天 ，装上之后各种报错。不是不能启动mysql，就是启动了mysql service但是由于本地mysql.sock找不到不能连接，反正是心力交瘁。来来回回装了好几遍，找各种原因，各种解决方案，但是不管怎么样，总算是装好了，并且在装的过程中也学到了很多东西。<br>那我就来说下装成功的过程，希望接下来我的博客能帮助到大家，互相学习。</p><h1 id="一-安装wget"><a href="#一-安装wget" class="headerlink" title="一.安装wget."></a>一.安装wget.</h1><p>wget命令用来从指定的URL下载文件,wget非常稳定，它在带宽很窄的情况下和不稳定网络中有很强的适应性，如果是由于网络的原因下载失败，wget会不断的尝试，直到整个文件下载完毕。如果是服务器打断下载过程，它会再次联到服务器上从停止的地方继续下载。这对从那些限定了链接时间的服务器上下载大文件非常有用。<br>如果虚拟机中未安装wget，则：<br>输入命令<code>yum -y install wget</code><br><em>其中：命令后面加上 -y 后，当执行该命令后，出现 需要选择确认或取消的时候，（即选择y/n的时候），自动选择y</em></p><h1 id="二-在MySQL官网下载MySQL仓库"><a href="#二-在MySQL官网下载MySQL仓库" class="headerlink" title="二.在MySQL官网下载MySQL仓库"></a>二.在MySQL官网下载MySQL仓库</h1><p>我使用的是阿里云服务器中的centos7.3，这里提供一个仓库链接：<br>1.<a href="https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm" target="_blank" rel="noopener">Red Hat Enterprise Linux 7 / Oracle Linux 7 (Architecture Independent), RPM Package.7版本的</a></p><p>2.<a href="https://dev.mysql.com/get/mysql80-community-release-el6-1.noarch.rpm" target="_blank" rel="noopener">Red Hat Enterprise Linux 6 / Oracle Linux 6 (Architecture Independent), RPM Package.6版本的</a></p><p>如果想要其他版本，比如Windows、Ubuntu、Macos，也可以去mysql官网进行不同系统不同版本的下载或者复制响应的链接。<br>可以来到如下页面：<br><img src="https://img-blog.csdnimg.cn/20191023202601505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023202736366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023202844815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h1 id="三-开始下载MySQL仓库"><a href="#三-开始下载MySQL仓库" class="headerlink" title="三.开始下载MySQL仓库"></a>三.开始下载MySQL仓库</h1><p>进入下载的目标目录（我是下载到/download/目录）<br><img src="https://img-blog.csdnimg.cn/20191023203145610.png" alt="在这里插入图片描述"></p><h5 id="1-使用wget进行下载"><a href="#1-使用wget进行下载" class="headerlink" title="1.使用wget进行下载"></a>1.使用wget进行下载</h5><p>使用命令# <code>wget  https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm</code><br>下载成功后就可以在/download/目录下看到该文件。<br><img src="https://img-blog.csdnimg.cn/20191023203332908.png" alt="在这里插入图片描述"></p><h5 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h5><p>使用命令#  <code>rpm -Uvh mysql80-community-release-el7-1.noarch.rpm</code> </p><h5 id="3-接下来就可以正式安装mysql了"><a href="#3-接下来就可以正式安装mysql了" class="headerlink" title="3.接下来就可以正式安装mysql了"></a>3.接下来就可以正式安装mysql了</h5><p>默认安装的是8.0版本的，我在这里演示一下5.7版本，如果需要的就是8.0版本可以直接跳过。<br>修改文件 <code>vim  /etc/yum.repos.d/mysql-community.repo</code><br>找到这里有一个8.0，有一个人5.7，用哪一个就把它的enabled修改为1,<br>这里我用的是5.7的，所以把5.7的enabled=1,把8.0的enable。<br><img src="https://img-blog.csdnimg.cn/20191023203819117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改好保存退出<br>然后执行<code>yum -y install mysql-community-server</code>进行正式安装。</p><h1 id="四-修改mysql的密码"><a href="#四-修改mysql的密码" class="headerlink" title="四.修改mysql的密码"></a>四.修改mysql的密码</h1><p>执行完毕上述步骤，MySQL就算安装完成，但是需要尽快在7天之内修改默认密码，mysql初始登录需要修改密码。</p><h5 id="1-重置密码的第一步就是跳过MySQL的密码认证过程"><a href="#1-重置密码的第一步就是跳过MySQL的密码认证过程" class="headerlink" title="1.重置密码的第一步就是跳过MySQL的密码认证过程"></a>1.重置密码的第一步就是跳过MySQL的密码认证过程</h5><p>方法如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#vim /etc/my.cnf(注：windows下修改的是my.ini)</span></span><br></pre></td></tr></table></figure><p>在文档内搜索mysqld定位到[mysqld]文本段：<br>/mysqld(在vim编辑状态下直接输入该命令可搜索文本内容)</p><p>在[mysqld]后面任意一行<code>skip-grant-tables</code>用来跳过密码验证的过程，如下图所示：<br>在这里插入图片描述<br><img src="https://img-blog.csdnimg.cn/20191023210015640.png" alt="在这里插入图片描述"><br>保存文档并退出：<code>:wq</code></p><h5 id="2-接下来我们需要重启MySQL："><a href="#2-接下来我们需要重启MySQL：" class="headerlink" title="2.接下来我们需要重启MySQL："></a>2.接下来我们需要重启MySQL：</h5><p>使用如下命令操作mysql：<br>systemctl start mysqld.service 启动<br>systemctl stop mysqld.service 停止<br>systemctl restart mysqld.service 重启</p><h5 id="3-重启之后输入mysql即可进入mysql"><a href="#3-重启之后输入mysql即可进入mysql" class="headerlink" title="3.重启之后输入mysql即可进入mysql"></a>3.重启之后输入<code>mysql</code>即可进入mysql</h5><h5 id="4-进行密码重置"><a href="#4-进行密码重置" class="headerlink" title="4.进行密码重置"></a>4.进行密码重置</h5><p>虽然已经走到了安装mysql的最后一步，但是因为第一次使用linux系统和在linux系统中安装mysql，所以遇到了很多问题。<br>1.使用mysql数据库</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br></pre></td></tr></table></figure><p>2.更新user表中的密码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> password=password(<span class="string">'root'</span>) <span class="built_in">where</span> user=<span class="string">'root'</span> and host=<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure><p>在使用上述sql语句之后会报错<br><img src="https://img-blog.csdnimg.cn/2019102322360746.png" alt="在这里插入图片描述"><br>这是因为在/etc/my.cnf文件中加入了<code>skip-grant-tables</code>，所以user表删除了password列，若想修改password列的值，要使用authentication_string代替password<br>即：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> authentication_string=password(<span class="string">"root"</span>) <span class="built_in">where</span> user=<span class="string">'root'</span> and host=<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/20191023223824345.png" alt="在这里插入图片描述"><br>至此，安装mysql所有步骤全部完成！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近在阿里云买了一个云服务器，centos 7.3。打算把自己写的项目部署进去来玩一玩，熟悉线上部署的流程。部署项目之前肯定要搭建好环境，比如jdk、tomcat、maven、mysql等等的安装。因为之前没有用过linux系统，对其中的原理和各种命令不尽熟悉，所以遇到了许多困难。&lt;/p&gt;
-    
-    </summary>
+      <category term="mysql" scheme="https://youngyang.top/categories/linux/mysql/"/>
     
     
-      <category term="Linux" scheme="https://www.youngyang.top/categories/Linux/"/>
+      <category term="linux" scheme="https://youngyang.top/tags/linux/"/>
     
-    
-      <category term="mysql" scheme="https://www.youngyang.top/tags/mysql/"/>
-    
-      <category term="Linux" scheme="https://www.youngyang.top/tags/Linux/"/>
-    
-      <category term="服务器" scheme="https://www.youngyang.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何实现http协议中的重定向？</title>
-    <link href="https://www.youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/"/>
-    <id>https://www.youngyang.top/2019/04/22/如何实现HTTP协议中重定向/</id>
-    <published>2019-04-22T06:47:40.000Z</published>
-    <updated>2019-10-31T04:32:39.393Z</updated>
-    
-    <content type="html"><![CDATA[<p>我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！</p><a id="more"></a><p>在学java web的时候遇到一个重定向的问题。</p><p>首先讲解下什么是重定向：在 HTTP 协议中，重定向操作由服务器通过发送特殊的响应（即 redirects）而触发。HTTP 协议的重定向响应的状态码为 3xx 。浏览器在接收到重定向响应的时候，会采用该响应提供的新的 URL ，并立即进行加载；大多数情况下，除了会有一小部分性能损失之外，重定向操作对于用户来说是不可见的。</p><p>简单的说就是：客户端向服务器发送请求，但是服务器的某个资源完成不了这个请求，让客户端去请求另一个资源来完成请求。就是一个请求转发的过程。</p><p>我是采用IntelliJ IDEA来完成的，首先先new两个Servlet，在这里实现httpServlet，起名responseDemo1和responseDemo2。</p><pre><code>其实重定向有两种方式：第一种：</code></pre><p> 1、设置状态码为302：response.setStatus(302);<br> 2、设置响应头的location，设置请求资源路径 response.setHeader(“location”,”资源路径”);<br>   第二种 ：<br>   直接调用response.sendRedirect(“资源路径”)</p><pre><code>第一个Servlet代码如下：`package cn.itcast.servlet;import javax.servlet.ServletException;import javax.servlet.annotation.WebServlet;import javax.servlet.http.HttpServlet;import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;import java.io.IOException;@WebServlet(&quot;/responseDemo1&quot;)public class responseDemo1 extends HttpServlet {protected void doPost(HttpServletRequest request, HttpServletResponse response) throws         ServletException, IOException {    System.out.println(request.getMethod());    System.out.println(&quot;responseDemo1.....&quot;);   /* //设置状态码302    response.setStatus(302);    //设置资源路径    response.setHeader(&quot;location&quot;, &quot;/day15/responseDemo2&quot;);*/   response.sendRedirect(&quot;/day15/responseDemo2&quot;);}protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    this.doPost(request,response);}</code></pre><p>}<br>`<br>    第二个如下：</p><pre><code>`    package cn.itcast.servlet;import javax.servlet.ServletException;import javax.servlet.annotation.WebServlet;import javax.servlet.http.HttpServlet;import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;import java.io.IOException;@WebServlet(&quot;/responseDemo2&quot;)public class responseDemo2 extends HttpServlet {protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    System.out.println(request.getMethod());    System.out.println(&quot;responseDemo2.......&quot;);} protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    this.doPost(request,response);}</code></pre><p>}<br>`</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="java web" scheme="https://www.youngyang.top/categories/java-web/"/>
-    
-    
-      <category term="重定向" scheme="https://www.youngyang.top/tags/%E9%87%8D%E5%AE%9A%E5%90%91/"/>
-    
-      <category term="实现原理" scheme="https://www.youngyang.top/tags/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>一文读懂Java 代码块和代码执行顺序</title>
-    <link href="https://www.youngyang.top/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
-    <id>https://www.youngyang.top/2019/04/22/一文读懂Java 代码块和代码执行顺序/</id>
+    <link href="https://youngyang.top/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
+    <id>https://youngyang.top/2019/04/22/一文读懂Java 代码块和代码执行顺序/</id>
     <published>2019-04-22T06:47:40.000Z</published>
     <updated>2019-10-31T04:33:16.831Z</updated>
     
@@ -238,17 +186,17 @@
     </summary>
     
     
-      <category term="java基础" scheme="https://www.youngyang.top/categories/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java基础" scheme="https://youngyang.top/categories/java%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="代码块执行顺序" scheme="https://www.youngyang.top/tags/%E4%BB%A3%E7%A0%81%E5%9D%97%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
+      <category term="代码块执行顺序" scheme="https://youngyang.top/tags/%E4%BB%A3%E7%A0%81%E5%9D%97%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
     
   </entry>
   
   <entry>
     <title>夯实Java基础系列：深入理解Java内部类及其实现原理</title>
-    <link href="https://www.youngyang.top/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
-    <id>https://www.youngyang.top/2019/04/22/夯实Java基础系列：深入理解Java内部类及其实现原理/</id>
+    <link href="https://youngyang.top/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+    <id>https://youngyang.top/2019/04/22/夯实Java基础系列：深入理解Java内部类及其实现原理/</id>
     <published>2019-04-22T06:47:40.000Z</published>
     <updated>2019-10-31T04:36:16.655Z</updated>
     
@@ -261,14 +209,66 @@
     </summary>
     
     
-      <category term="java基础" scheme="https://www.youngyang.top/categories/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java基础" scheme="https://youngyang.top/categories/java%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="实现原理" scheme="https://www.youngyang.top/categories/java%E5%9F%BA%E7%A1%80/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+      <category term="实现原理" scheme="https://youngyang.top/categories/java%E5%9F%BA%E7%A1%80/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
     
     
-      <category term="Java基础" scheme="https://www.youngyang.top/tags/Java%E5%9F%BA%E7%A1%80/"/>
+      <category term="Java基础" scheme="https://youngyang.top/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="内部类" scheme="https://www.youngyang.top/tags/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
+      <category term="内部类" scheme="https://youngyang.top/tags/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何实现http协议中的重定向？</title>
+    <link href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/"/>
+    <id>https://youngyang.top/2019/04/22/如何实现HTTP协议中重定向/</id>
+    <published>2019-04-22T06:47:40.000Z</published>
+    <updated>2019-10-31T04:32:39.393Z</updated>
+    
+    <content type="html"><![CDATA[<p>我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！</p><a id="more"></a><p>在学java web的时候遇到一个重定向的问题。</p><p>首先讲解下什么是重定向：在 HTTP 协议中，重定向操作由服务器通过发送特殊的响应（即 redirects）而触发。HTTP 协议的重定向响应的状态码为 3xx 。浏览器在接收到重定向响应的时候，会采用该响应提供的新的 URL ，并立即进行加载；大多数情况下，除了会有一小部分性能损失之外，重定向操作对于用户来说是不可见的。</p><p>简单的说就是：客户端向服务器发送请求，但是服务器的某个资源完成不了这个请求，让客户端去请求另一个资源来完成请求。就是一个请求转发的过程。</p><p>我是采用IntelliJ IDEA来完成的，首先先new两个Servlet，在这里实现httpServlet，起名responseDemo1和responseDemo2。</p><pre><code>其实重定向有两种方式：第一种：</code></pre><p> 1、设置状态码为302：response.setStatus(302);<br> 2、设置响应头的location，设置请求资源路径 response.setHeader(“location”,”资源路径”);<br>   第二种 ：<br>   直接调用response.sendRedirect(“资源路径”)</p><pre><code>第一个Servlet代码如下：`package cn.itcast.servlet;import javax.servlet.ServletException;import javax.servlet.annotation.WebServlet;import javax.servlet.http.HttpServlet;import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;import java.io.IOException;@WebServlet(&quot;/responseDemo1&quot;)public class responseDemo1 extends HttpServlet {protected void doPost(HttpServletRequest request, HttpServletResponse response) throws         ServletException, IOException {    System.out.println(request.getMethod());    System.out.println(&quot;responseDemo1.....&quot;);   /* //设置状态码302    response.setStatus(302);    //设置资源路径    response.setHeader(&quot;location&quot;, &quot;/day15/responseDemo2&quot;);*/   response.sendRedirect(&quot;/day15/responseDemo2&quot;);}protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    this.doPost(request,response);}</code></pre><p>}<br>`<br>    第二个如下：</p><pre><code>`    package cn.itcast.servlet;import javax.servlet.ServletException;import javax.servlet.annotation.WebServlet;import javax.servlet.http.HttpServlet;import javax.servlet.http.HttpServletRequest;import javax.servlet.http.HttpServletResponse;import java.io.IOException;@WebServlet(&quot;/responseDemo2&quot;)public class responseDemo2 extends HttpServlet {protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    System.out.println(request.getMethod());    System.out.println(&quot;responseDemo2.......&quot;);} protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    this.doPost(request,response);}</code></pre><p>}<br>`</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java web" scheme="https://youngyang.top/categories/java-web/"/>
+    
+    
+      <category term="重定向" scheme="https://youngyang.top/tags/%E9%87%8D%E5%AE%9A%E5%90%91/"/>
+    
+      <category term="实现原理" scheme="https://youngyang.top/tags/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在Linux中安装MySQL数据库</title>
+    <link href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https://youngyang.top/2019/04/22/如何在Linux中安装MySQL数据库/</id>
+    <published>2019-04-22T06:47:40.000Z</published>
+    <updated>2019-10-31T04:33:02.595Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在阿里云买了一个云服务器，centos 7.3。打算把自己写的项目部署进去来玩一玩，熟悉线上部署的流程。部署项目之前肯定要搭建好环境，比如jdk、tomcat、maven、mysql等等的安装。因为之前没有用过linux系统，对其中的原理和各种命令不尽熟悉，所以遇到了许多困难。</p><a id="more"></a><p>说出来大家可能不信，光是装mysql就装了两天 ，装上之后各种报错。不是不能启动mysql，就是启动了mysql service但是由于本地mysql.sock找不到不能连接，反正是心力交瘁。来来回回装了好几遍，找各种原因，各种解决方案，但是不管怎么样，总算是装好了，并且在装的过程中也学到了很多东西。<br>那我就来说下装成功的过程，希望接下来我的博客能帮助到大家，互相学习。</p><h1 id="一-安装wget"><a href="#一-安装wget" class="headerlink" title="一.安装wget."></a>一.安装wget.</h1><p>wget命令用来从指定的URL下载文件,wget非常稳定，它在带宽很窄的情况下和不稳定网络中有很强的适应性，如果是由于网络的原因下载失败，wget会不断的尝试，直到整个文件下载完毕。如果是服务器打断下载过程，它会再次联到服务器上从停止的地方继续下载。这对从那些限定了链接时间的服务器上下载大文件非常有用。<br>如果虚拟机中未安装wget，则：<br>输入命令<code>yum -y install wget</code><br><em>其中：命令后面加上 -y 后，当执行该命令后，出现 需要选择确认或取消的时候，（即选择y/n的时候），自动选择y</em></p><h1 id="二-在MySQL官网下载MySQL仓库"><a href="#二-在MySQL官网下载MySQL仓库" class="headerlink" title="二.在MySQL官网下载MySQL仓库"></a>二.在MySQL官网下载MySQL仓库</h1><p>我使用的是阿里云服务器中的centos7.3，这里提供一个仓库链接：<br>1.<a href="https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm" target="_blank" rel="noopener">Red Hat Enterprise Linux 7 / Oracle Linux 7 (Architecture Independent), RPM Package.7版本的</a></p><p>2.<a href="https://dev.mysql.com/get/mysql80-community-release-el6-1.noarch.rpm" target="_blank" rel="noopener">Red Hat Enterprise Linux 6 / Oracle Linux 6 (Architecture Independent), RPM Package.6版本的</a></p><p>如果想要其他版本，比如Windows、Ubuntu、Macos，也可以去mysql官网进行不同系统不同版本的下载或者复制响应的链接。<br>可以来到如下页面：<br><img src="https://img-blog.csdnimg.cn/20191023202601505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023202736366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023202844815.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h1 id="三-开始下载MySQL仓库"><a href="#三-开始下载MySQL仓库" class="headerlink" title="三.开始下载MySQL仓库"></a>三.开始下载MySQL仓库</h1><p>进入下载的目标目录（我是下载到/download/目录）<br><img src="https://img-blog.csdnimg.cn/20191023203145610.png" alt="在这里插入图片描述"></p><h5 id="1-使用wget进行下载"><a href="#1-使用wget进行下载" class="headerlink" title="1.使用wget进行下载"></a>1.使用wget进行下载</h5><p>使用命令# <code>wget  https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm</code><br>下载成功后就可以在/download/目录下看到该文件。<br><img src="https://img-blog.csdnimg.cn/20191023203332908.png" alt="在这里插入图片描述"></p><h5 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h5><p>使用命令#  <code>rpm -Uvh mysql80-community-release-el7-1.noarch.rpm</code> </p><h5 id="3-接下来就可以正式安装mysql了"><a href="#3-接下来就可以正式安装mysql了" class="headerlink" title="3.接下来就可以正式安装mysql了"></a>3.接下来就可以正式安装mysql了</h5><p>默认安装的是8.0版本的，我在这里演示一下5.7版本，如果需要的就是8.0版本可以直接跳过。<br>修改文件 <code>vim  /etc/yum.repos.d/mysql-community.repo</code><br>找到这里有一个8.0，有一个人5.7，用哪一个就把它的enabled修改为1,<br>这里我用的是5.7的，所以把5.7的enabled=1,把8.0的enable。<br><img src="https://img-blog.csdnimg.cn/20191023203819117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>修改好保存退出<br>然后执行<code>yum -y install mysql-community-server</code>进行正式安装。</p><h1 id="四-修改mysql的密码"><a href="#四-修改mysql的密码" class="headerlink" title="四.修改mysql的密码"></a>四.修改mysql的密码</h1><p>执行完毕上述步骤，MySQL就算安装完成，但是需要尽快在7天之内修改默认密码，mysql初始登录需要修改密码。</p><h5 id="1-重置密码的第一步就是跳过MySQL的密码认证过程"><a href="#1-重置密码的第一步就是跳过MySQL的密码认证过程" class="headerlink" title="1.重置密码的第一步就是跳过MySQL的密码认证过程"></a>1.重置密码的第一步就是跳过MySQL的密码认证过程</h5><p>方法如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#vim /etc/my.cnf(注：windows下修改的是my.ini)</span></span><br></pre></td></tr></table></figure><p>在文档内搜索mysqld定位到[mysqld]文本段：<br>/mysqld(在vim编辑状态下直接输入该命令可搜索文本内容)</p><p>在[mysqld]后面任意一行<code>skip-grant-tables</code>用来跳过密码验证的过程，如下图所示：<br>在这里插入图片描述<br><img src="https://img-blog.csdnimg.cn/20191023210015640.png" alt="在这里插入图片描述"><br>保存文档并退出：<code>:wq</code></p><h5 id="2-接下来我们需要重启MySQL："><a href="#2-接下来我们需要重启MySQL：" class="headerlink" title="2.接下来我们需要重启MySQL："></a>2.接下来我们需要重启MySQL：</h5><p>使用如下命令操作mysql：<br>systemctl start mysqld.service 启动<br>systemctl stop mysqld.service 停止<br>systemctl restart mysqld.service 重启</p><h5 id="3-重启之后输入mysql即可进入mysql"><a href="#3-重启之后输入mysql即可进入mysql" class="headerlink" title="3.重启之后输入mysql即可进入mysql"></a>3.重启之后输入<code>mysql</code>即可进入mysql</h5><h5 id="4-进行密码重置"><a href="#4-进行密码重置" class="headerlink" title="4.进行密码重置"></a>4.进行密码重置</h5><p>虽然已经走到了安装mysql的最后一步，但是因为第一次使用linux系统和在linux系统中安装mysql，所以遇到了很多问题。<br>1.使用mysql数据库</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br></pre></td></tr></table></figure><p>2.更新user表中的密码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> password=password(<span class="string">'root'</span>) <span class="built_in">where</span> user=<span class="string">'root'</span> and host=<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure><p>在使用上述sql语句之后会报错<br><img src="https://img-blog.csdnimg.cn/2019102322360746.png" alt="在这里插入图片描述"><br>这是因为在/etc/my.cnf文件中加入了<code>skip-grant-tables</code>，所以user表删除了password列，若想修改password列的值，要使用authentication_string代替password<br>即：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> authentication_string=password(<span class="string">"root"</span>) <span class="built_in">where</span> user=<span class="string">'root'</span> and host=<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/20191023223824345.png" alt="在这里插入图片描述"><br>至此，安装mysql所有步骤全部完成！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在阿里云买了一个云服务器，centos 7.3。打算把自己写的项目部署进去来玩一玩，熟悉线上部署的流程。部署项目之前肯定要搭建好环境，比如jdk、tomcat、maven、mysql等等的安装。因为之前没有用过linux系统，对其中的原理和各种命令不尽熟悉，所以遇到了许多困难。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://youngyang.top/categories/Linux/"/>
+    
+    
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
+    
+      <category term="Linux" scheme="https://youngyang.top/tags/Linux/"/>
+    
+      <category term="服务器" scheme="https://youngyang.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
