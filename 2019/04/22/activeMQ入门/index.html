@@ -51,12 +51,13 @@
   };
 </script>
 
-  <meta name="description" content="为什么要使用消息中间件？系统解耦假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。 整个过程，如下图所示：但是现在要是来了系统D、系统E、系统F、系统G，等等，十来个其他系统慢慢的都需要这份核心数据呢？如下图所示：大家可别以为这是开玩笑，一个大规模系统，往往会拆分为几十个甚至上百个子系统，每个子">
+  <meta name="description" content="为什么要使用消息中间件？系统解耦假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。">
+<meta name="keywords" content="消息队列,中间件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="activeMQ入门">
-<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2020&#x2F;07&#x2F;04&#x2F;activeMQ%E5%85%A5%E9%97%A8&#x2F;index.html">
+<meta property="og:title" content="activeMQ简单介绍">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;04&#x2F;22&#x2F;activeMQ%E5%85%A5%E9%97%A8&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
-<meta property="og:description" content="为什么要使用消息中间件？系统解耦假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。 整个过程，如下图所示：但是现在要是来了系统D、系统E、系统F、系统G，等等，十来个其他系统慢慢的都需要这份核心数据呢？如下图所示：大家可别以为这是开玩笑，一个大规模系统，往往会拆分为几十个甚至上百个子系统，每个子">
+<meta property="og:description" content="为什么要使用消息中间件？系统解耦假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217123156135.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217123225235.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
@@ -71,11 +72,11 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217194057953.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217194919499.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217201149319.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2020-07-04T12:08:11.220Z">
+<meta property="og:updated_time" content="2020-07-04T14:34:35.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217123156135.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="https://youngyang.top/2020/07/04/activeMQ%E5%85%A5%E9%97%A8/">
+<link rel="canonical" href="https://youngyang.top/2019/04/22/activeMQ%E5%85%A5%E9%97%A8/">
 
 
 <script id="page-configurations">
@@ -89,7 +90,7 @@
   };
 </script>
 
-  <title>activeMQ入门 | Yang's Blog</title>
+  <title>activeMQ简单介绍 | Yang's Blog</title>
   
 
 
@@ -164,12 +165,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">22</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -203,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/activeMQ%E5%85%A5%E9%97%A8/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/activeMQ%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -216,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          activeMQ入门
+          activeMQ简单介绍
         </h1>
 
         <div class="post-meta">
@@ -225,9 +226,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-04 20:10:03 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:10:03+08:00">2020-07-04</time>
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 22:34:35" itemprop="dateModified" datetime="2020-07-04T22:34:35+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index">
+                    <span itemprop="name">消息队列</span>
+                  </a>
+                </span>
             </span>
 
           <br>
@@ -249,6 +267,7 @@
 
       
         <h1 id="为什么要使用消息中间件？"><a href="#为什么要使用消息中间件？" class="headerlink" title="为什么要使用消息中间件？"></a>为什么要使用消息中间件？</h1><h2 id="系统解耦"><a href="#系统解耦" class="headerlink" title="系统解耦"></a>系统解耦</h2><p>假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。<br>那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。</p>
+<a id="more"></a>
 <p>整个过程，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191217123156135.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>但是现在要是来了系统D、系统E、系统F、系统G，等等，十来个其他系统慢慢的都需要这份核心数据呢？如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191217123225235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大家可别以为这是开玩笑，一个大规模系统，往往会拆分为几十个甚至上百个子系统，每个子系统又对应N多个服务，这些系统与系统之间有着错综复杂的关系网络。</p>
 <p>如果某个系统产出一份核心数据，可能下游无数的其他系统都需要这份数据来实现各种业务逻辑。此时如果你要是采取上面那种模式来设计系统架构，那么绝对你负责系统A的同学要被烦死了。</p>
 <p>先是来一个人找他要求发送数据给一个新的系统H，系统A的同学要修改代码然后在那个代码里加入调用新系统H的流程。一会那个系统B是个陈旧老系统要下线了，告诉系统A的同学：别给我发送数据了，接着系统A再次修改代码不再给这个系统B。<br><strong>然后如果要是某个上游或者下游系统突然宕机了呢？</strong><br>系统A的调用代码里是不是会抛异常？那系统A的同学会收到报警说异常了，结果他还要去care是下游哪个系统宕机了。所以在实际的系统架构设计中，如果全部采取这种系统耦合的方式，在某些场景下绝对是不合适的，系统耦合度太严重。并且互相耦合起来并不是核心链路的调用，而是一些非核心的场景（比如上述的数据消费）导致了系统耦合，这样会严重的影响上下游系统的开发和维护效率。</p>
@@ -301,21 +320,25 @@
 	</div>
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag"># 消息队列</a>
+              <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag"># 中间件</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/" rel="next" title="MySQL性能优化之索引优化分析">
-                  <i class="fa fa-chevron-left"></i> MySQL性能优化之索引优化分析
+                <a href="/2019/04/22/java%E4%B8%AD%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86/" rel="next" title="Java中集合的遍历">
+                  <i class="fa fa-chevron-left"></i> Java中集合的遍历
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2020/07/04/ConcurrentModifcationException%E8%AF%A6%E8%A7%A3/" rel="prev" title="ConcurrentModifcationException详解">
-                  ConcurrentModifcationException详解 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/04/22/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/" rel="prev" title="Docker学习之二">
+                  Docker学习之二 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -378,13 +401,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
