@@ -52,9 +52,10 @@
 </script>
 
   <meta name="description" content="为什么 Lambda 表达式(匿名类) 不能访问非 final  的局部变量呢？ 因为实例变量存在堆中，而局部变量是在栈上分配，Lambda 表达(匿名类) 会在另一个线程中执行。如果在线程中要直接访问一个局部变量，可能线程执行时该局部变量已经被销毁了，而 final 类型的局部变量在 Lambda 表达式(匿名类) 中其实是局部变量的一个拷贝，因为之前的存放在栈中（lambda表达式在其他线程运">
+<meta name="keywords" content="Java8新特性,lambda表达式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为什么lambda表达式使用的局部变量要是final的">
-<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2020&#x2F;07&#x2F;04&#x2F;%E4%B8%BA%E4%BB%80%E4%B9%88lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A6%81%E6%98%AFfinal%E7%9A%84&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;04&#x2F;22&#x2F;%E4%B8%BA%E4%BB%80%E4%B9%88lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A6%81%E6%98%AFfinal%E7%9A%84&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="为什么 Lambda 表达式(匿名类) 不能访问非 final  的局部变量呢？ 因为实例变量存在堆中，而局部变量是在栈上分配，Lambda 表达(匿名类) 会在另一个线程中执行。如果在线程中要直接访问一个局部变量，可能线程执行时该局部变量已经被销毁了，而 final 类型的局部变量在 Lambda 表达式(匿名类) 中其实是局部变量的一个拷贝，因为之前的存放在栈中（lambda表达式在其他线程运">
 <meta property="og:locale" content="zh-CN">
@@ -64,11 +65,11 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200619225609710.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200619225749859.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020061922575680.png">
-<meta property="og:updated_time" content="2020-07-04T12:08:08.662Z">
+<meta property="og:updated_time" content="2020-07-04T13:05:51.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200619225323534.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="https://youngyang.top/2020/07/04/%E4%B8%BA%E4%BB%80%E4%B9%88lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A6%81%E6%98%AFfinal%E7%9A%84/">
+<link rel="canonical" href="https://youngyang.top/2019/04/22/%E4%B8%BA%E4%BB%80%E4%B9%88lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A6%81%E6%98%AFfinal%E7%9A%84/">
 
 
 <script id="page-configurations">
@@ -157,12 +158,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">30</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">17</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">21</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -196,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/%E4%B8%BA%E4%BB%80%E4%B9%88lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A6%81%E6%98%AFfinal%E7%9A%84/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E4%B8%BA%E4%BB%80%E4%B9%88lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A6%81%E6%98%AFfinal%E7%9A%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -218,9 +219,32 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:08" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 21:05:51" itemprop="dateModified" datetime="2020-07-04T21:05:51+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" itemprop="url" rel="index">
+                    <span itemprop="name">Java8新特性</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java8%E6%96%B0%E7%89%B9%E6%80%A7/lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">lambda表达式</span>
+                  </a>
+                </span>
             </span>
 
           <br>
@@ -243,6 +267,7 @@
       
         <p>为什么 Lambda 表达式(匿名类) 不能访问非 final  的局部变量呢？</p>
 <p>因为实例变量存在堆中，而局部变量是在栈上分配，<strong><em>Lambda 表达(匿名类) 会在另一个线程中执行</em></strong>。如果在线程中要直接访问一个局部变量，可能线程执行时该局部变量已经被销毁了，而 <strong>final 类型的局部变量在 Lambda 表达式(匿名类) 中其实是局部变量的一个拷贝，因为之前的存放在栈中（lambda表达式在其他线程运行的时候可能栈已经释放了），所以必须要拷贝出一份来</strong>。</p>
+<a id="more"></a>
 <p>Java 8 的 Lambda 可以捕获什么变量呢？</p>
 <p>(1). 捕获实例变量或静态变量是没有限制的 (可认为是通过 final 类型的局部变量 this 来引用前两者)；</p>
 <p>(2)<strong>. 捕获的局部变量必须显式的声明为 final 或实际效果的的 final 类型</strong>。<br>注意(敲黑板)：如果在Lambda表达式中使用局部变量，即使我们没有声明成final类型的，编译器也会帮助我们将他们声明成final的，所以如果重新赋值会出错。</p>
@@ -267,21 +292,25 @@
 	</div>
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java8%E6%96%B0%E7%89%B9%E6%80%A7/" rel="tag"># Java8新特性</a>
+              <a href="/tags/lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"># lambda表达式</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2020/07/04/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/" rel="next" title="同步组建的基础之队列同步器AQS">
-                  <i class="fa fa-chevron-left"></i> 同步组建的基础之队列同步器AQS
+                <a href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/" rel="next" title="如何实现http协议中的重定向？">
+                  <i class="fa fa-chevron-left"></i> 如何实现http协议中的重定向？
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2020/07/04/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E8%AF%A6%E8%A7%A3/" rel="prev" title="线程池的五种状态详解">
-                  线程池的五种状态详解 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82HashMap/" rel="prev" title="一文读懂HashMap">
+                  一文读懂HashMap <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -343,13 +372,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
