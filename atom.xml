@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://youngyang.top/"/>
-  <updated>2019-11-13T15:30:59.492Z</updated>
+  <updated>2020-07-04T10:09:22.225Z</updated>
   <id>https://youngyang.top/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>1</title>
+    <link href="https://youngyang.top/2020/07/04/1/"/>
+    <id>https://youngyang.top/2020/07/04/1/</id>
+    <published>2020-07-04T10:09:22.225Z</published>
+    <updated>2020-07-04T10:09:22.225Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>MySQL性能优化之索引优化分析</title>
@@ -144,33 +159,6 @@
   </entry>
   
   <entry>
-    <title>Your password does not satisfy the current policy requirements</title>
-    <link href="https://youngyang.top/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/"/>
-    <id>https://youngyang.top/2019/04/22/ERROR 1819 (HY000)_ Your password does not satisfy the current policy requirements/</id>
-    <published>2019-04-22T06:47:40.000Z</published>
-    <updated>2019-10-31T04:34:42.958Z</updated>
-    
-    <content type="html"><![CDATA[<p>在linux中部署项目，搭建数据库环境的时候，需要专门设置一个user来管理响应的数据库。这是我在初步使用mysql，向mysql中user表插入用户时遇到的问题。</p><a id="more"></a><p>密码策略问题异常信息：<br>ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</p><p>如下图：<img src="https://img-blog.csdnimg.cn/20191024103619380.png" alt="在这里插入图片描述"><br>解决办法：</p><h4 id="1、查看-mysql-初始的密码策略，"><a href="#1、查看-mysql-初始的密码策略，" class="headerlink" title="1、查看 mysql 初始的密码策略，"></a>1、查看 mysql 初始的密码策略，</h4><p>输入语句 </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE <span class="string">'validate_password%'</span>;</span><br></pre></td></tr></table></figure><p>进行查看，<br>如下图：<br><img src="https://img-blog.csdnimg.cn/20191024103903746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="2、首先需要设置密码的验证强度等级"><a href="#2、首先需要设置密码的验证强度等级" class="headerlink" title="2、首先需要设置密码的验证强度等级"></a>2、首先需要设置密码的验证强度等级</h4><p>设置 validate_password_policy 的全局参数为 LOW 即可，输入设值语句 </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global validate_password_policy=LOW;</span><br></pre></td></tr></table></figure><p>进行设值，如下图：<img src="https://img-blog.csdnimg.cn/20191024104114414.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="3、设置密码长度"><a href="#3、设置密码长度" class="headerlink" title="3、设置密码长度"></a>3、设置密码长度</h4><p>当前密码长度为 8 ，如果不介意的话就不用修改了，此处设置为 4 位的密码，设置 validate_password_length 的全局参数为 6 即可，<br>输入设值语句<br><code>set global validate_password_length=4;</code>进行设值，如下图：<br><img src="https://img-blog.csdnimg.cn/20191024104332805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="4-设置密码"><a href="#4-设置密码" class="headerlink" title="4.设置密码"></a>4.设置密码</h4><p>现在就可以为mysql的用户设置密码了，只要满足4位长度即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user <span class="string">'mmall'</span>@<span class="string">'localhost'</span> identified by <span class="string">'mmall'</span>;</span><br></pre></td></tr></table></figure><p>执行结果如下：<br><img src="https://img-blog.csdnimg.cn/20191024105338293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>至此，用户就添加成功了！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在linux中部署项目，搭建数据库环境的时候，需要专门设置一个user来管理响应的数据库。这是我在初步使用mysql，向mysql中user表插入用户时遇到的问题。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="https://youngyang.top/categories/linux/"/>
-    
-      <category term="mysql" scheme="https://youngyang.top/categories/linux/mysql/"/>
-    
-    
-      <category term="linux" scheme="https://youngyang.top/tags/linux/"/>
-    
-      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
     <title>一文读懂Java 代码块和代码执行顺序</title>
     <link href="https://youngyang.top/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/"/>
     <id>https://youngyang.top/2019/04/22/一文读懂Java 代码块和代码执行顺序/</id>
@@ -269,6 +257,33 @@
       <category term="Linux" scheme="https://youngyang.top/tags/Linux/"/>
     
       <category term="服务器" scheme="https://youngyang.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Your password does not satisfy the current policy requirements</title>
+    <link href="https://youngyang.top/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/"/>
+    <id>https://youngyang.top/2019/04/22/ERROR 1819 (HY000)_ Your password does not satisfy the current policy requirements/</id>
+    <published>2019-04-22T06:47:40.000Z</published>
+    <updated>2019-10-31T04:34:42.958Z</updated>
+    
+    <content type="html"><![CDATA[<p>在linux中部署项目，搭建数据库环境的时候，需要专门设置一个user来管理响应的数据库。这是我在初步使用mysql，向mysql中user表插入用户时遇到的问题。</p><a id="more"></a><p>密码策略问题异常信息：<br>ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</p><p>如下图：<img src="https://img-blog.csdnimg.cn/20191024103619380.png" alt="在这里插入图片描述"><br>解决办法：</p><h4 id="1、查看-mysql-初始的密码策略，"><a href="#1、查看-mysql-初始的密码策略，" class="headerlink" title="1、查看 mysql 初始的密码策略，"></a>1、查看 mysql 初始的密码策略，</h4><p>输入语句 </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE <span class="string">'validate_password%'</span>;</span><br></pre></td></tr></table></figure><p>进行查看，<br>如下图：<br><img src="https://img-blog.csdnimg.cn/20191024103903746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="2、首先需要设置密码的验证强度等级"><a href="#2、首先需要设置密码的验证强度等级" class="headerlink" title="2、首先需要设置密码的验证强度等级"></a>2、首先需要设置密码的验证强度等级</h4><p>设置 validate_password_policy 的全局参数为 LOW 即可，输入设值语句 </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global validate_password_policy=LOW;</span><br></pre></td></tr></table></figure><p>进行设值，如下图：<img src="https://img-blog.csdnimg.cn/20191024104114414.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="3、设置密码长度"><a href="#3、设置密码长度" class="headerlink" title="3、设置密码长度"></a>3、设置密码长度</h4><p>当前密码长度为 8 ，如果不介意的话就不用修改了，此处设置为 4 位的密码，设置 validate_password_length 的全局参数为 6 即可，<br>输入设值语句<br><code>set global validate_password_length=4;</code>进行设值，如下图：<br><img src="https://img-blog.csdnimg.cn/20191024104332805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="4-设置密码"><a href="#4-设置密码" class="headerlink" title="4.设置密码"></a>4.设置密码</h4><p>现在就可以为mysql的用户设置密码了，只要满足4位长度即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user <span class="string">'mmall'</span>@<span class="string">'localhost'</span> identified by <span class="string">'mmall'</span>;</span><br></pre></td></tr></table></figure><p>执行结果如下：<br><img src="https://img-blog.csdnimg.cn/20191024105338293.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>至此，用户就添加成功了！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在linux中部署项目，搭建数据库环境的时候，需要专门设置一个user来管理响应的数据库。这是我在初步使用mysql，向mysql中user表插入用户时遇到的问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://youngyang.top/categories/linux/"/>
+    
+      <category term="mysql" scheme="https://youngyang.top/categories/linux/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://youngyang.top/tags/mysql/"/>
+    
+      <category term="linux" scheme="https://youngyang.top/tags/linux/"/>
     
   </entry>
   
