@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Yang's Blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="日志框架在项目的开发中，日志是必不可少的一个记录事件的组件，所以也会相应的在项目中实现和构建我们所需要的日志框架。 而市面上常见的日志框架有很多，比如：JCL(Jakarta Commons Logging)、SLF4J、Jboss-logging、jUL(java.util.logging)、log4j、log4j2、logback等等，我们该如何选择呢？ 通常情况下，日志是由一个抽象层+实现层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot中的日志框架">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2020&#x2F;07&#x2F;04&#x2F;springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6&#x2F;index.html">
+<meta property="og:site_name" content="Yang&#39;s Blog">
+<meta property="og:description" content="日志框架在项目的开发中，日志是必不可少的一个记录事件的组件，所以也会相应的在项目中实现和构建我们所需要的日志框架。 而市面上常见的日志框架有很多，比如：JCL(Jakarta Commons Logging)、SLF4J、Jboss-logging、jUL(java.util.logging)、log4j、log4j2、logback等等，我们该如何选择呢？ 通常情况下，日志是由一个抽象层+实现层">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314115440271.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314115918774.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314120555427.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314121150178.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314121345179.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314174107763.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314122224798.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314122308975.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314174107763.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020031417483942.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314182841210.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020031418311933.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314183341183.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020031418590245.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314191756666.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314192323153.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314192521424.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314193209483.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314193807757.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-07-04T12:08:10.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200314115440271.png">
+
+<link rel="canonical" href="https://youngyang.top/2020/07/04/springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>springboot中的日志框架 | Yang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springboot中的日志框架
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="日志框架"><a href="#日志框架" class="headerlink" title="日志框架"></a>日志框架</h1><p>在项目的开发中，日志是必不可少的一个记录事件的组件，所以也会相应的在项目中实现和构建我们所需要的日志框架。</p>
+<p>而市面上常见的日志框架有很多，比如：JCL(Jakarta Commons Logging)、SLF4J、Jboss-logging、jUL(java.util.logging)、log4j、log4j2、logback等等，我们该如何选择呢？</p>
+<p>通常情况下，<strong><em>日志是由一个抽象层+实现层的组合来搭建的</em></strong>。<br><img src="https://img-blog.csdnimg.cn/20200314115440271.png" alt="在这里插入图片描述"><br>而SpringBoot机智的选择了SLF4J+Logback的组合，这个组合是当下比较合适的一组（log4j2其实很厉害，但是太厉害还不能很好地整合）。</p>
+<h1 id="SLF4J框架"><a href="#SLF4J框架" class="headerlink" title="SLF4J框架"></a>SLF4J框架</h1><p>SLF4J框架是一个常用的日志抽象层。<br>官网是最好的学习助手。<br>来到slf4j的官网的用户手册，我们可以在下边看到这张图：<br><img src="https://img-blog.csdnimg.cn/20200314115918774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>首先SLF4J是一个日志门面，我们如果使用需要再另外找到一个日志实现框架，比如log4j、logback、log4j2、jcl、jul等等。</p>
+<p>并且slf4j和log4j以及logback是同一个人写的，先有的log4j，但是作者觉得这个框架功能并不是很理想，并且在log4j的基础上进行改进的话改进要很大，所以作者干脆一不做二不休又编写了另一个框架，也就是大名鼎鼎的Logback。</p>
+<p>假如我们使用slf4j+logback，因为logback已经知道了slf4j的存在，所以可以完美搭配。但如果slf4j想要搭配其他框架的话，就要导入一个中间的过渡jar包，因为其他框架在编写之前并不知道slf4j的存在。</p>
+<p>各种框架的过渡jar包如下所示：<br><img src="https://img-blog.csdnimg.cn/20200314120555427.png" alt="在这里插入图片描述"><br>这些jar包，往上实现了slf4j，往下内部又调用了log4j，jcl或者jul等等的方法，所以称之为过渡包。</p>
+<p><strong>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，配置文件还是做成日志实现框架自己本身的配置文件</strong></p>
+<h1 id="遗留问题的解决"><a href="#遗留问题的解决" class="headerlink" title="遗留问题的解决"></a>遗留问题的解决</h1><p>在我们的项目中，可能同时使用到了许多框架，比如spring、mybatis、hibernate等等。但是这些框架底层使用到了许多不同的日志框架，比如spring的默认日志框架是commens-logging。</p>
+<p>不同的框架使用不同的日志框架，这样我们的项目看起来就像是一个日志的杂交系统。</p>
+<p><strong><em>那如何解决这种问题呢？</em></strong></p>
+<p>来看看slf4j的官网告诉我们如何使用吧：<br><img src="https://img-blog.csdnimg.cn/20200314121150178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>slf4j官网的指示很明显，就是再用的时候需要导入一个“偷天换日包”。</p>
+<p>因为如果直接将这些框架所依赖的日志框架jar包排除出去，系统肯定会报错。我们就要使用一个偷天换日包，偷梁换柱包，比如：<br><img src="https://img-blog.csdnimg.cn/20200314121345179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>拿spring举例子，因为spring必须使用commens-logging日志框架，而我们又想使用slf4j+logback的日志组合，那么我们必须要把commens-logging排除出去，但是怎么让系统不报错呢？</p>
+<p>我们使用这些偷天换日包的话，就像jcl-over-slf4j.jar。这个jar的名字很明显就是从JCL想slf4j转化，它内部包的包名，包括类名都和JCL的完全相同，但是这些类中的方法全部是调用的slf4j的方法进行实现，这样我们就可以完美实现slf4j+logback组合，并且令系统不报错。</p>
+<p>这样spring依旧使用JCL作为日志支持，但是他所使用的JCL已经不是原来的JCL了，原来的JCL已经被我们排除出去，使用的是我们导入的偷天换日包，这样就不会报错了。</p>
+<p><strong><em>统一日志记录的思路（SpringBoot实现统一日志记录为slf4j的做法）：</em></strong></p>
+<ol>
+<li>先排除掉其他日志框架</li>
+<li>然后用中间包来替换排除掉的日志框架</li>
+<li>最后再添加目标日志框架</li>
+</ol>
+<h2 id="springboot的日志解决方案"><a href="#springboot的日志解决方案" class="headerlink" title="springboot的日志解决方案"></a>springboot的日志解决方案</h2><p>springboot使用的是<strong><em>slf4j+logback</em></strong>的组合。</p>
+<p><strong><em>按照以前的想法：</em></strong><br>springboot的底层是spring，那么他必然依赖JCL，所以我们要先将原来的JCL排除出去，加入我们的偷天换日包。这个偷天换日包，包名和类名都是各种框架需要的包名和类名，以保证框架不会报错，但是底层实现都是通过slf4j的方法来实现的。这样就能实现slf4j+logback的组合了。</p>
+<p>但是在我使用springboot2.2.5版本的时候发现，框架组合并不是按照原来盗用原来日志框架的包名和类名来实现的，而是通过桥接方式实现，如下所示：<br><img src="https://img-blog.csdnimg.cn/20200314174107763.png" alt="在这里插入图片描述"><br>那么包名不是原来的包名的话，使用到jul的框架依旧会报错，点进这个类发现，虽然包名不是jul的包名，但是通过桥接模式依旧能让我们实现jul–&gt;slf4j的改变。</p>
+<p><strong>在springboot2.0之后：</strong></p>
+<p>在SpringBoot2.x版本的时候，上述的实现方式发生了一些改变，中间引入了”桥接”的概念，没有直接通过模拟类名实现，比如类：SLF4JBridgeHandler，但是其底层的实现方法都是类似的，都是通过排除原有依赖实现。</p>
+<p>比如springboot2.2.5，快速创建一个springboot的web项目，进入pom文件：<br><img src="https://img-blog.csdnimg.cn/20200314122224798.png" alt="在这里插入图片描述"><br>打开项目的依赖图：<br><img src="https://img-blog.csdnimg.cn/20200314122308975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们可以看到，jul-to-slf4j.jar和log4j-to-slf4j.jar等等这些jar包，这些包都是偷天换日包，内部调用的都是slf4j的方法但是包名和类名都不变，这样就可以很好地和slf4j整合在一起了。</p>
+<p>比如我们打开jul-to-slf4j.jar：<br><img src="https://img-blog.csdnimg.cn/20200314174107763.png" alt="在这里插入图片描述"><br>打开这个类，可以看到这个类的注释：<br><img src="https://img-blog.csdnimg.cn/2020031417483942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大概意思是：这个handler将会把JUL重定向（redirect）到slf4j，但是这个handler仅仅能将JUL桥接到slf4j。</p>
+<p>我觉得这种方式和原来的方式大同小异，都是排除原来依赖的日志jar包，然后导入一个过渡包，实现slf4j+JCL或者slf4j+JUL的整合。</p>
+<p><strong><em>SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可。</em></strong></p>
+<h1 id="日志的使用"><a href="#日志的使用" class="headerlink" title="日志的使用"></a>日志的使用</h1><h2 id="springboot日志配置"><a href="#springboot日志配置" class="headerlink" title="springboot日志配置"></a>springboot日志配置</h2><p>那我们在配置好日志之后，如何使用呢？<br>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line">@Test</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//日志的级别；</span></span><br><span class="line"><span class="comment">//由低到高 trace&lt;debug&lt;info&lt;warn&lt;error</span></span><br><span class="line"><span class="comment">//可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效</span></span><br><span class="line">logger.trace(<span class="string">"这是trace日志..."</span>);</span><br><span class="line">logger.debug(<span class="string">"这是debug日志..."</span>);</span><br><span class="line"><span class="comment">//SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别</span></span><br><span class="line">logger.info(<span class="string">"这是info日志..."</span>);</span><br><span class="line">logger.warn(<span class="string">"这是warn日志..."</span>);</span><br><span class="line">logger.error(<span class="string">"这是error日志..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到<br><img src="https://img-blog.csdnimg.cn/20200314182841210.png" alt="在这里插入图片描述"><br>输出只有info，warn和error级别。日志的默认级别是info（也就是root级别），只有info和高于info级别的日志才能输出。</p>
+<p>我们可以在配置文件application.properties中进行配置，如：<br><img src="https://img-blog.csdnimg.cn/2020031418311933.png" alt="在这里插入图片描述"><br>trace是最低级别，这样所有级别的日志信息都能输出出来。</p>
+<p>我们还可以配置哪些东西呢？<br>比如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">logging.level.com.atguigu=trace</span><br><span class="line">#logging.path=</span><br><span class="line"># 不指定路径在当前项目下生成springboot.<span class="built_in">log</span>日志</span><br><span class="line"># 可以指定完整的路径；</span><br><span class="line">#logging.file=G:/springboot.<span class="built_in">log</span></span><br><span class="line"># 在当前磁盘的根路径下创建spring文件夹和里面的<span class="built_in">log</span>文件夹；使用 spring.<span class="built_in">log</span> 作为默认文件</span><br><span class="line">logging.path=/spring/<span class="built_in">log</span></span><br><span class="line"># 在控制台输出的日志的格式</span><br><span class="line">logging.pattern.console=%d&#123;yyyy‐MM‐dd&#125; [%thread] %‐<span class="number">5l</span>evel %logger&#123;<span class="number">50</span>&#125; ‐ %msg%n</span><br><span class="line"># 指定文件中日志输出的格式</span><br><span class="line">logging.pattern.file=%d&#123;yyyy‐MM‐dd&#125; === [%thread] === %‐<span class="number">5l</span>evel === %logger&#123;<span class="number">50</span>&#125; ==== %msg%n</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200314183341183.png" alt="在这里插入图片描述"><br>像这样配置到application.properties这样，如果这样的话也太low了，我们可以写一个logback的专门的配置文件，那么这个配置文件放到哪里呢？</p>
+<p>再次提到我觉得官网是最好的学习助手。</p>
+<p>来到spring官网没查看springboot2.2.5的使用手册，在logging一栏：<br><img src="https://img-blog.csdnimg.cn/2020031418590245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>所以我们可以把编写的logback.xml配置文件放到类路径的根目录下。这样springboot就可以自己帮我们加载进行配置了。</p>
+<p>还有在命名为logback.xml之外，还有一个logback-spring.xml，如果这样命名的话就可以使用spriingboot为我们提供的logback的额外功能，官网是这么说的如如下图所示：<img src="https://img-blog.csdnimg.cn/20200314191756666.png" alt="在这里插入图片描述"><br>点进去主要有两个扩展功能：<br><img src="https://img-blog.csdnimg.cn/20200314192323153.png" alt="在这里插入图片描述"><br>那为什么我们改个名字就可以使用springboot为我们提供的额外功能呢？<br><img src="https://img-blog.csdnimg.cn/20200314192521424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大概内容是这样的：因为标准的logback.xml文件会被日志框架过早的加载，所以你需要去使用logback-spring.xml或者定义一个logging.config。<br>这个拓展在logback的配置扫描下不能使用（logback-spring.xml会被spring扫描到），如果你非要这样使用，那么就会报这样一个错误。</p>
+<p><strong><em>额外特性1：profile配置</em></strong><br><img src="https://img-blog.csdnimg.cn/20200314193209483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大概意思就是，我们可以定义一个<springProfile></springProfile>标签，里边有个name属性，我们在name属性中指定这个配置在哪个profile中生效，在其他profile不会生效。如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;appender name=<span class="string">"stdout"</span> class=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span><br><span class="line">&lt;!‐‐</span><br><span class="line">日志输出格式：</span><br><span class="line">%d表示日期时间，</span><br><span class="line">%thread表示线程名，</span><br><span class="line">%‐<span class="number">5l</span>evel：级别从左显示<span class="number">5</span>个字符宽度</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; 表示logger名字最长<span class="number">50</span>个字符，否则按照句点分割。</span><br><span class="line">%msg：日志消息，</span><br><span class="line">%n是换行符</span><br><span class="line">‐‐&gt;</span><br><span class="line">&lt;layout class=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span><br><span class="line">&lt;springProfile name=<span class="string">"dev"</span>&gt;</span><br><span class="line">&lt;pattern&gt;%d&#123;yyyy‐MM‐dd HH:mm:ss.SSS&#125; ‐‐‐‐&gt; [%thread] ‐‐‐&gt; %‐<span class="number">5l</span>evel</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; ‐ %msg%n&lt;/pattern&gt;</span><br><span class="line">&lt;/springProfile&gt;</span><br><span class="line">&lt;springProfile name=<span class="string">"!dev"</span>&gt;</span><br><span class="line">&lt;pattern&gt;%d&#123;yyyy‐MM‐dd HH:mm:ss.SSS&#125; ==== [%thread] ==== %‐<span class="number">5l</span>evel</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; ‐ %msg%n&lt;/pattern&gt;</span><br><span class="line">&lt;/springProfile&gt;</span><br><span class="line">&lt;/layout&gt;</span><br><span class="line">&lt;/appender&gt;</span><br></pre></td></tr></table></figure>
+<p><strong><em>额外功能2：环境属性</em></strong><br><img src="https://img-blog.csdnimg.cn/20200314193807757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以使用<springProperty></springProperty>标签，这个标签可以允许我们从application.yml中获取值，而并不是直接设一个值scope属性为该值使用的范围，source是获取值得来源，并使用${}的方式获该值。<br>使用方法如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;springProperty scope=<span class="string">"context"</span> name=<span class="string">"fluentHost"</span> source=<span class="string">"myapp.fluentd.host"</span></span><br><span class="line">        defaultValue=<span class="string">"localhost"</span>/&gt;</span><br><span class="line">&lt;appender name=<span class="string">"FLUENT"</span> class=<span class="string">"ch.qos.logback.more.appenders.DataFluentAppender"</span>&gt;</span><br><span class="line">    &lt;remoteHost&gt;$&#123;fluentHost&#125;&lt;/remoteHost&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/appender&gt;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/07/04/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/" rel="next" title="springboot的MVC自动配置">
+                  <i class="fa fa-chevron-left"></i> springboot的MVC自动配置
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/07/04/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" rel="prev" title="Springboot中对mvc进行扩展">
+                  Springboot中对mvc进行扩展 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#日志框架"><span class="nav-number">1.</span> <span class="nav-text">日志框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLF4J框架"><span class="nav-number">2.</span> <span class="nav-text">SLF4J框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遗留问题的解决"><span class="nav-number">3.</span> <span class="nav-text">遗留问题的解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot的日志解决方案"><span class="nav-number">3.1.</span> <span class="nav-text">springboot的日志解决方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#日志的使用"><span class="nav-number">4.</span> <span class="nav-text">日志的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot日志配置"><span class="nav-number">4.1.</span> <span class="nav-text">springboot日志配置</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="youngyang"
+    src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">youngyang</p>
+  <div class="site-description" itemprop="description">Record what you want!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyoungyang" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;xyoungyang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_42013590" title="CSDN &amp;rarr; https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42013590" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngyang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">226k</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+

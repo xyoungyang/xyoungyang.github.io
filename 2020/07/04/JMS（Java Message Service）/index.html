@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Yang's Blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="是什么JMS是Java EE中的一部分，好比是盘子和点心的关系，JMS是Java EE中的额一个组成部分。 JMS的组成JMS有四部分组成。分别为： JMS privider： 实现JMS接口与规范的消息中间件，也就是我们的MQ服务器。JMS producer：消息生产者，创建与发送JMS消息的客户端应用。JMS consumer：消息的消费者，接受与处理JMS消息的客户端应用。JMS messa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMS（Java Message Service）">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2020&#x2F;07&#x2F;04&#x2F;JMS%EF%BC%88Java%20Message%20Service%EF%BC%89&#x2F;index.html">
+<meta property="og:site_name" content="Yang&#39;s Blog">
+<meta property="og:description" content="是什么JMS是Java EE中的一部分，好比是盘子和点心的关系，JMS是Java EE中的额一个组成部分。 JMS的组成JMS有四部分组成。分别为： JMS privider： 实现JMS接口与规范的消息中间件，也就是我们的MQ服务器。JMS producer：消息生产者，创建与发送JMS消息的客户端应用。JMS consumer：消息的消费者，接受与处理JMS消息的客户端应用。JMS messa">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217201717408.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217201745254.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217203129546.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217203559742.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217203319377.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217203702484.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217203801226.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217204358515.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217204259849.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217211429786.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217212023194.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217212047638.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191218111916699.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191218112010364.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191218112039889.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191218112054756.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-07-04T12:08:11.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217201717408.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="https://youngyang.top/2020/07/04/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JMS（Java Message Service） | Yang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JMS（Java Message Service）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>JMS是Java EE中的一部分，好比是盘子和点心的关系，JMS是Java EE中的额一个组成部分。<br><img src="https://img-blog.csdnimg.cn/20191217201717408.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191217201745254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="JMS的组成"><a href="#JMS的组成" class="headerlink" title="JMS的组成"></a>JMS的组成</h1><p>JMS有四部分组成。分别为：</p>
+<p>JMS privider： 实现JMS接口与规范的消息中间件，也就是我们的MQ服务器。<br>JMS producer：消息生产者，创建与发送JMS消息的客户端应用。<br>JMS consumer：消息的消费者，接受与处理JMS消息的客户端应用。<br>JMS message：JMS的消息。</p>
+<h2 id="JMS-message的组成"><a href="#JMS-message的组成" class="headerlink" title="JMS message的组成"></a>JMS message的组成</h2><p>JMS message由三部分组成：消息头、消息头和消息属性。</p>
+<h3 id="消息头"><a href="#消息头" class="headerlink" title="消息头"></a>消息头</h3><p>在JMS message中包含很多消息头，如下所示：<br><img src="https://img-blog.csdnimg.cn/20191217203129546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>几个比较重要的消息头如下：</p>
+<p>1、<strong>JMSdestination</strong>：message发送的目的地，比如queue和topic。<br>2、<strong>JMSDeliveryMode</strong>:主要是指定消息的持久或者非持久化。<br><img src="https://img-blog.csdnimg.cn/20191217203559742.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191217203319377.png" alt="在这里插入图片描述"><br>3、JMSExpiration：消息存活时间。<br><img src="https://img-blog.csdnimg.cn/20191217203702484.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>4、JMSPriority：消息优先级。<br><img src="https://img-blog.csdnimg.cn/20191217203801226.png" alt="在这里插入图片描述"></p>
+<p>5、JMSMessageID：唯一识别每个消息的标志，由MQ产生。</p>
+<h3 id="消息体"><a href="#消息体" class="headerlink" title="消息体"></a>消息体</h3><p>消息体顾名思义作用就是<strong>封装具体消息的数据</strong>。<br>那么消息的数据到底有多少种格式呢，有五种。其中最常用的为<strong>TextMessage</strong>和<strong>MapMessage</strong>两种。<br>1、TextMessage：普通的字符串消息，包含一个string。<br>2、MapMessage：一个map类型的消息，key为stirng类型，而value 为<strong>java的基本类型</strong>。如下：<br><img src="https://img-blog.csdnimg.cn/20191217204358515.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如果MapMessage中的value放的是char类型数据，则创键方式如下所示：<br><img src="https://img-blog.csdnimg.cn/20191217204259849.png" alt="在这里插入图片描述"><br>3、BytesMessage：二进制数组消息，包含一个byte[]。<br>4、StreamMessage：java数据流消息，用标准流操作来顺序的填充或读取。<br>5、ObjectMessage：对象消息，包含一个可序列化的java对象。</p>
+<p><strong><em>注意：</em></strong><br>    发送和接受的消息体类型必须是一致对应的。如发送的是TextMessage，则接收方式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">consumer.setMessageListener(<span class="keyword">new</span> MessageListener() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           <span class="keyword">public</span> <span class="keyword">void</span> onMessage(Message message) &#123;</span><br><span class="line">               <span class="keyword">if</span> (null != message &amp;&amp; message instanceof TextMessage) &#123;</span><br><span class="line">                   TextMessage textMessage = (TextMessage) message;</span><br><span class="line">                   <span class="keyword">try</span> &#123;</span><br><span class="line">                       System.out.println(<span class="string">"msg-----"</span> + textMessage.getText());</span><br><span class="line">                   &#125; <span class="keyword">catch</span> (JMSException e) &#123;</span><br><span class="line">                       e.printStackTrace();</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="消息属性"><a href="#消息属性" class="headerlink" title="消息属性"></a>消息属性</h3><p>如果需要使用消息头以外的值，那么可以使用消息属性（一种加强型的api），可用于识别/去重/重点标注等操作。<br><img src="https://img-blog.csdnimg.cn/20191217211429786.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="JMS的可靠性"><a href="#JMS的可靠性" class="headerlink" title="JMS的可靠性"></a>JMS的可靠性</h1><h2 id="persistent：持久性"><a href="#persistent：持久性" class="headerlink" title="persistent：持久性"></a>persistent：持久性</h2><h3 id="基于队列queue"><a href="#基于队列queue" class="headerlink" title="基于队列queue"></a>基于队列queue</h3><p>1、非持久化：<br><img src="https://img-blog.csdnimg.cn/20191217212023194.png" alt="在这里插入图片描述"><br>2、持久化<br><img src="https://img-blog.csdnimg.cn/20191217212047638.png" alt="在这里插入图片描述"><br>3、默认情况下ActiveMQ是持久化的，即向MQ中发送消息之后即使MQ服务器宕机挂掉然后重新启动之后，消费者也可以从MQ中取到原来发送的消息；而如果使用上述方法设置消息非持久化，那么在重新启动之后就不能取到原来的数据，原来的数据就会被丢失。</p>
+<h3 id="基于主题topic发布订阅"><a href="#基于主题topic发布订阅" class="headerlink" title="基于主题topic发布订阅"></a>基于主题topic发布订阅</h3><p> <strong>持久的发布主题生产者：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.durable;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的生产者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DurableJmsProduceTopic</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVE_URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String TOPIC_NAME = <span class="string">"topic-01"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws JMSException </span>&#123;</span><br><span class="line">        <span class="comment">//创建连接工厂，按照指定的url地址，采用默认用户名和密码</span></span><br><span class="line">        ActiveMQConnectionFactory activeMQConnectionFactory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVE_URL);</span><br><span class="line">        <span class="comment">//通过连接工厂创建连接</span></span><br><span class="line">        Connection connection = activeMQConnectionFactory.createConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建回话session，两个参数：事务和签收</span></span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        <span class="comment">//常见目的地（队列或queue者主题topic）</span></span><br><span class="line">        Topic topic = session.createTopic(TOPIC_NAME);</span><br><span class="line">        <span class="comment">//创建生产者</span></span><br><span class="line">        MessageProducer producer = session.createProducer(topic);</span><br><span class="line">        <span class="comment">//设置持久化的topic生产者</span></span><br><span class="line">        producer.setDeliveryMode(DeliveryMode.PERSISTENT);</span><br><span class="line">        connection.start();</span><br><span class="line">        <span class="comment">//使用MessageProducer生产3条消息发送到MQ的队列里</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//创建消息</span></span><br><span class="line">            TextMessage textMessage = session.createTextMessage(<span class="string">"msg------"</span> + i);</span><br><span class="line">            <span class="comment">//通过生产者MessageProducer发送给MQ</span></span><br><span class="line">            producer.send(textMessage);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//关闭资源</span></span><br><span class="line">        producer.close();</span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>持久的发布主题消费者：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.durable;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的生产者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DurableJmsConsumerTopic</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVEMQ_URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String TOPIC_NAME = <span class="string">"topic-01"</span>;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws JMSException, IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">"订阅者z3"</span>);</span><br><span class="line">        ActiveMQConnectionFactory factory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVEMQ_URL);</span><br><span class="line">        Connection connection = factory.createConnection();</span><br><span class="line">        connection.setClientID(<span class="string">"z3"</span>);</span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        Topic topic = session.createTopic(TOPIC_NAME);</span><br><span class="line">        TopicSubscriber durableSubscriber = session.createDurableSubscriber(topic, <span class="string">"remark.."</span>);</span><br><span class="line"></span><br><span class="line">        connection.start();</span><br><span class="line"></span><br><span class="line">        Message message = durableSubscriber.receive();</span><br><span class="line">        <span class="keyword">while</span> (null != message) &#123;</span><br><span class="line">            TextMessage textMessage = (TextMessage) message;</span><br><span class="line">            System.out.println(textMessage.getText());</span><br><span class="line">            message = durableSubscriber.receive();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>持久化的表现：</strong><br>持久性的订阅者首先启动进行订阅，就算中途离线关掉了系统，也会在下次连接上线后收到消息。</p>
+<h2 id="transaction：事务"><a href="#transaction：事务" class="headerlink" title="transaction：事务"></a>transaction：事务</h2><p>无论是在生产者还是消费者的时候都要创建一个session会话，如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Session session = connection.createSession(<span class="literal">false</span>,Session.AUTO_ACKNOWLEDGE);</span><br></pre></td></tr></table></figure>
+<p>其中第一个参数就是事务，false代表关闭事务，true代表使用事务。</p>
+<p>如果生产者和消费者都设置为false，那么在producer.send(message)之后，消息就会直接传到队列中，consumer.receive之后消息就会直接取出来；<br>如果生产者和消费者都设置为true，那么必须手动session.commit()进行提交，出错之候可以session.rollback()。如果不commit，那么：producer.send()之后，消息不会发送到消息队列中，并且因为没有commit，consumer.receive()会多次消费同一条消息。</p>
+<h2 id="acknowledge-签收模式"><a href="#acknowledge-签收模式" class="headerlink" title="acknowledge 签收模式"></a>acknowledge 签收模式</h2><p>签收模式的效果如何与事务的开启与否有着密切的关系，主要常用的签收模式包括两种：自动签收AUTO_ACKNOWLEDGE和手动签收CLIENT_ACKNOWLEDGE。</p>
+<p><strong>1、在事务为false的时候，签收模式为：AUTO_ACKNOWLEDGE</strong><br>在此模式下，为自动签收。不用任何操作就会签收，不会出现二次消费的情况<br><strong>2、在事务为false的时候，签收模式为：CLIENT_ACKNOWLEDGE</strong><br>在此模式下消息不会自动签收，必须使用message.acknowledge()手动对消息进行签收，否则会出现二次消费。<br><strong>3、在事务为true的时候，签收模式为：AUTO_ACKNOWLEDGE</strong><br>在此模式下，并且调用session.commit()进行事务提交的情况下为自动签收。若事务不提交，则会出现二次消费的情况。<br><strong>4、在事务为true的时候，签收模式为：CLIENT_ACKNOWLEDGE</strong><br>在此模式下，并且调用session.commit()进行事务提交的情况下为手动签收。若事务不提交，则会出现二次消费的情况。即使message.acknowledge()进行消息手动签收也会出现二次消费。</p>
+<p><strong>总结：</strong><br>在事务关闭的情况下，消息是否自动签收取决于签收模式，如AUTO_ACKNOWLEDGE或者CLIENT_ACKNOWLEDGE；在事务开启的情况下，并且调用commit方法，则无论签收模式是什么<strong>都会</strong>自动提交，在事务开启的情况下，若不调用commit方法，则无论签收模式是什么<strong>都不会</strong>自动提交。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="JMS点对点模式总结"><a href="#JMS点对点模式总结" class="headerlink" title="JMS点对点模式总结"></a>JMS点对点模式总结</h2><p><img src="https://img-blog.csdnimg.cn/20191218111916699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="JMS发布订阅模式总结"><a href="#JMS发布订阅模式总结" class="headerlink" title="JMS发布订阅模式总结"></a>JMS发布订阅模式总结</h2><p><img src="https://img-blog.csdnimg.cn/20191218112010364.png" alt="在这里插入图片描述"></p>
+<h3 id="非持久订阅"><a href="#非持久订阅" class="headerlink" title="非持久订阅"></a>非持久订阅</h3><p><img src="https://img-blog.csdnimg.cn/20191218112039889.png" alt="在这里插入图片描述"></p>
+<h3 id="持久订阅"><a href="#持久订阅" class="headerlink" title="持久订阅"></a>持久订阅</h3><p><img src="https://img-blog.csdnimg.cn/20191218112054756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="用哪个"><a href="#用哪个" class="headerlink" title="用哪个"></a>用哪个</h3><p>当所有消息必须被接受，则用持久订阅。当丢失消息能够被容忍，则用非持久订阅。</p>
+
+    </div>
+
+    
+    
+    
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/07/04/java%E4%B8%AD%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86/" rel="next" title="java中集合的遍历">
+                  <i class="fa fa-chevron-left"></i> java中集合的遍历
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/07/04/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="prev" title="JUC之线程池">
+                  JUC之线程池 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#是什么"><span class="nav-number">1.</span> <span class="nav-text">是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMS的组成"><span class="nav-number">2.</span> <span class="nav-text">JMS的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMS-message的组成"><span class="nav-number">2.1.</span> <span class="nav-text">JMS message的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息头"><span class="nav-number">2.1.1.</span> <span class="nav-text">消息头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息体"><span class="nav-number">2.1.2.</span> <span class="nav-text">消息体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息属性"><span class="nav-number">2.1.3.</span> <span class="nav-text">消息属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMS的可靠性"><span class="nav-number">3.</span> <span class="nav-text">JMS的可靠性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#persistent：持久性"><span class="nav-number">3.1.</span> <span class="nav-text">persistent：持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于队列queue"><span class="nav-number">3.1.1.</span> <span class="nav-text">基于队列queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于主题topic发布订阅"><span class="nav-number">3.1.2.</span> <span class="nav-text">基于主题topic发布订阅</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transaction：事务"><span class="nav-number">3.2.</span> <span class="nav-text">transaction：事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#acknowledge-签收模式"><span class="nav-number">3.3.</span> <span class="nav-text">acknowledge 签收模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JMS点对点模式总结"><span class="nav-number">4.1.</span> <span class="nav-text">JMS点对点模式总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JMS发布订阅模式总结"><span class="nav-number">4.2.</span> <span class="nav-text">JMS发布订阅模式总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非持久订阅"><span class="nav-number">4.2.1.</span> <span class="nav-text">非持久订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久订阅"><span class="nav-number">4.2.2.</span> <span class="nav-text">持久订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用哪个"><span class="nav-number">4.2.3.</span> <span class="nav-text">用哪个</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="youngyang"
+    src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">youngyang</p>
+  <div class="site-description" itemprop="description">Record what you want!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyoungyang" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;xyoungyang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_42013590" title="CSDN &amp;rarr; https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42013590" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngyang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">226k</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+

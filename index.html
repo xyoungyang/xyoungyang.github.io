@@ -159,7 +159,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">11</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
 
   </li>
   </ul>
@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/1/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -202,71 +202,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/04/1/" class="post-title-link" itemprop="url">1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-04 18:09:22" itemprop="dateCreated datePublished" datetime="2020-07-04T18:09:22+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">MySQL性能优化之索引优化分析</a>
+            <a href="/2020/07/04/Redis/" class="post-title-link" itemprop="url">Redis</a>
         </h1>
 
         <div class="post-meta">
@@ -277,18 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-11-13 23:24:41 / 修改时间：23:30:59" itemprop="dateCreated datePublished" datetime="2019-11-13T23:24:41+08:00">2019-11-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -297,7 +222,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>7.6k</span>
             </span>
 
         </div>
@@ -309,15 +234,84 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>数据库中索引的重要性毋庸置疑，系统的性能下降可能包含很多原因，其中就包括SQL慢，执行时间长或者等待时间长，其原因包括查询语句写的烂、索引失效、关联太多join（设计缺陷或不得已的需求）、服务器调优及各个参数设置（缓冲\线程数等 ）等原因。其中很大的原因就是索引方面有待优化。<br>本篇文章围绕在开发过程中的索引优化展开描述。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="Redis入门概述"><a href="#Redis入门概述" class="headerlink" title="Redis入门概述"></a>Redis入门概述</h1><h2 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h2><p><strong>Redis是NoSQL的一种落地实现，NoSQL(NoSQL = Not Only SQL )，意即“不仅仅是SQL”。</strong><br>泛指非关系型的数据库。随着互联网web2.0网站的兴起，传统的关系数据库在应付web2.0网站，特别是超大规模和高并发的SNS类型的web2.0纯动态网站已经显得力不从心，暴露了很多难以克服的问题，而非关系型的数据库则由于其本身的特点得到了非常迅速的发展。NoSQL数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，尤其是大数据应用难题，包括超大规模数据的存储。<br>（例如谷歌或Facebook每天为他们的用户收集万亿比特的数据）。这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展。</p>
+<p><strong>Redis</strong>:REmote DIctionary Server(远程字典服务器)，是完全开源免费的，用C语言编写的，遵守BSD协议，是一个高性能的(key/value)分布式内存数据库，基于内存运行并支持持久化的NoSQL数据库，是当前最热门的NoSql数据库之一，也被人们称为数据结构服务器。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>Redis 与其他 key - value 缓存产品有以下三个特点：<br>1、Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。<br>2、Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。<br>3、Redis支持数据的备份，即master-slave模式的数据备份。</p>
+<h1 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h1><p>1、下载获得redis-3.0.4.tar.gz后将它放入我们的Linux目录/opt<br>2、/opt目录下，解压命令</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf redis<span class="number">-3.0</span><span class="number">.4</span>.tar.gz</span><br></pre></td></tr></table></figure>
+<p>3、解压完成后出现文件夹：redis-3.0.4<br><img src="https://img-blog.csdnimg.cn/2019122714244650.png" alt="在这里插入图片描述"><br>4、进入目录</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd redis<span class="number">-3.0</span><span class="number">.4</span></span><br></pre></td></tr></table></figure>
+<p>5、在redis-3.0.4目录下执行make命令<br>注：运行make命令的时候可能出现错误，因为需要gcc。<br>若没有gcc，在可以上网的情况下可以使用：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure>
+<p>进行yum安装。<br>若不能上网可以使用镜像光盘进行rpm安装。<br>6、二次make，因为前边执行过make，所以会报错，运行make distclean之后再make<br><img src="https://img-blog.csdnimg.cn/20191227142833197.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>7、make执行完成后，再去爱吃运行make install。<br><img src="https://img-blog.csdnimg.cn/20191227143027264.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>8、安装之后默认安装位置在：/usr/local/bin下，如下图所示：<br><img src="https://img-blog.csdnimg.cn/2019122714315244.png" alt="在这里插入图片描述"><br>其中：<br>    Redis-benchmark：性能测试工具，可以在自己本子运行，看看自己本子性能如何。（服务启动起来后执行）<br>    Redis-check-aof：修复有问题的AOF文件。<br>    Redis-check-dump：修复有问题的dump.rdb文件。<br>    Redis-cli：客户端，操作入口。<br>    Redis-sentinel：Redis集群使用。<br>    Redis-server：Redis服务器启动命令。<br>9、启动Redis<br>修改redis.conf文件将里面的daemonize no 改成 yes，让服务在后台启动。<br>将默认的redis.conf拷贝到自己定义好的一个路径下，比如/myredis。<br>在/usr/local/bin目录下启动redis服务器命令如下所示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /myredis/redis.conf</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20191227143645608.png" alt="在这里插入图片描述"><br>启动redis客户端</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p <span class="number">6379</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20191227143819158.png" alt="在这里插入图片描述"><br>进行连通测试，出现如下则成功：<br><img src="https://img-blog.csdnimg.cn/2019122714385652.png" alt="在这里插入图片描述"></p>
+<h1 id="Redis启动后杂项基础知识讲解"><a href="#Redis启动后杂项基础知识讲解" class="headerlink" title="Redis启动后杂项基础知识讲解"></a>Redis启动后杂项基础知识讲解</h1><p>1、redis默认有16个数据库，类似数组下表从零开始，初始默认使用零号库。<br>2、可以使用select id指令来选择使用几号库<br><img src="https://img-blog.csdnimg.cn/20191227144221364.png" alt="在这里插入图片描述"><br>3、Dbsize查看当前数据库的key的数量<br>4、Flushdb：清空当前库<br>5、Flushall；通杀全部库<br>6、统一密码管理，16个库都是同样密码，要么都OK要么一个也连接不上<br>7、Redis索引都是从零开始<br>8、默认端口是6379</p>
+<h1 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h1><p><strong>1、String（字符串）</strong><br>string是redis最基本的类型，你可以理解成与Memcached一模一样的类型，一个key对应一个value。string类型是二进制安全的。意思是redis的string可以包含任何数据。比如jpg图片或者序列化的对象 。string类型是Redis最基本的数据类型，一个redis中字符串value最多可以是512M。<br>2、<strong>Hash（哈希，类似java中的map）</strong><br>Redis hash 是一个键值对集合。Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。<br><strong>3、List（列表）</strong><br>Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素导列表的头部（左边）或者尾部（右边）。它的底层实际是个链表。<br><strong>4、Set（集合）</strong><br>Redis的Set是string类型的无序集合。它是通过HashTable实现实现的。<br><strong>5、Zset(sorted set：有序集合)</strong><br>Redis zset 和 set 一样也是string类型元素的集合，且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。zset的成员是唯一的，但分数(score)却可以重复。</p>
+<h1 id="Redis常用指令"><a href="#Redis常用指令" class="headerlink" title="Redis常用指令"></a>Redis常用指令</h1><h2 id="对Redis的键key操作"><a href="#对Redis的键key操作" class="headerlink" title="对Redis的键key操作"></a>对Redis的键key操作</h2><p><img src="https://img-blog.csdnimg.cn/20191227145010378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>案例：<br>1、keys *：查看存在的所有key的值<br>2、exists key名字：判断某个key是否存在<br>3、expire key 秒钟：为给定的key设置过期时间<br>4、ttl key：查看还有多少秒钟过期，-1表示永不过期，-2表示已过期。<br>5、 type key：查看key的类型</p>
+<h2 id="对Redis字符串String操作"><a href="#对Redis字符串String操作" class="headerlink" title="对Redis字符串String操作"></a>对Redis字符串String操作</h2><p><img src="https://img-blog.csdnimg.cn/20191227145659165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191227145704824.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Redis列表List操作"><a href="#Redis列表List操作" class="headerlink" title="Redis列表List操作"></a>Redis列表List操作</h2><p><img src="https://img-blog.csdnimg.cn/20191227145752688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191227145802410.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="对Redis集合Set操作"><a href="#对Redis集合Set操作" class="headerlink" title="对Redis集合Set操作"></a>对Redis集合Set操作</h2><p><img src="https://img-blog.csdnimg.cn/20191227145835738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="对Redis哈希Hash操作"><a href="#对Redis哈希Hash操作" class="headerlink" title="对Redis哈希Hash操作"></a>对Redis哈希Hash操作</h2><p><img src="https://img-blog.csdnimg.cn/20191227145900504.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="对Redis的zset操作"><a href="#对Redis的zset操作" class="headerlink" title="对Redis的zset操作"></a>对Redis的zset操作</h2><p><img src="https://img-blog.csdnimg.cn/20191227150007421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191227150012530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h1><h2 id="RDB（Redis-DataBase）"><a href="#RDB（Redis-DataBase）" class="headerlink" title="RDB（Redis DataBase）"></a>RDB（Redis DataBase）</h2><p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是行话讲的Snapshot快照，它恢复时是将快照文件直接读到内存里。<br>Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。<br>整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。<strong>RDB的缺点是最后一次持久化后的数据可能丢失。</strong></p>
+<h3 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h3><p>Fork的作用是复制一个与当前进程一样的进程。新进程的所有数据（变量、环境变量、程序计数器等）数值都和原进程一致，但是是一个全新的进程，并作为原进程的子进程。</p>
+<h3 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h3><p>Rdb 保存的是dump.rdb文件<br><img src="https://img-blog.csdnimg.cn/2019122715064635.png" alt="在这里插入图片描述"></p>
+<h3 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h3><p>在redis.conf（/opt/redis-3.0.4目录下）中SNAPSHOTTING部分进行如下修改：<br><img src="https://img-blog.csdnimg.cn/2019122715101684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上面配置表示：<br>在900s内进行一次写操作或者300s内进行10次写操作就进行持久化，save “”表示不开启RDB持久化。</p>
+<h3 id="如何主动触发RDB快照"><a href="#如何主动触发RDB快照" class="headerlink" title="如何主动触发RDB快照"></a>如何主动触发RDB快照</h3><p>1、Save：save时只管保存，其它不管，全部阻塞。<br>2、BGSAVE：Redis会在后台异步进行快照操作，快照同时还可以响应客户端请求。可以通过lastsave<br>命令获取最后一次成功执行快照的时间。<br>3、执行flushall或者shutdown命令，也会产生dump.rdb文件，但是flushall命令触发之后里面是空的，无意义</p>
+<h3 id="如何恢复"><a href="#如何恢复" class="headerlink" title="如何恢复"></a>如何恢复</h3><p>将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>1、适合大规模数据恢复。<br>2、因为是隔一段时间才进行保存，所以对数据完整性和一致性要求不高。</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>1、在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改。<br>2、Fork的时候，内存中的数据被克隆了一份，大致2倍的膨胀性需要考虑。</p>
+<h3 id="如何禁用RDB持久化"><a href="#如何禁用RDB持久化" class="headerlink" title="如何禁用RDB持久化"></a>如何禁用RDB持久化</h3><p>动态所有停止RDB保存规则的方法：redis-cli config set save “”<br>或者在redis.conf配置文件中将save “”打开。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="https://img-blog.csdnimg.cn/20191227151936318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="AOF-Append-Only-File"><a href="#AOF-Append-Only-File" class="headerlink" title="AOF(Append Only File)"></a>AOF(Append Only File)</h2><p><strong>以日志的形式来记录每个写操作</strong>，将Redis执行过的所有写指令记录下来(读操作不记录)，只许追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。</p>
+<h3 id="保存文件-1"><a href="#保存文件-1" class="headerlink" title="保存文件"></a>保存文件</h3><p>AOF保存的是appendonly.aof文件。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><img src="https://img-blog.csdnimg.cn/20191227152259821.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="数据恢复和修复"><a href="#数据恢复和修复" class="headerlink" title="数据恢复和修复"></a>数据恢复和修复</h3><p><strong>恢复</strong>：将appendonly.aof文件复制到redis安装目录下，重启redis即可。（在同时有dump.rdb和appendonly.aof的情况下优先使用appendonly.aof文件进行数据恢复）<br><strong>修复</strong>：若appendonly.aof文件被损坏，使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Redis-check-aof --fix</span><br></pre></td></tr></table></figure>
+
+<p>命令进行修复。</p>
+<h3 id="Rewrite"><a href="#Rewrite" class="headerlink" title="Rewrite"></a>Rewrite</h3><p><strong>Rewrite</strong>：AOF采用文件追加方式，文件会越来越大为避免出现此种情况，新增了重写机制，当AOF文件的大小超过所设定的阈值时，Redis就会启动AOF文件的内容压缩，只保留可以恢复数据的最小指令集。可以使用命令bgrewriteaof。<br><strong>重写原理</strong>：AOF文件持续增长而过大时，会fork出一条新进程来将文件重写(也是先写临时文件最后再rename)，遍历新进程的内存中数据，每条记录有一条的Set语句。重写aof文件的操作，并没有读取旧的aof文件，而是将整个内存中的数据库内容用命令的方式重写了一个新的aof文件，这点和快照有点类似。<br><strong>触发机制</strong>：Redis会记录上次重写时的AOF大小，默认配置是当AOF文件大小是上次rewrite后大小的一倍且文件大于64M时触发。</p>
+<h3 id="三种机制"><a href="#三种机制" class="headerlink" title="三种机制"></a>三种机制</h3><p>1、<strong>每修改同步：appendfsync always</strong>：同步持久化 每次发生数据变更会被立即记录到磁盘，性能较差但数据完整性比较好。<br>2、<strong>每秒同步：appendfsync everysec</strong>： 异步操作，每秒记录   如果一秒内宕机，有数据丢失。<br>3、<strong>不同步：appendfsync no</strong>：从不同步。</p>
+<h3 id="劣势-1"><a href="#劣势-1" class="headerlink" title="劣势"></a>劣势</h3><p>1、相同数据集的数据而言aof文件要远大于rdb文件，恢复速度慢于rdb。<br>2、AOF运行效率要慢于RDB，每秒同步策略效率较好，不同步效率和rdb相同。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><img src="https://img-blog.csdnimg.cn/20191227153132791.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="选择哪一个"><a href="#选择哪一个" class="headerlink" title="选择哪一个"></a>选择哪一个</h2><p>RDB持久化方式能够在指定的时间间隔能对你的数据进行快照存储。</p>
+<p>AOF持久化方式记录每次对服务器写的操作，当服务器重启的时候会重新执行这些命令来恢复原始的数据，AOF命令以redis协议追加保存每次写的操作到文件末尾。Redis还能对AOF文件进行后台重写，使得AOF文件的体积不至于过大。</p>
+<p>只做缓存：如果你只希望你的数据在服务器运行的时候存在,你也可以不使用任何持久化方式。</p>
+<p><strong>若同时开启两种持久化方式：</strong><br>在这种情况下，当redis重启的时候会优先载入AOF文件来恢复原始的数据，因为在通常情况下AOF文件保存的数据集要比RDB文件保存的数据集要完整。</p>
+<p>RDB的数据不实时，同时使用两者时服务器重启也只会找AOF文件。</p>
+<p>那要不要只使用AOF呢？作者建议不要，因为RDB更适合用于备份数据库(AOF在不断变化不好备份)，快速重启，而且不会有AOF可能潜在的bug，留着作为一个万一的手段。</p>
+<p><strong>性能建议：</strong><br>因为RDB文件只用作后备用途，建议只在Slave上持久化RDB文件，而且只要15分钟备份一次就够了，只保留save 900 1这条规则。</p>
+<p>如果Enalbe AOF，好处是在最恶劣情况下也只会丢失不超过两秒数据，启动脚本较简单只load自己的AOF文件就可以了。代价一是带来了持续的IO，二是AOF rewrite的最后将rewrite过程中产生的新数据写到新文件造成的阻塞几乎是不可避免的。只要硬盘许可，应该尽量减少AOF rewrite的频率，AOF重写的基础大小默认值64M太小了，可以设到5G以上。默认超过原大小100%大小时重写可以改到适当的数值。</p>
+<p>如果不Enable AOF ，仅靠Master-Slave Replication 实现高可用性也可以。能省掉一大笔IO也减少了rewrite时带来的系统波动。代价是如果Master/Slave同时倒掉，会丢失十几分钟的数据，启动脚本也要比较两个Master/Slave中的RDB文件，载入较新的那个。新浪微博就选用了这种架构。</p>
+<h1 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h1><p>可以一次执行多个命令，本质是一组命令的集合。一个事务中的所有命令都会序列化，按顺序地串行化执行而不会被其它命令插入，不许加塞。</p>
+<h2 id="如何使用及案例"><a href="#如何使用及案例" class="headerlink" title="如何使用及案例"></a>如何使用及案例</h2><p><img src="https://img-blog.csdnimg.cn/20191227154655897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Case1：正常执行<br><img src="https://img-blog.csdnimg.cn/20191227154721689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Case2：放弃事务<br><img src="https://img-blog.csdnimg.cn/20191227154747866.png" alt="在这里插入图片描述"><br>Case3：全体连坐<br><img src="https://img-blog.csdnimg.cn/20191227154757102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>注：Case3和Case4要区分开，一个是在入队之前就出现了错误，此种情况下全体连坐，即全部都不能执行；另一个是在入队之后执行的时候才出现错误，则只有出错的命令不能执行。和java中的编译时错误和运行时错误类似。</strong><br>4、Case4：冤头债主<br><img src="https://img-blog.csdnimg.cn/20191227154820435.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Case5：watch监控<br>知识点补充：<br><strong>悲观锁</strong>：悲观锁(Pessimistic Lock), 顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。</p>
+<p><strong>乐观锁</strong>：乐观锁(Optimistic Lock), 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。乐观锁适用于多读的应用类型，这样可以提高吞吐量。<br>乐观锁策略：提交版本必须大于记录当前版本才能执行更新。</p>
+<p>无加塞篡改，先监控再开启multi，保证两笔金额变动在同一个事务内，如：<br><img src="https://img-blog.csdnimg.cn/20191227155521192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>有加塞篡改，监控了key，如果key被修改了，后面一个事务的执行失效，如：<br><img src="https://img-blog.csdnimg.cn/20191227155627402.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>unwatch：<br><img src="https://img-blog.csdnimg.cn/20191227155651817.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一旦执行了exec之前加的监控锁都会被取消掉了。</p>
+<p><strong>小结</strong>：<br>Watch指令，类似乐观锁，事务提交时，如果Key的值已被别的客户端改变，比如某个list已被别的客户端push/pop过了，整个事务队列都不会被执行。<br>通过WATCH命令在事务执行之前监控了多个Keys，倘若在WATCH之后有任何Key的值发生了变化，EXEC命令执行的事务都将被放弃，同时返回Nullmulti-bulk应答以通知调用者事务执行失败。</p>
+<h2 id="事务的三个阶段"><a href="#事务的三个阶段" class="headerlink" title="事务的三个阶段"></a>事务的三个阶段</h2><p><strong>1、开启：以MULTI开始一个事务；<br>2、入队：将多个命令入队到事务中，接到这些命令并不会立即执行，而是放到等待执行的事务队列里面；<br>3、执行：由EXEC命令触发事务。</strong></p>
+<h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><p>1、单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。<br>2、没有隔离级别的概念：队列中的命令没有提交之前都不会实际的被执行，因为事务提交前任何指令都不会被实际执行，也就不存在”事务内的查询要看到事务里的更新，在事务外查询不能看到”这个让人万分头痛的问题。<br>3、不保证原子性：redis同一个事务中如果有一条命令执行失败，其后的命令仍然会被执行，没有回滚。</p>
+<h1 id="Redis的复制-Master-Slave"><a href="#Redis的复制-Master-Slave" class="headerlink" title="Redis的复制(Master/Slave)"></a>Redis的复制(Master/Slave)</h1><p>也就是我们所说的主从复制，主机数据更新后根据配置和策略，自动同步到备机的master/slaver机制，<strong>Master以写为主，Slave以读为主</strong>。</p>
+<p>从库配置：slaveof 主库IP 主库端口。每次与master断开之后，都需要重新连接，除非你配置进redis.conf文件。可以使用Info replication查看主库和从库的信息。</p>
+<p>修改配置文件：<br>1、拷贝多个redis.conf文件<br><img src="https://img-blog.csdnimg.cn/20191227162129397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2、开启daemonize yes<br>3、Pid文件名字<br>4、指定端口<br><img src="https://img-blog.csdnimg.cn/20191227162159161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>5、log文件名<br><img src="https://img-blog.csdnimg.cn/20191227162237994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>6、dump.rdb名字<br><img src="https://img-blog.csdnimg.cn/20191227162259578.png" alt="在这里插入图片描述"></p>
+<h2 id="常用的三种情况"><a href="#常用的三种情况" class="headerlink" title="常用的三种情况"></a>常用的三种情况</h2><h3 id="一主二仆"><a href="#一主二仆" class="headerlink" title="一主二仆"></a>一主二仆</h3><p><img src="https://img-blog.csdnimg.cn/20191227162349298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191227162453452.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1 切入点问题？slave1、slave2是从头开始复制还是从切入点开始复制?比如从k4进来，那之前的123是否也可以复制<br>答：第一次连接的时候全部复制，即使从k4才连接进来的，也会复制之前的所有内容。<br>2 从机是否可以写？set可否？<br> 答：不可以<br>3 主机shutdown后情况如何？从机是上位还是原地待命<br> 答：非哨兵模式下，丛集原地待命不会上位。<br>4 主机又回来了后，主机新增记录，从机还能否顺利复制？<br> 答：可以<br>5 其中一台从机down后情况如何？依照原有它能跟上大部队吗？<br>答：不能，必须手动连接主机。</p>
+<h3 id="薪火相传"><a href="#薪火相传" class="headerlink" title="薪火相传"></a>薪火相传</h3><p>上一个Slave可以是下一个slave的Master，Slave同样可以接收其他slaves的连接和同步请求，那么该slave作为了链条中下一个的master，可以有效减轻master的写压力。</p>
+<p>中途变更转向:会清除之前的数据，重新建立拷贝最新的。</p>
+<h3 id="反客为主"><a href="#反客为主" class="headerlink" title="反客为主"></a>反客为主</h3><p>SLAVE no one： 使当前数据库停止与其他数据库的同步，转成主数据库。</p>
+<h2 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h2><p>1、Slave启动成功连接到master后会发送一个sync命令。<br>2、Master接到命令启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕之后，master将传送整个数据文件到slave，以完成一次完全同步。</p>
+<p>全量复制：而slave服务在接收到数据库文件数据后，将其存盘并加载到内存中。</p>
+<p>增量复制：Master继续将新的所有收集到的修改命令依次传给slave，完成同步。</p>
+<p>但是只要是重新连接master,一次完全同步（全量复制)将被自动执行。</p>
+<h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><p>反客为主的自动版，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库。</p>
+<p>调整结构，服务器6379带着服务器6380、6381。</p>
+<p>自定义的/myredis目录下新建sentinel.conf文件，名字绝不能错。<br>配置哨兵,填写内容： sentinel monitor 被监控数据库名字(自己起名字) 127.0.0.1 6379 1。<br><img src="https://img-blog.csdnimg.cn/20191227163353238.png" alt="在这里插入图片描述"><br>上面最后一个数字1，表示主机挂掉后salve投票看让谁接替成为主机，得票数多少后成为主机。</p>
+<p>启动哨兵：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Redis-sentinel /myredis/sentinel.conf</span><br></pre></td></tr></table></figure>
+<p>在哨兵模式下，若原有的master挂掉之后，则在所有的slaver中投票选出那个服务器作为master，选出master之后，其他的slaver全部作为该master的从机继续工作。<br><strong>注：若原来的master重新正常工作，则也会作为新master的slaver。并且一组sentinel能同时监控多个Master。</strong></p>
+<h2 id="复制的确定"><a href="#复制的确定" class="headerlink" title="复制的确定"></a>复制的确定</h2><p>复制延时：由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。</p>
+
       
     </div>
 
@@ -336,7 +330,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/11/13/MySQL%E9%94%81%E6%9C%BA%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/linux%E4%B8%AD%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Bfirewalld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -350,7 +344,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/13/MySQL%E9%94%81%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">mysql锁机制</a>
+            <a href="/2020/07/04/linux%E4%B8%AD%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Bfirewalld/" class="post-title-link" itemprop="url">linux中的防火墙之firewalld</a>
         </h1>
 
         <div class="post-meta">
@@ -361,18 +355,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-11-13 23:20:00 / 修改时间：23:30:34" itemprop="dateCreated datePublished" datetime="2019-11-13T23:20:00+08:00">2019-11-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:09" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -381,7 +364,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>409</span>
+              <span>532</span>
             </span>
 
         </div>
@@ -393,17 +376,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="mysql锁机制概述"><a href="#mysql锁机制概述" class="headerlink" title="mysql锁机制概述"></a>mysql锁机制概述</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><img src="https://img-blog.csdnimg.cn/20191111174054371.png" alt="在这里插入图片描述"></p>
-<h2 id="锁的分类"><a href="#锁的分类" class="headerlink" title="锁的分类"></a>锁的分类</h2><h3 id="从数据操作的类型（读、写）分："><a href="#从数据操作的类型（读、写）分：" class="headerlink" title="从数据操作的类型（读、写）分："></a>从数据操作的类型（读、写）分：</h3><p>1、读锁（共享锁）：针对同一份数据，多个读操作可以同时进行而不会互相影响。<br>2、写锁（排它锁）：当前写操作没有完成前，它会阻断其他写锁和读锁。</p>
-<h3 id="从对数据操作的颗粒度分："><a href="#从对数据操作的颗粒度分：" class="headerlink" title="从对数据操作的颗粒度分："></a>从对数据操作的颗粒度分：</h3><p>从对数据操作的颗粒度分为：表锁和行锁。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/13/MySQL%E9%94%81%E6%9C%BA%E5%88%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>linux中有多种防火墙，centos7.0之前使用的是iptables，在7.0之后使用firewalld。下面我会介绍firewalld防火墙。</p>
+<h2 id="1、查看防火墙状态"><a href="#1、查看防火墙状态" class="headerlink" title="1、查看防火墙状态"></a>1、查看防火墙状态</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2020042212381214.png" alt="在这里插入图片描述"></p>
+<h2 id="2、开启防火墙"><a href="#2、开启防火墙" class="headerlink" title="2、开启防火墙"></a>2、开启防火墙</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta"># systemctl start firewalld</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、关闭防火墙"><a href="#3、关闭防火墙" class="headerlink" title="3、关闭防火墙"></a>3、关闭防火墙</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="4、重启防火墙"><a href="#4、重启防火墙" class="headerlink" title="4、重启防火墙"></a>4、重启防火墙</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="5、设置开机自启动"><a href="#5、设置开机自启动" class="headerlink" title="5、设置开机自启动"></a>5、设置开机自启动</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="6、关闭开机自启动"><a href="#6、关闭开机自启动" class="headerlink" title="6、关闭开机自启动"></a>6、关闭开机自启动</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="7、查看firewalld开放的端口号"><a href="#7、查看firewalld开放的端口号" class="headerlink" title="7、查看firewalld开放的端口号"></a>7、查看firewalld开放的端口号</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --<span class="built_in">list</span>-all</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200422124007767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>或者使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --<span class="built_in">list</span>-ports</span><br></pre></td></tr></table></figure>
+<p>也可以查看开放的端口号：<br><img src="https://img-blog.csdnimg.cn/20200422124537581.png" alt="在这里插入图片描述"></p>
+<h2 id="8、开放端口号（开放端口号之后必须重启防火墙）"><a href="#8、开放端口号（开放端口号之后必须重启防火墙）" class="headerlink" title="8、开放端口号（开放端口号之后必须重启防火墙）"></a>8、开放端口号（开放端口号之后必须重启防火墙）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-port=<span class="number">80</span>/tcp --permanent</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200422124319852.png" alt="在这里插入图片描述"><br>其中–permanent代表永久开启改端口，如果不加这个参数，重启之后将失效。</p>
+<h2 id="9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）"><a href="#9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）" class="headerlink" title="9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）"></a>9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --remove-port=<span class="number">80</span>/tcp --permanent</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200422124709714.png" alt="在这里插入图片描述"></p>
+
       
     </div>
 
@@ -422,7 +411,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/Linux%E4%B8%AD%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -436,7 +425,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/" class="post-title-link" itemprop="url">MySQL性能优化之explain</a>
+            <a href="/2020/07/04/Linux%E4%B8%AD%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7vim/" class="post-title-link" itemprop="url">Linux中编辑工具vim</a>
         </h1>
 
         <div class="post-meta">
@@ -445,26 +434,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-07-17 17:43:54" itemprop="dateCreated datePublished" datetime="2019-07-17T17:43:54+08:00">2019-07-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 23:36:16" itemprop="dateModified" datetime="2019-11-13T23:36:16+08:00">2019-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:08" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -473,7 +445,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>963</span>
+              <span>5.2k</span>
             </span>
 
         </div>
@@ -485,15 +457,58 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在日常工作中，我们会有时会开慢查询去记录一些执行时间比较久的SQL语句，找出这些SQL语句并不意味着完事了，些时我们常常用到explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上索引，有没有做全表扫描，这都可以通过explain命令来查看。所以我们深入了解MySQL的基于开销的优化器，还可以获得很多可能被优化器考虑到的访问策略的细节，以及当运行SQL语句时哪种策略预计会被优化器采用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="vi与vim"><a href="#vi与vim" class="headerlink" title="vi与vim"></a>vi与vim</h1><p>vi编辑器是所有Unix及Linux系统下标准的编辑器，他就相当于windows系统中的记事本一样，它的强大不逊色于任何最新的文本编辑器。他是我们使用Linux系统不能缺少的工具。由于对Unix及Linux系统的任何版本，vi编辑器是完全相同的，学会它后，您将在Linux的世界里畅行无阻。</p>
+<h2 id="vim的特点"><a href="#vim的特点" class="headerlink" title="vim的特点"></a>vim的特点</h2><p>vim 具有程序编辑的能力，可以以字体颜色辨别语法的正确性，方便程序设计；<br>因为程序简单，编辑速度相当快速。<br>vim可以当作vi的升级版本，他可以用多种颜色的方式来显示一些特殊的信息。<br>vim会依据文件扩展名或者是文件内的开头信息， 判断该文件的内容而自动的执行该程序的语法判断式，再以颜色来显示程序代码与一般信息。<br>vim里面加入了很多额外的功能，例如支持正则表达式的搜索、多文件编辑、块复制等等。 这对于我们在Linux上进行一些配置文件的修改工作时是很棒的功能。</p>
+<h2 id="为何要学-vi"><a href="#为何要学-vi" class="headerlink" title="为何要学 vi"></a>为何要学 vi</h2><p>所有的Unix Like系统都会内建vi文本编辑器，其他的文本编辑器则不一定会存在；<br>一些软件的编辑接口会主动调用vi (例如 crontab, visudo, edquota 等命令)；</p>
+<h1 id="vi的使用"><a href="#vi的使用" class="headerlink" title="vi的使用"></a>vi的使用</h1><p>基本上vi可以分为三种状态，分别是一般模式、编辑模式和命令行模式，各模式的功能区分如下：</p>
+<h2 id="一般模式："><a href="#一般模式：" class="headerlink" title="一般模式："></a>一般模式：</h2><p>以vi打开一个文件就直接进入一般模式了(这是默认的模式)。在这个模式中， 你可以使用上下左右按键来移动光标，你可以使用删除字符或删除整行来处理文件内容， 也可以使用复制、粘贴来处理你的文件数据。</p>
+<h2 id="编辑模式："><a href="#编辑模式：" class="headerlink" title="编辑模式："></a>编辑模式：</h2><p>在一般模式中可以进行删除、复制、粘贴等的操作，但是却无法编辑文件的内容，只有当到你按下【i, I, o, O, a, A, r, R】等任何一个字母之后才会进入编辑模式。这时候屏幕的左下方会出现【INSERT或 REPLACE】的字样，此时才可以进行编辑。而如果要回到一般模式时， 则必须要按下【Esc】即可退出编辑模式。</p>
+<h2 id="命令行模式："><a href="#命令行模式：" class="headerlink" title="命令行模式："></a>命令行模式：</h2><p>输入【 : / ? 】三个中的任何一个，就可以将光标移动到最底下那一行。在这个模式中， 可以提供查找、读取、存盘、替换字符、离开vi、显示行号等的动作则是在此模式中完成的！</p>
+<h2 id="一般模式可用的按钮说明"><a href="#一般模式可用的按钮说明" class="headerlink" title="一般模式可用的按钮说明"></a>一般模式可用的按钮说明</h2><h3 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h3><p>【h、j、k、l】，分别控制光标左、下、上、右移一格<br>按【ctrl+b】屏幕往”后”移动一页<br>按【ctrl+f】屏幕往”前”移动一页</p>
+<p>【n<space>】光标向右移动n个字符<br>【Home】移动到这一行的最前面字符处:0数字，但不能用数字小键盘上的数字<br>【End】 移动到这一行的最后面字符处:$，我测试好像不行<br>【w】光标跳到下个字的开头<br>【e】光标跳到下个字的字尾</p>
+<p>【H】 光标移动到这个屏幕的最上方那一行的第一个字符<br>【M】 光标移动到这个屏幕的中间那一行的第一个字符<br>【L】光标移动到这个屏幕的最下方那一行的第一个字符</p>
+<p>【G】 移动到这个文件的最后一行<br>【nG】移动到这个文件的第n行(可配合:set nu)<br>【gg】 移动到这个文件的第一行，相当于1G<br>【n<Enter>】光标向下移动n行</p>
+<h3 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a>查找与替换</h3><p>【/word】 向光标向下寻找一个名称为word的字符串<br>【?word】 向光标向上寻找一个名称为word的字符串<br>【n】 代表重复前一个查找的动作<br>【N】 与n刚好相反，为【反向】进行行前一个查找动作</p>
+<p>【:n1,n2s/word1/word2/g】  n1与n2为数字，在第n1与n2行之间查找word1 这个字符串，并将该字符串替换为word2</p>
+<p>【:1,$s/word1/word2/g】 从第一行到最后一行查找word1字符串，并将该字符串替换为word2<br>【:1,$s/word1/word2/gc】 从第一行到最后一行查找word1字符串，并将该字符串替换为word2 ，且在替换前提示用户确认是否进行替换</p>
+<h3 id="删除、复制与粘贴"><a href="#删除、复制与粘贴" class="headerlink" title="删除、复制与粘贴"></a>删除、复制与粘贴</h3><p>【x】 为向后删除一个字符 (相当于【del】键)<br>【X】 为向前删除一个字符(相当于【backspace】键)<br>【nx】 连续向后删除n个字符</p>
+<p>【dd】 删除光标所在行<br>【ndd】 删除光标所在的向下n行<br>【d1G】 删除光标所在行到第一行的所有数据<br>【dG】 删除光标所在到最后一行的所有数据</p>
+<p>【d$】 删除光标所在处，到该行的最后一个字符<br>【d0】 删除光标所在处，到该行的最前一个字符</p>
+<p>【yy】 复制光标所在的那一行<br>【nyy】 复制光标所在的向下n列</p>
+<p>【y1G】 复制光标所在行到第一行的所有数据<br>【yG】 复制光标所在行到最后一行的所有数据</p>
+<p>【y0】 复制光标所在的那个字符到该行行首的所有数据<br>【y$】 复制光标所在的那个字符到该行行尾的所有数据</p>
+<p>【p】将已复制的数据在光标下一行粘贴上<br>【P】 则为贴在光标的上一行</p>
+<p>【u】 恢复前一个操作<br>【Ctrl+r】重做上一个操作</p>
+<p>【.】 是重复前一个操作</p>
+<h2 id="一般模式切换到编辑模式的可用的按钮说明"><a href="#一般模式切换到编辑模式的可用的按钮说明" class="headerlink" title="一般模式切换到编辑模式的可用的按钮说明"></a>一般模式切换到编辑模式的可用的按钮说明</h2><p>【i, I】 进入编辑模式：<br>i 为【从目前光标所在处插入】<br>I 为【在目前所在行的第一个非空格符处开始插入】</p>
+<p>【a, A】 进入编辑模式(Insert mode)：<br>a 为【从目前光标所在的下一个字符处开始插入】<br>A 为【从光标所在行的最后一个字符处开始插入】</p>
+<p>【o, O】 进入编辑模式：<br>o 为【在目前光标所在的下一行处插入新的一行】<br>O 为在目前光标所在处的上一行插入新的一行</p>
+<p>【r, R】 进入取代模式：<br>r 只会取代光标所在的那一个字符一次<br>R会一直取代光标所在的文字，直到按下 ESC 为止；</p>
+<p>【Esc】 退出编辑模式，回到一般模式</p>
+<h2 id="一般模式切换到命令行模式可用的按钮说明"><a href="#一般模式切换到命令行模式可用的按钮说明" class="headerlink" title="一般模式切换到命令行模式可用的按钮说明"></a>一般模式切换到命令行模式可用的按钮说明</h2><p>【:w】 保存编辑的内容<br>【:w!】强制写入该文件，但跟你对该文件的权限有关<br>【:q】 离开vi<br>【:q!】 不想保存修改强制离开<br>【:wq】 保存后离开<br>【:x】 保存后离开<br>【ZZ】 若文件没有更动，则不保存离开，若文件已经被更改过，则保存后离开</p>
+<p>【:w filename】 将编辑的数据保存成另一个文件（类似另存）<br>【:r filename】 在编辑的数据中，读入另一个文件的数据。即将【filename】 这个文件的内容加到光标所在行后面。</p>
+<p>【:n1,n2 w filename】 将n1到n2的内容保存成filename这个文件。<br>【:! command】暂时离开vi 到命令行模式下执行command的显示结果！例如 【:! ls /home】即可在 vi 当中察看/home底下以ls输出的文件信息！</p>
+<p>【:set nu】 显示行号<br>【:set nonu】 与 set nu 相反，为取消行</p>
+<h2 id="vim的缓存文件、恢复与开启时的警告信息"><a href="#vim的缓存文件、恢复与开启时的警告信息" class="headerlink" title="vim的缓存文件、恢复与开启时的警告信息"></a>vim的缓存文件、恢复与开启时的警告信息</h2><p>我们知道一些常用的编辑软件，都有个恢复的功能，就是说当你的系统因为某些原因而导致类似当机的情况时，还可以利用这个恢复功能将之前未保存的数据找回来。我们的VIM也有这个功能。</p>
+<p>当我们在使用vim编辑时，vim会在与被编辑的文件的目录下，再建立一个名为 .filename.swp的文件。如果你的系统因为某些原因断线了， 导致你编辑的文件还没有保存，这个时候 .filenam.swp 就能够发会救援的功能了。</p>
+<p>我们来演示一下<br>vim man.config<br>ctrl+z放到后台执行<br>我们停止VI的进程<br>一种方法<br>ps aux |grep vi<br>kill -9 n</p>
+<p>另外一种方法<br>jobs<br>kill -9 %1</p>
+<p>我们用ls -l 命令来查看一下目录里面，会发现有个.man.config.swp的文件，这个文件就是个缓存的文件</p>
+<p>我们再来编辑<br>vim man.config<br>这时候会出现一些信息<br>问题一：可能有其他人或程序同时在编辑这个文件：<br>问题二：在前一个vim的环境中，可能因为某些不知名原因导致vim中断 (crashed)：</p>
+<p>右下角会出现六个命令项，其作用说明如下：<br>(O)pen Read-Only：打开此文件成为只读档， 可以用在你只是想要查阅该文件内容并不想要进行编辑行为时。一般来说，在上课时，如果你是登入到同学的计算机去看他的配置文件， 结果发现其实同学他自己也在编辑时，可以使用这个模式；<br>(E)dit anyway：还是用正常的方式打开你要编辑的那个文件， 并不会载入暂存盘的内容。如果说两个人都在编辑这个文件的话，很容易出现互相改变对方的文件等问题。<br>(R)ecover：就是加载暂存盘的内容，用在你要救回之前未保存的工作。 不过当你救回来并且储存离开vim后，还是要手动自行删除那个暂存档。<br>(D)elete it：你确定那个暂存档是无用的！那么开启文件前会先将这个暂存盘删除<br>(Q)uit：按下 q 就离开vim，不会进行任何动作回到命令提示字符。<br>(A)bort：忽略这个编辑行为，感觉上与 quit 非常类似！</p>
+<h1 id="vim的功能"><a href="#vim的功能" class="headerlink" title="vim的功能"></a>vim的功能</h1><p>其实，目前大部分的Linux发行版本都以vim取代了vi。为什么要用vim呢？因为vim具有颜色显示的功能，并且还支持许多的程序语法(syntax)和相应的提示信息。查看自己的VI是不是被VIM代替，可以用<br>alias这个命令来查看是不是有alias vi=’vim’这一行。</p>
+<p>块选择<br>【v】字符选择，会将光标经过的地方反白选择<br>【V】 行选择，会将光标经过的行反白选择<br>【Ctrl+v】 块选择，可以用长方形的方式选择资料 （提制竖列）<br>【y】 将反白的地方复制<br>【d】 将反白的地方删除</p>
+<p>多文件编辑<br>大家在使用vim的时候，可能会碰到你需要复制一个文件中的某段到另外一个文件中，而vim不能够在关闭的时候，把这段保留住。或者是用其它的方法复制。<br>【vim file1 file2】</p>
+<p>【:n】编辑下一个文件<br>【:N】编辑上一个文件<br>【:files】列出目前这个vim编辑的所有文件</p>
+<p>多窗口功能<br>有两个需要对照着看的文件<br>【:sp filename】开启一个新窗口，如果有加 filename， 表示在新窗口开启一个新文件，否则表示两个窗口为同一个文件内容(同步显示)。</p>
+<p>【ctrl+w+j】<br>【ctrl+w+↓】按键的按法是：先按下 【ctrl】 不放， 再按下 w 后放开所有的按键，然后再按下 j (或向下箭头键)，则光标可移动到下方的窗口。</p>
+<p>【ctrl+w+k】<br>【ctrl+w+↑】同上，不过光标移动到上面的窗口。</p>
+<p>vim 环境设定与记录(<del>/.vimrc, ~/.viminfo)<br>如果我们以vim软件来查找一个文件内部的某个字符串时，这个字符串会被反白， 而下次我们再次以vim编辑这个文件时，该查找的字符串反白情况还是存在。另外，当我们重复编辑同一个文件时，当第二次进入该文件时， 光标竟然就在上次离开的那一行的开头。这个功能可能是方便，但也有不方便的时候。怎么会这样呢？这是因为我们的vim会主动的将你曾经做过的行为登录下来，那个记录动作的文件就是： ~/.viminfo，不想用这个功能，就直接删除</del>/.viminfo。只要你曾经使用过vim，那么你的家目录就会有这个文件。这个文件是自动产生的，你在vim里头所做过的动作，就可以在这个文件内部找到。有兴趣的朋友可以自己查看文件里面的内容。</p>
+<p>不过，对于每个不同的发行版本对vim的预设环境都不太相同。举例来说，某些版本在查找到关键词时并不会高亮度反白， 有些版本则会主动的帮你进行缩排（所谓的缩排，就是当你按下 Enter 编辑新的一行时，光标不会在行首，而是在与上一行的第一个非空格符处对齐）的行为。其实这些都可以自行设定的，下面我们就来看看vim的环境设定。<br>vim的环境设定参数有很多，如果你想要知道目前的设定值，可以在一般模式时输入【 :set all】来查阅，由于设定项目实在太多了，我们在这里就仅列出一些平时比较常用的一些简单的设定值，给大家提供参考。</p>
+<p>:set all “显示目前所有的环境参数设定值<br>:set hlsearch “高亮度反白(高亮度搜寻)<br>:set nohlsearch “取消高亮度反白(高亮度搜寻)<br>:set backspace=2 “在编辑的时候可随时用退格键删除 （０、１的时候，只针对刚输入的字符有效）<br>:set autoindent “自动缩排<br>:set noautoindent “取消自动缩排<br>:set ruler “可显示最后一行的状态<br>:set showmode “左下角那一行的状态<br>:set nu “显示行号<br>:set nonu “取消行号<br>:set bg=dark “显示不同的底色色调<br>:syntax on “进行语法检验，颜色显示<br>:syntax off “关闭语法检验</p>
+<p>了解完上面的内容后，下面我们就能写一下自己的vim操作环境。<br>整体vim的设定值一般是置在/etc/vimrc这个文件里面，不建议大家来修改他。我们在自己的家目录里面建立个.vimrc文件，在这里面写入自己的内容就能实现了。<br>[root@yufei ~]# vim ~/.vimrc<br>内容如下<br>set hlsearch “高亮度反白<br>set backspace=2 “可随时用退格键删除<br>set autoindent “自动缩排<br>set ruler “可显示最后一行的状态<br>set showmode “左下角那一行的状态<br>set nu “可以在每一行的最前面显示行号<br>set bg=dark “显示不同的底色色调<br>syntax on “进行语法检验，颜色显示<br>“这个文件的双引号 (“)表示的是注释</p>
+<p>保存退出vim后，在下次使用vim的时候，就会有自己的vim操作环境了。<br>提醒一点，这个文件中每一行前面加不加【:】效果都是一样的。</p>
+
       
     </div>
 
@@ -512,7 +527,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/JVM%E7%9A%847%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -526,7 +541,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">MySQL性能优化之查询截取分析</a>
+            <a href="/2020/07/04/JVM%E7%9A%847%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" class="post-title-link" itemprop="url">JVM的7种垃圾回收器</a>
         </h1>
 
         <div class="post-meta">
@@ -535,26 +550,121 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-07-17 17:22:45" itemprop="dateCreated datePublished" datetime="2019-07-17T17:22:45+08:00">2019-07-17</time>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:09" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 23:36:44" itemprop="dateModified" datetime="2019-11-13T23:36:44+08:00">2019-11-13</time>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
               </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="垃圾回收算法和垃圾回收器"><a href="#垃圾回收算法和垃圾回收器" class="headerlink" title="垃圾回收算法和垃圾回收器"></a>垃圾回收算法和垃圾回收器</h1><p>对于JVM的垃圾回收算法有复制算法、标记清除、标记整理。</p>
+<p>用阳哥的话就是：这些算法只是天上飞的理念，是一种方法论，但是真正的垃圾回收还需要有落地实现，所以垃圾回收器应运而生。</p>
+<p>JVM回收的区域包括方法区和堆，jvm对于不同区域不同的特点采用分代收集算法，比如因为所有的对象都是在Eden区进行分配，并且大部分对象的存活时间都不长，都是“朝生夕死”的，每次新生代存活的对象都不多，所以新采取复制算法；而jvm默认是新生代的对象熬过15次GC才能进入老年代，所以老年代的对象都是生命周期比较长的，采用标记清除或者标记整理算法。</p>
+<p>那么对于这些算法的实现都有什么呢？</p>
+<p><strong><em>新生代：serial、ParNew、Parallel<br>老年代：Serial Old、Parallel Old、CMS<br>全堆：G1</em></strong></p>
+<p>并且他们的搭配组合如下：<br><img src="https://img-blog.csdnimg.cn/20200329183345463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h1><p>jvm的垃圾回收器大体上的分类主要包括四种：串行、并行、并发（CMS）和G1。</p>
+<p><strong>串行垃圾回收器（Serial）</strong>：它为单线程环境设计并且只使用一个线程进行垃圾回收，会暂停所有的用户线程。所以不适合服务器环境。<br><strong>并行垃圾回收器（Parallel）</strong>：多个垃圾回收线程并行工作，此时用户线程是暂停的，适用于科学计算/大数据处理等弱交互场景。<br><strong>并发垃圾回收器（CMS）</strong>：用户线程和垃圾收集线程同时执行（不一定是并行，可能交替执行），不需要停顿用户线程。互联网公司多用它，适用于对响应时间有要求的场景。<br><strong>G1垃圾回收器</strong>：G1垃圾回收器将堆内存分割成不同的区域然后并发的对其进行垃圾回收。<br><img src="https://img-blog.csdnimg.cn/20200329183758412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="默认的垃圾回收器"><a href="#默认的垃圾回收器" class="headerlink" title="默认的垃圾回收器"></a>默认的垃圾回收器</h2><p>平时我们没有配置什么jvm参数，程序也能正常执行，那么JVM默认的垃圾回收器是什么呢？</p>
+<p>那么如何查看默认的回收器呢？有很多方式，这里简单列举几种：<br>1.命令行方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -XX:+PrintCommandLineFlags -version</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200329184831286.png" alt="在这里插入图片描述"><br>可以看到jdk8默认的是使用的Parallel并行回收器。<br>2、jvm参数设置<br>在JVM运行之前加入参数同样可以查看，其实这两种方式是差不多的<br><img src="https://img-blog.csdnimg.cn/20200329184736708.png" alt="在这里插入图片描述"><br>3.jps+jinfo<br>先使用jps查看java进程号，在使用jinfo查看该进程的配置<br><img src="https://img-blog.csdnimg.cn/20200329185103280.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200329185124436.png" alt="在这里插入图片描述"></p>
+<h2 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h2><p>Serial是一个单线程收集器，在进行垃圾收集的时候必须停下所有的工作（Stop The World） 。<br><img src="https://img-blog.csdnimg.cn/20200329185621793.png" alt="在这里插入图片描述"><br>串行收集器是最古老，最稳定以及效率高的收集器，只使用一个线程去回收但其在进行垃圾收集过程中可能会产生较长的停顿(<br>Stop-The-World状态)。</p>
+<p>虽然在收集垃圾过程中需要暂停所有其他的工作线程，但是它简单高效，对于限定单个CPU环境来说，没有线程交互的开销可以获得最高的单线程垃圾收集效率，因此Serial垃圾收集器依然是java虛拟机运行在Client模式下默认的新生代垃圾收集器。</p>
+<p><strong>对应JVM参数是: -XX:+UseSerialGC</strong></p>
+<p>开启后会使用: <strong>Serial(Young区用) + Serial Old(Old区用)</strong>的收集器组合：表示新生代、老年代都会使用串行回收收集器，新生代使用复制算法，老年代使用标记-整理算法。</p>
+<h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p>ParNew是Serial收集器的升级版，将单线程进行垃圾回收升级为多线程进行垃圾回收，但是依旧会Stop The World。<br><img src="https://img-blog.csdnimg.cn/20200329192043546.png" alt="在这里插入图片描述"><br>ParNew收集器其实就是Serial收集器新生代的并行多线程版本，最常见的应用场景是<strong>配合老年代的CMS GC工作</strong>，其余的行为和<br>Serial收集器完全一样，ParNew垃圾收集器在垃圾收集过程中同样也要暂停所有其他的工作线程。它是很多java虚拟机运行在Server<br>模式下新生代的默认垃圾收集器。</p>
+<p><strong>常用对应JVM参数: -XX:+UseParNewGC</strong></p>
+<p>启用ParNew收集器，只影响新生代的收集，不影响老年代<br>开启。上述参数后，会使用: <strong>ParNew(Young区用) + Serial Old</strong>的收集器组合，新生代使用复制算法，老年代采用标记-整理算法。</p>
+<p>但是，ParNew+Tenured这样的搭配，java8已经不再被推荐。<br><img src="https://img-blog.csdnimg.cn/20200329192521994.png" alt="在这里插入图片描述"></p>
+<h2 id="Parallel收集器"><a href="#Parallel收集器" class="headerlink" title="Parallel收集器"></a>Parallel收集器</h2><p>Parallel Scavenge收集器类似ParNew也是一个新生代垃圾收集器，使用复制算法，也是一个并行的多线程的垃圾收集器，<strong>俗称吞吐<br>量优先收集器</strong>。一句话:串行收集器在新生代和老年代的并行化</p>
+<p>首先先科普下什么是吞吐量：<br><strong>吞吐量(Thoughput）</strong>=运行用户代码时间(运行用户代码时间+垃圾收集时间)，也即比如程序运行100分钟，垃圾收集时间1分钟，<br>吞吐量就是99%)。</p>
+<p>Parallel收集器重点关注的是:<br><strong>可控制的高吞吐量意味着高效利用CPU的时间，它多用于在后台运算而不需要太多交互的任务。</strong></p>
+<p><strong>自适应调节策略也是Parallel Scavenge收集器与ParNew收集器的-一个重要区别。</strong>自适应调节策略：虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间(-XX:MaxGCPauseMillis)或最大的吞吐量。</p>
+<p><strong>常用JVM参数: -XX:+UseParallelGC或-XX:+UseParallelOldGC(可互相激活)使用Parallel Scanvenge收集器</strong></p>
+<p>开启该参数后:使用<strong>Parallel收集器+Parallel Old</strong>的组合。新生代使用复制算法，老年代使用标记-整理算法。</p>
+<h2 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h2><p>SerialOlid是Serial垃圾收集器老年代版本，它同样是个单线程的收集器，使用标记-整理算法，这个收集器也主要是运行在Client默<br>的java虚拟机默认的年老代垃圾收集器。</p>
+<p>在Server模式下，主要有两个用途(了解，版本已经到8及以后): .<br>1.在JDK1.5之前版本中与新生代的Parallel Scavenge收集器搭配使用。 ( Parallel Scavenge + Serial Old )<br>2.<strong>作为老年代版中使用CMS收集器的后备垃圾收集方案</strong>。</p>
+<h2 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h2><p>Parallel Old收集器是Parallel Scavenge的老年代版木，使用多线程的标记-整理算法，Parallel Old收集器在JDK1.6才开始提供。<br>在JDK1.6之前，新生代使用Parallel Scavenge收集器只能搭配年老代的Serial Old收集器，只能保证新生代的吞吐量优先，无法保<br>证整体的吞吐量。在JDK1.6之前(Parallel Scavenge + Serial Old )<br>Parallel Old正是为了在年老代同样提供吞吐量优先的垃圾收集器，如果系统对吞吐量要求比较高，JDK1.8后可以优先考虑新生代<br>Parallel Scavenge和年老代Parallel Old收集器的搭配策略。在 JDK1.8及后(Parallel Scavenge + Parallel Old )<br>JVM常用参数：<br><strong>-XX:+UseParallelOldGC</strong>使用Parallel Old收集器，设置该参数后，<strong>新生代Parallel+老年代Parallel Old</strong>。</p>
+<h2 id="CMS-Concurrent-Mark-Sweep"><a href="#CMS-Concurrent-Mark-Sweep" class="headerlink" title="CMS(Concurrent Mark Sweep)"></a>CMS(Concurrent Mark Sweep)</h2><p><strong>CMS收集器(Concurrent Mark Sweep: 并发标记清除)是一种以获取最短回收停顿时间为目标的收集器</strong>。</p>
+<p>适合应用在互联网站或者B/S系统的服务器上，这类应用尤其重视服务器的响应速度，希望系统停顿时间最短。</p>
+<p>CMS非常适合堆内存大、CPU核数多的服务器端应用，也是G1出现之前大型应用的首选收集器。<br><img src="https://img-blog.csdnimg.cn/20200329194129287.png" alt="在这里插入图片描述"><br>Concurrent Mark Sweep并发标记清除，并发收集低停顿，并发指的是与用户线程一起执行。</p>
+<p>启该收集器的JVM参数: <strong>-XX:+UseConcMarkSweepGC</strong> 开启该参数后会自动将-XX:+UseParNewGC打开<br>开启该参数后，使用<strong>ParNew(Young区用) + CMS(Old区用) + Serial Old</strong>的收集器组合，Serial Old将作为CMS出错的后备收集器</p>
+<p><strong>CMS收集器的运行过程分为下列4步：</strong></p>
+<p><strong>初始标记：</strong>标记GC Roots能直接关联的对象。速度很快但是存在Stop The World。<br><strong>并发标记：</strong>进行GC Roots Tracing 的过程，找出存活对象且用户线程可并发执行。<br><strong>重新标记：</strong>为了修正并发标记期间因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录。仍然存在Stop The World问题。<br><strong>并发清除：</strong>对标记的对象进行清除回收。</p>
+<p><strong>CMS优点：</strong>并发收集低停顿<br><strong>缺点：</strong><br>1.浮动垃圾：由于CMS并发清理阶段用户线程还在运行着，伴随程序运行自然会有新垃圾产生，这部分垃圾得标记过程之后，所以CMS无法在当收集中处理掉他们，只好留待下一次GC清理掉，这一部分垃圾称为浮动垃圾。在jdk1.5默认设置下，CMS收集器当老年代使用了68%的空间就会被激活，可以通过-XX:CMSInitialOccupancyFraction的值来提高触发百分比，在jdk1.6中CMS启动阈值提升到了92%，要是CMS运行期间预留的内存无法满足程序的需要，就会出现”Concurrent Mode Failure“，然后降级临时启用Serial Old收集器进行老年代的垃圾收集，这样停顿时间就很长了。所以-XX:CMSInitialOccupancyFraction设置太高容易导致大量”Concurrent Mode Failure“。</p>
+<p>2.有空间碎片：CMS是一款基于“标记-清除”算法实现的，所以会产生空间碎片。为了解决这个问题，CMS提供了-XX:UseCMSCompactAtFullCollection开发参数用于开启内存碎片的合并整理，由于内存整理是无法并行的，所以停顿时间会变长。还有-XX:CMSFullGCBeforeCompaction，这个参数用于设置多少次不压缩Full GC后，跟着来一次带压缩的(默认为0)。</p>
+<p>3.对CPU资源敏感。在并发标记和并发清除阶段虽然不会停止用户线程，但是会因为占用一部分cpu资源进行垃圾回收导致用户程序变慢。<br>CMS默认启动的回收线程数是（cpu数量+3）/4。所以CPU数量少会导致用户程序执行速度降低较多。</p>
+<h2 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h2><p>G1适用于全堆，既可以在新生代使用和老年代使用。G1与之前的收集器有很大的不同，是从不同的角度去设计的。</p>
+<p>回想下之前的垃圾收集器的特点：<br>1.年轻代和老年代都是各自独立的连续的内存块。<br>2.年轻代Eden+from+to使用复制算法<br>3.老年代的收集必须扫描全部老年代内存空间。<br>4.都是以尽可能少而快速地执行GC为设计原则</p>
+<p>G1收集器的设计目标是取代CMS收集器，它同CMS相比，在以下方面表现的更出色：<br>1、G1是一个有整理内存过程的垃圾收集器，不会产生很多内存碎片。<br>2、G1的Stop The World(STW)更可控，G1在停顿时间上添加了预测机制，用户可以指定期望停顿时间。</p>
+<p>CMS垃圾收集器虽然减少了暂停应用程序的运行时间，但是它还是存在着内存碎片问题。于是，为了去除内存碎片问题，同时又保留<br>CMS垃圾收集器低暂停时间的优点，JAVA7发布了一个新的垃圾收集器——G1垃圾收集器。</p>
+<p>G1是在2012年才在jdk1.7u4中可用。 oracle官方计划在jdk9中将G1变成默认的垃圾收集器以替代CMS。它是一 款面向服务端应用的收<br>器，主要应用在多CPU和大内存服务器环境下，极大的减少垃圾收集的停顿时间，全面提升服务器的性能，逐步替换java8以前的CM:<br>集器。</p>
+<p>主要改变是<strong>Eden，Survivor和Tenured等内存区域不再是连续的了，而是变成了一个个大小一样的region ,每个region从1M到32M不等。- - 个region有可能属于Eden, Survivor或 者Tenured内存区域。</strong></p>
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p><img src="https://img-blog.csdnimg.cn/20200329195752141.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200329195809972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200329195820666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>G1的最大好处是化整为零，避免全内存扫描，只需要按照区域来进行扫描即可。<br><img src="https://img-blog.csdnimg.cn/20200329195920191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200329195928775.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>G1收集器大致可分为如下步骤：</p>
+<p><strong>初始标记：</strong>仅标记GC Roots能直接到的对象，并且修改TAMS（Next Top at Mark Start）的值，让下一阶段用户程序并发运行时，能在正确可用的Region中创建新对象。（需要线程停顿，但耗时很短。）<br><strong>并发标记：</strong>从GC Roots开始对堆中对象进行可达性分析，找出存活对象。（耗时较长，但可与用户程序并发执行）<br><strong>最终标记：</strong>为了修正在并发标记期间因用户程序执行而导致标记产生变化的那一部分标记记录。且对象的变化记录在线程Remembered Set  Logs里面，把Remembered Set  Logs里面的数据合并到Remembered Set中。（需要线程停顿，但可并行执行。）<br><strong>筛选回收：</strong>对各个Region的回收价值和成本进行排序，根据用户所期望的GC停顿时间来制定回收计划。（可并发执行）<br><img src="https://img-blog.csdnimg.cn/2020032920005033.png" alt="在这里插入图片描述"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://img-blog.csdnimg.cn/20200329195049567.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/JUC%E4%B9%8B%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/04/JUC%E4%B9%8B%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue/" class="post-title-link" itemprop="url">JUC之阻塞队列BlockingQueue</a>
+        </h1>
+
+        <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -575,15 +685,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <pre><code>在java.util.concurrent包中，BlockingQueue很好的解决了多线程中，如何高效安全“传输”数据的问题。通过这些高效并且线程安全的队列类，为我们快速搭建高质量的多线程程序带来极大的便利。本文详细介绍了BlockingQueue家庭中的一些成员，包括他们各自的功能以及常见使用场景。</code></pre><h1 id="BlockingQueue优势"><a href="#BlockingQueue优势" class="headerlink" title="BlockingQueue优势"></a>BlockingQueue优势</h1><p>多线程环境中，通过队列可以很容易实现数据共享，比如经典的“生产者”和“消费者”模型中，通过队列可以很便利地实现两者之间的数据共享。假设我们有若干生产者线程，另外又有若干个消费者线程。如果生产者线程需要把准备好的数据共享给消费者线程，利用队列的方式来传递数据，就可以很方便地解决他们之间的数据共享问题。但如果生产者和消费者在某个时间段内，万一发生数据处理速度不匹配的情况呢？理想情况下，如果生产者产出数据的速度大于消费者消费的速度，并且当生产出来的数据累积到一定程度的时候，那么生产者必须暂停等待一下（阻塞生产者线程），以便等待消费者线程把累积的数据处理完毕，反之亦然。<br>然而，在concurrent包发布以前，在多线程环境下，我们每个程序员都必须去自己控制这些细节，尤其还要兼顾效率和线程安全，而这会给我们的程序带来不小的复杂度。好在此时，强大的concurrent包横空出世了，而他也给我们带来了强大的BlockingQueue。（在多线程领域：所谓阻塞，在某些情况下会挂起线程（即阻塞），一旦条件满足，被挂起的线程又会自动被唤醒）</p>
+<h1 id="BlockingQueue介绍"><a href="#BlockingQueue介绍" class="headerlink" title="BlockingQueue介绍"></a>BlockingQueue介绍</h1><h2 id="BlockingQueue架构介绍"><a href="#BlockingQueue架构介绍" class="headerlink" title="BlockingQueue架构介绍"></a>BlockingQueue架构介绍</h2><p>BlockingQueue接口是Queue的子接口，而Queue接口和List接口Set接口一样，都是Collection的子接口。具体实现关系如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191114221959715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="BlockingQueue结构"><a href="#BlockingQueue结构" class="headerlink" title="BlockingQueue结构"></a>BlockingQueue结构</h2><p>阻塞队列，顾名思义，首先它是一个队列，而一个队列在数据结构中所起的作用大致如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191114221322916.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>从上图我们可以很清楚看到，通过一个共享的队列，可以使得数据由队列的一端输入，从另外一端输出；线程1往阻塞队列里添加元素，线程2从阻塞队列里移除元素。</p>
+<p><strong>当队列是空的，从队列中获取元素的操作将会被阻塞；当队列是满的，从队列中添加元素的操作将会被阻塞。</strong></p>
+<p>试图从空的队列中获取元素的线程将会被阻塞，直到其他线程往空的队列插入新的元素。<br>试图向已满的队列中添加新元素的线程将会被阻塞，直到其他线程从队列中移除一个或多个元素或者完全清空，使队列变得空闲起来并后续新增。</p>
+<h2 id="BlockingQueue种类"><a href="#BlockingQueue种类" class="headerlink" title="BlockingQueue种类"></a>BlockingQueue种类</h2><p>BlockingQueue有如下7个实现类，常用的如下面红色所示：<br><img src="https://img-blog.csdnimg.cn/20191114222752980.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="BlockingQueue的核心方法"><a href="#BlockingQueue的核心方法" class="headerlink" title="BlockingQueue的核心方法"></a>BlockingQueue的核心方法</h2><p>作为BlockingQueue的使用者，我们再也不需要关心什么时候需要阻塞线程，什么时候需要唤醒线程，因为这一切BlockingQueue都给你一手包办了。既然BlockingQueue如此神通广大，让我们一起来见识下它的常用方法：<br><img src="https://img-blog.csdnimg.cn/20191114222944455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191114223006143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
       
     </div>
 
@@ -602,7 +711,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -616,7 +725,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">MySQL逻辑架构</a>
+            <a href="/2020/07/04/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">JUC之线程池</a>
         </h1>
 
         <div class="post-meta">
@@ -625,26 +734,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-07-13 09:23:22" itemprop="dateCreated datePublished" datetime="2019-07-13T09:23:22+08:00">2019-07-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 23:35:40" itemprop="dateModified" datetime="2019-11-13T23:35:40+08:00">2019-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -653,7 +745,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>4.8k</span>
             </span>
 
         </div>
@@ -665,15 +757,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="MySQL总体概览"><a href="#MySQL总体概览" class="headerlink" title="MySQL总体概览"></a>MySQL总体概览</h1><p><img src="https://img-blog.csdnimg.cn/20191108103653857.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20191108103640296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="线程池的优势"><a href="#线程池的优势" class="headerlink" title="线程池的优势"></a>线程池的优势</h1><p>线程池做的工作主要是控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中取出任务来执行。</p>
+<p>它的主要特点为：线程复用；控制最大并发数；管理线程。</p>
+<p>第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的销耗。<br>第二：提高响应速度。当任务到达时，任务可以不需要等待线程创建就能立即执行。<br>第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会销耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</p>
+<h1 id="线程池如何使用"><a href="#线程池如何使用" class="headerlink" title="线程池如何使用"></a>线程池如何使用</h1><p>Java API中为我们提供了许多写好的线程池，这些线程池都是通过Executor框架实现的，用到了Executor接口，Executors工具类，ExecutorService接口，ThreadPoolExecutor类。<br><img src="https://img-blog.csdnimg.cn/20191114204944549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>java API通过Executors工具类为我们提供了一些获取线程池的方法，常用的主要包括newFixedThreadPool(int nThreads)、newSingleThreadExecutor()、newCachedThreadPool()三个方法。</p>
+<p>可通过如下方法获取API中提供的线程池并使用：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThreadPoolDemo</span>&#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		ExecutorService threadPool1 = Executors.newFixedThreadPool(n);<span class="comment">//其中n为线程池中的固定线程数</span></span><br><span class="line">		<span class="comment">//ExecutorService threadPool2 = Executor.newSingleThreadExecutor();//构建只包含一个线程的线程池</span></span><br><span class="line">		<span class="comment">//ExecutorService threadPool3 = Executors.newCachedThreadPool();//构建一个线程数可扩展的线程池</span></span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">			<span class="comment">//execute方法定义在父接口Executor接口中（有且仅有一个方法）	void execute(Runnable command)  </span></span><br><span class="line">				threadpool1.execute(()-&gt;&#123;System.out.println(<span class="string">"Thread.currentThread().getName()"</span>)&#125;);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;finally&#123;</span><br><span class="line">				<span class="comment">//shutdown方法定义在ExecutorService中</span></span><br><span class="line">				threadPool.shutdown();</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="newFixedThreadPool-int-nThreads"><a href="#newFixedThreadPool-int-nThreads" class="headerlink" title="newFixedThreadPool(int nThreads)"></a>newFixedThreadPool(int nThreads)</h2><p>特点：执行长期任务性能好，创建一个线程池，一池有N个固定的线程，有固定线程数的线程。<br>源码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>newFixedThreadPool()创建的线程池corePoolSize和maximumPoolSize值是相等的，它使用的是LinkedBlockingQueue。</p>
+<h2 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor()"></a>newSingleThreadExecutor()</h2><p>特点：一个任务一个任务的执行，一池一线程。<br>源码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">        (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>newSingleThreadExecutor() 创建的线程池corePoolSize和maximumPoolSize值都是1，它使用的是LinkedBlockingQueue。</p>
+<h2 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool()"></a>newCachedThreadPool()</h2><p>特点：执行很多短期异步任务，线程池根据需要创建新线程，但在先前构建的线程可用时将重用它们。可扩容，遇强则强。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>newCachedThreadPoo()创建的线程池将corePoolSize设置为0，将maximumPoolSize设置为Integer.MAX_VALUE，它使用的是SynchronousQueue，也就是说来了任务就创建线程运行，当线程空闲超过60秒，就销毁线程。</p>
+<h2 id="ThreadPoolExecutor类"><a href="#ThreadPoolExecutor类" class="headerlink" title="ThreadPoolExecutor类"></a>ThreadPoolExecutor类</h2><p><img src="https://img-blog.csdnimg.cn/2019111421320624.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如上图所示，java中各种线程池，不管是单一线程还是可扩展线程数的线程池底层都是使用ThreadPoolExecutor类进行创建。<br>ThreadPoolExecutor类的构造方法如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == null || threadFactory == null || handler == null)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    <span class="keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ThreadPoolExecutor类的7大参数：<br><img src="https://img-blog.csdnimg.cn/20191114213400462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="线程池底层工作原理"><a href="#线程池底层工作原理" class="headerlink" title="线程池底层工作原理"></a>线程池底层工作原理</h1><p><img src="https://img-blog.csdnimg.cn/20191114213549689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20191114213527829.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>流程如下：<br>1、在创建了线程池后，开始等待请求。<br>2、当调用execute()方法添加一个请求任务时，线程池会做出如下判断：<br>  2.1如果正在运行的线程数量小于corePoolSize，那么马上创建线程运行这个任务；<br>  2.2如果正在运行的线程数量大于或等于corePoolSize，那么将这个任务放入队列；<br>  2.3如果这个时候队列满了且正在运行的线程数量还小于maximumPoolSize，那么还是要创建非核心线程立刻运行这个任务；<br>  2.4如果队列满了且正在运行的线程数量大于或等于maximumPoolSize，那么线程池会启动饱和拒绝策略来执行。<br>3、当一个线程完成任务时，它会从队列中取下一个任务来执行。<br>4、当一个线程无事可做超过一定的时间（keepAliveTime）时，线程会判断：<br>    如果当前运行的线程数大于corePoolSize，那么这个线程就被停掉。<br>    所以线程池的所有任务完成后，它最终会收缩到corePoolSize的大小。</p>
+<h1 id="线程池的拒绝策略"><a href="#线程池的拒绝策略" class="headerlink" title="线程池的拒绝策略"></a>线程池的拒绝策略</h1><p>当等待队列已经排满了，再也塞不下新任务了同时，线程池中的max线程也达到了，无法继续为新任务服务。<br>这个是时候我们就需要拒绝策略机制合理的处理这个问题，JDK中为我们提供了4中拒绝策略，如下所示：<br>1、AbortPolicy(默认)：直接抛出RejectedExecutionException异常阻止系统正常运行。<br>2、CallerRunsPolicy：“调用者运行”一种调节机制，该策略既不会抛弃任务，也不会抛出异常，而是将某些任务回退到调用者，从而降低新任务的流量。（谁调用的这个线程，回退给那个线程执行，如main线程调用线程池执行，则回调给main线程执行此任务）<br>3、DiscardOldestPolicy：抛弃队列中等待最久的任务，然后把当前任务加人队列中尝试再次提交当前任务。<br>4、DiscardPolicy：该策略默默地丢弃无法处理的任务，不予任何处理也不抛出异常。如果允许任务丢失，这是最好的一种策略。</p>
+<p>以上内置拒绝策略均实现了RejectedExecutionHandle接口。</p>
+<p>常见：问题在工作中单一的/固定数的/可变的三种创建线程池的方法哪个用的多？<br>    <strong>答案</strong>：一个都不用，我们工作中只能使用自定义的。<br>    <img src="https://img-blog.csdnimg.cn/20191114214715301.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>所以自定义的线程池代码实例如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.guigu.juc;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/11/14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThreadPoolDemo</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService myThreadPool = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">4</span>,<span class="comment">//常驻核心线程数</span></span><br><span class="line">                <span class="number">10</span>,<span class="comment">//可容纳最大线程数</span></span><br><span class="line">                <span class="number">3</span>,<span class="comment">//多余空闲线程的存活时间</span></span><br><span class="line">                TimeUnit.SECONDS,<span class="comment">//存活时间单位</span></span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue(<span class="number">3</span>),<span class="comment">//阻塞任务队列</span></span><br><span class="line">                Executors.defaultThreadFactory(),<span class="comment">//线程池中用于生成线程的线程工厂（一般默认）</span></span><br><span class="line">                <span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());<span class="comment">//拒绝策略</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                myThreadPool.execute(() -&gt; &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName());</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            myThreadPool.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="如何设置线程池中线程的数量"><a href="#如何设置线程池中线程的数量" class="headerlink" title="如何设置线程池中线程的数量"></a>如何设置线程池中线程的数量</h1><h2 id="CPU密集型"><a href="#CPU密集型" class="headerlink" title="CPU密集型"></a>CPU密集型</h2><p><img src="https://img-blog.csdnimg.cn/20191205203027295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="IO密集型"><a href="#IO密集型" class="headerlink" title="IO密集型"></a>IO密集型</h2><p><img src="https://img-blog.csdnimg.cn/20191205203052632.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191205203059964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
       
     </div>
 
@@ -692,7 +802,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -706,7 +816,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">一文读懂Java 代码块和代码执行顺序</a>
+            <a href="/2020/07/04/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/" class="post-title-link" itemprop="url">JMS（Java Message Service）</a>
         </h1>
 
         <div class="post-meta">
@@ -715,26 +825,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-31 12:33:16" itemprop="dateModified" datetime="2019-10-31T12:33:16+08:00">2019-10-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -743,7 +836,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.3k</span>
+              <span>4.9k</span>
             </span>
 
         </div>
@@ -755,15 +848,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>这是我在一个公众号上看到的关于java基础的一些内容，我觉得对于java基础掌握不牢固的小伙伴的帮助应该会很大，所以搬运过来供大家学习交流。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>JMS是Java EE中的一部分，好比是盘子和点心的关系，JMS是Java EE中的额一个组成部分。<br><img src="https://img-blog.csdnimg.cn/20191217201717408.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191217201745254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="JMS的组成"><a href="#JMS的组成" class="headerlink" title="JMS的组成"></a>JMS的组成</h1><p>JMS有四部分组成。分别为：</p>
+<p>JMS privider： 实现JMS接口与规范的消息中间件，也就是我们的MQ服务器。<br>JMS producer：消息生产者，创建与发送JMS消息的客户端应用。<br>JMS consumer：消息的消费者，接受与处理JMS消息的客户端应用。<br>JMS message：JMS的消息。</p>
+<h2 id="JMS-message的组成"><a href="#JMS-message的组成" class="headerlink" title="JMS message的组成"></a>JMS message的组成</h2><p>JMS message由三部分组成：消息头、消息头和消息属性。</p>
+<h3 id="消息头"><a href="#消息头" class="headerlink" title="消息头"></a>消息头</h3><p>在JMS message中包含很多消息头，如下所示：<br><img src="https://img-blog.csdnimg.cn/20191217203129546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>几个比较重要的消息头如下：</p>
+<p>1、<strong>JMSdestination</strong>：message发送的目的地，比如queue和topic。<br>2、<strong>JMSDeliveryMode</strong>:主要是指定消息的持久或者非持久化。<br><img src="https://img-blog.csdnimg.cn/20191217203559742.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191217203319377.png" alt="在这里插入图片描述"><br>3、JMSExpiration：消息存活时间。<br><img src="https://img-blog.csdnimg.cn/20191217203702484.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>4、JMSPriority：消息优先级。<br><img src="https://img-blog.csdnimg.cn/20191217203801226.png" alt="在这里插入图片描述"></p>
+<p>5、JMSMessageID：唯一识别每个消息的标志，由MQ产生。</p>
+<h3 id="消息体"><a href="#消息体" class="headerlink" title="消息体"></a>消息体</h3><p>消息体顾名思义作用就是<strong>封装具体消息的数据</strong>。<br>那么消息的数据到底有多少种格式呢，有五种。其中最常用的为<strong>TextMessage</strong>和<strong>MapMessage</strong>两种。<br>1、TextMessage：普通的字符串消息，包含一个string。<br>2、MapMessage：一个map类型的消息，key为stirng类型，而value 为<strong>java的基本类型</strong>。如下：<br><img src="https://img-blog.csdnimg.cn/20191217204358515.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>如果MapMessage中的value放的是char类型数据，则创键方式如下所示：<br><img src="https://img-blog.csdnimg.cn/20191217204259849.png" alt="在这里插入图片描述"><br>3、BytesMessage：二进制数组消息，包含一个byte[]。<br>4、StreamMessage：java数据流消息，用标准流操作来顺序的填充或读取。<br>5、ObjectMessage：对象消息，包含一个可序列化的java对象。</p>
+<p><strong><em>注意：</em></strong><br>    发送和接受的消息体类型必须是一致对应的。如发送的是TextMessage，则接收方式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">consumer.setMessageListener(<span class="keyword">new</span> MessageListener() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           <span class="keyword">public</span> <span class="keyword">void</span> onMessage(Message message) &#123;</span><br><span class="line">               <span class="keyword">if</span> (null != message &amp;&amp; message instanceof TextMessage) &#123;</span><br><span class="line">                   TextMessage textMessage = (TextMessage) message;</span><br><span class="line">                   <span class="keyword">try</span> &#123;</span><br><span class="line">                       System.out.println(<span class="string">"msg-----"</span> + textMessage.getText());</span><br><span class="line">                   &#125; <span class="keyword">catch</span> (JMSException e) &#123;</span><br><span class="line">                       e.printStackTrace();</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="消息属性"><a href="#消息属性" class="headerlink" title="消息属性"></a>消息属性</h3><p>如果需要使用消息头以外的值，那么可以使用消息属性（一种加强型的api），可用于识别/去重/重点标注等操作。<br><img src="https://img-blog.csdnimg.cn/20191217211429786.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="JMS的可靠性"><a href="#JMS的可靠性" class="headerlink" title="JMS的可靠性"></a>JMS的可靠性</h1><h2 id="persistent：持久性"><a href="#persistent：持久性" class="headerlink" title="persistent：持久性"></a>persistent：持久性</h2><h3 id="基于队列queue"><a href="#基于队列queue" class="headerlink" title="基于队列queue"></a>基于队列queue</h3><p>1、非持久化：<br><img src="https://img-blog.csdnimg.cn/20191217212023194.png" alt="在这里插入图片描述"><br>2、持久化<br><img src="https://img-blog.csdnimg.cn/20191217212047638.png" alt="在这里插入图片描述"><br>3、默认情况下ActiveMQ是持久化的，即向MQ中发送消息之后即使MQ服务器宕机挂掉然后重新启动之后，消费者也可以从MQ中取到原来发送的消息；而如果使用上述方法设置消息非持久化，那么在重新启动之后就不能取到原来的数据，原来的数据就会被丢失。</p>
+<h3 id="基于主题topic发布订阅"><a href="#基于主题topic发布订阅" class="headerlink" title="基于主题topic发布订阅"></a>基于主题topic发布订阅</h3><p> <strong>持久的发布主题生产者：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.durable;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的生产者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DurableJmsProduceTopic</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVE_URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String TOPIC_NAME = <span class="string">"topic-01"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws JMSException </span>&#123;</span><br><span class="line">        <span class="comment">//创建连接工厂，按照指定的url地址，采用默认用户名和密码</span></span><br><span class="line">        ActiveMQConnectionFactory activeMQConnectionFactory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVE_URL);</span><br><span class="line">        <span class="comment">//通过连接工厂创建连接</span></span><br><span class="line">        Connection connection = activeMQConnectionFactory.createConnection();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建回话session，两个参数：事务和签收</span></span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        <span class="comment">//常见目的地（队列或queue者主题topic）</span></span><br><span class="line">        Topic topic = session.createTopic(TOPIC_NAME);</span><br><span class="line">        <span class="comment">//创建生产者</span></span><br><span class="line">        MessageProducer producer = session.createProducer(topic);</span><br><span class="line">        <span class="comment">//设置持久化的topic生产者</span></span><br><span class="line">        producer.setDeliveryMode(DeliveryMode.PERSISTENT);</span><br><span class="line">        connection.start();</span><br><span class="line">        <span class="comment">//使用MessageProducer生产3条消息发送到MQ的队列里</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//创建消息</span></span><br><span class="line">            TextMessage textMessage = session.createTextMessage(<span class="string">"msg------"</span> + i);</span><br><span class="line">            <span class="comment">//通过生产者MessageProducer发送给MQ</span></span><br><span class="line">            producer.send(textMessage);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//关闭资源</span></span><br><span class="line">        producer.close();</span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>持久的发布主题消费者：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.durable;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的生产者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DurableJmsConsumerTopic</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVEMQ_URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String TOPIC_NAME = <span class="string">"topic-01"</span>;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws JMSException, IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">"订阅者z3"</span>);</span><br><span class="line">        ActiveMQConnectionFactory factory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVEMQ_URL);</span><br><span class="line">        Connection connection = factory.createConnection();</span><br><span class="line">        connection.setClientID(<span class="string">"z3"</span>);</span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        Topic topic = session.createTopic(TOPIC_NAME);</span><br><span class="line">        TopicSubscriber durableSubscriber = session.createDurableSubscriber(topic, <span class="string">"remark.."</span>);</span><br><span class="line"></span><br><span class="line">        connection.start();</span><br><span class="line"></span><br><span class="line">        Message message = durableSubscriber.receive();</span><br><span class="line">        <span class="keyword">while</span> (null != message) &#123;</span><br><span class="line">            TextMessage textMessage = (TextMessage) message;</span><br><span class="line">            System.out.println(textMessage.getText());</span><br><span class="line">            message = durableSubscriber.receive();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>持久化的表现：</strong><br>持久性的订阅者首先启动进行订阅，就算中途离线关掉了系统，也会在下次连接上线后收到消息。</p>
+<h2 id="transaction：事务"><a href="#transaction：事务" class="headerlink" title="transaction：事务"></a>transaction：事务</h2><p>无论是在生产者还是消费者的时候都要创建一个session会话，如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Session session = connection.createSession(<span class="literal">false</span>,Session.AUTO_ACKNOWLEDGE);</span><br></pre></td></tr></table></figure>
+<p>其中第一个参数就是事务，false代表关闭事务，true代表使用事务。</p>
+<p>如果生产者和消费者都设置为false，那么在producer.send(message)之后，消息就会直接传到队列中，consumer.receive之后消息就会直接取出来；<br>如果生产者和消费者都设置为true，那么必须手动session.commit()进行提交，出错之候可以session.rollback()。如果不commit，那么：producer.send()之后，消息不会发送到消息队列中，并且因为没有commit，consumer.receive()会多次消费同一条消息。</p>
+<h2 id="acknowledge-签收模式"><a href="#acknowledge-签收模式" class="headerlink" title="acknowledge 签收模式"></a>acknowledge 签收模式</h2><p>签收模式的效果如何与事务的开启与否有着密切的关系，主要常用的签收模式包括两种：自动签收AUTO_ACKNOWLEDGE和手动签收CLIENT_ACKNOWLEDGE。</p>
+<p><strong>1、在事务为false的时候，签收模式为：AUTO_ACKNOWLEDGE</strong><br>在此模式下，为自动签收。不用任何操作就会签收，不会出现二次消费的情况<br><strong>2、在事务为false的时候，签收模式为：CLIENT_ACKNOWLEDGE</strong><br>在此模式下消息不会自动签收，必须使用message.acknowledge()手动对消息进行签收，否则会出现二次消费。<br><strong>3、在事务为true的时候，签收模式为：AUTO_ACKNOWLEDGE</strong><br>在此模式下，并且调用session.commit()进行事务提交的情况下为自动签收。若事务不提交，则会出现二次消费的情况。<br><strong>4、在事务为true的时候，签收模式为：CLIENT_ACKNOWLEDGE</strong><br>在此模式下，并且调用session.commit()进行事务提交的情况下为手动签收。若事务不提交，则会出现二次消费的情况。即使message.acknowledge()进行消息手动签收也会出现二次消费。</p>
+<p><strong>总结：</strong><br>在事务关闭的情况下，消息是否自动签收取决于签收模式，如AUTO_ACKNOWLEDGE或者CLIENT_ACKNOWLEDGE；在事务开启的情况下，并且调用commit方法，则无论签收模式是什么<strong>都会</strong>自动提交，在事务开启的情况下，若不调用commit方法，则无论签收模式是什么<strong>都不会</strong>自动提交。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="JMS点对点模式总结"><a href="#JMS点对点模式总结" class="headerlink" title="JMS点对点模式总结"></a>JMS点对点模式总结</h2><p><img src="https://img-blog.csdnimg.cn/20191218111916699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="JMS发布订阅模式总结"><a href="#JMS发布订阅模式总结" class="headerlink" title="JMS发布订阅模式总结"></a>JMS发布订阅模式总结</h2><p><img src="https://img-blog.csdnimg.cn/20191218112010364.png" alt="在这里插入图片描述"></p>
+<h3 id="非持久订阅"><a href="#非持久订阅" class="headerlink" title="非持久订阅"></a>非持久订阅</h3><p><img src="https://img-blog.csdnimg.cn/20191218112039889.png" alt="在这里插入图片描述"></p>
+<h3 id="持久订阅"><a href="#持久订阅" class="headerlink" title="持久订阅"></a>持久订阅</h3><p><img src="https://img-blog.csdnimg.cn/20191218112054756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="用哪个"><a href="#用哪个" class="headerlink" title="用哪个"></a>用哪个</h3><p>当所有消息必须被接受，则用持久订阅。当丢失消息能够被容忍，则用非持久订阅。</p>
+
       
     </div>
 
@@ -782,7 +896,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/java%E4%B8%AD%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -796,7 +910,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">夯实Java基础系列：深入理解Java内部类及其实现原理</a>
+            <a href="/2020/07/04/java%E4%B8%AD%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86/" class="post-title-link" itemprop="url">java中集合的遍历</a>
         </h1>
 
         <div class="post-meta">
@@ -805,32 +919,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-31 12:36:16" itemprop="dateModified" datetime="2019-10-31T12:36:16+08:00">2019-10-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">实现原理</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:09" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -839,7 +930,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.8k</span>
+              <span>4.9k</span>
             </span>
 
         </div>
@@ -851,15 +942,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>这是我在一个公众号上看到的关于java基础的一些内容，我觉得对于java基础掌握不牢固的小伙伴的帮助应该会很大，所以搬运过来供大家学习交流。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>我在学习关于LinkedList的知识的时候，看到提示，不能使用普通for循环进行遍历，于是我看了几种list的普通for循环的底层，合作了如下总结。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Java语言中，提供了一套数据集合框架，其中定义了一些诸如List、Set等抽象数据类型，每个抽象数据类型的各个具体实现，底层又采用了不同的实现方式，比如ArrayList和LinkedList。</p>
+<p>除此之外，Java对于数据集合的遍历，也提供了几种不同的方式。开发人员必须要清楚的明白每一种遍历方式的特点、适用场合、以及在不同底层实现上的表现。下面就详细分析一下这一块内容。</p>
+<h1 id="数据元素是怎样在内存中存放的？"><a href="#数据元素是怎样在内存中存放的？" class="headerlink" title="数据元素是怎样在内存中存放的？"></a>数据元素是怎样在内存中存放的？</h1><p>数据元素在内存中，主要有2种存储方式：</p>
+<p><strong>1、顺序存储，Random Access（Direct Access）</strong>：<br> 这种方式，相邻的数据元素存放于相邻的内存地址中，整块内存地址是连续的。可以根据元素的位置直接计算出内存地址，直接进行读取。读取一个特定位置元素的平均时间复杂度为O(1)。正常来说，只有基于数组实现的集合，才有这种特性。Java中以ArrayList为代表。</p>
+<p><strong>2、链式存储，Sequential Access</strong>：<br>这种方式，每一个数据元素，在内存中都不要求处于相邻的位置，每个数据元素包含它下一个元素的内存地址。不可以根据元素的位置直接计算出内存地址，只能按顺序读取元素。读取一个特定位置元素的平均时间复杂度为O(n)。主要以链表为代表。Java中以LinkedList为代表。</p>
+<h1 id="Java中提供的遍历方式有哪些？"><a href="#Java中提供的遍历方式有哪些？" class="headerlink" title="Java中提供的遍历方式有哪些？"></a>Java中提供的遍历方式有哪些？</h1><p><strong>1、传统的for循环遍历，基于计数器的：</strong><br> 遍历者自己在集合外部维护一个计数器，然后依次读取每一个位置的元素，当读取到最后一个元素后，停止。主要就是需要按元素的位置来读取元素。这也是最原始的集合遍历方法。</p>
+<p>写法为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">list</span>.size(); i++) &#123;</span><br><span class="line">    <span class="built_in">list</span>.get(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2、迭代器遍历，Iterator：</strong></p>
+<p>Iterator本来是OO的一个设计模式，主要目的就是屏蔽不同数据集合的特点，统一遍历集合的接口。Java作为一个OO语言，自然也在Collections中支持了Iterator模式。</p>
+<p>写法为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterator iterator = <span class="built_in">list</span>.iterator();</span><br><span class="line"><span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">    iterator.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3、foreach循环遍历：</strong><br>屏蔽了显式声明的Iterator和计数器。</p>
+<p>优点：代码简洁，不易出错。<br>缺点：只能做简单的遍历，不能在遍历过程中操作（删除、替换）数据集合。<br>写法为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (ElementType element : <span class="built_in">list</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="每个遍历方法的实现原理是什么？"><a href="#每个遍历方法的实现原理是什么？" class="headerlink" title="每个遍历方法的实现原理是什么？"></a>每个遍历方法的实现原理是什么？</h1><p><strong>1、传统的for循环遍历，基于计数器的</strong>：<br>遍历者自己在集合外部维护一个计数器，然后依次读取每一个位置的元素，当读取到最后一个元素后，停止。主要就是需要按元素的位置来读取元素。<br><strong>2、迭代器遍历，Iterator：</strong><br> 每一个具体实现的数据集合，一般都需要提供相应的Iterator。相比于传统for循环，Iterator取缔了显式的遍历计数器。所以基于顺序存储集合的Iterator可以直接按位置访问数据。而基于链式存储集合的Iterator，正常的实现，都是需要保存当前遍历的位置。然后根据当前位置来向前或者向后移动指针。<br><strong>3、foreach循环遍历</strong>：<br>根据反编译的字节码可以发现，foreach内部也是采用了Iterator的方式实现，只不过Java编译器帮我们生成了这些代码。</p>
+<h1 id="各遍历方式对于不同的存储方式，性能如何？"><a href="#各遍历方式对于不同的存储方式，性能如何？" class="headerlink" title="各遍历方式对于不同的存储方式，性能如何？"></a>各遍历方式对于不同的存储方式，性能如何？</h1><h2 id="1、传统的for循环遍历，基于计数器的："><a href="#1、传统的for循环遍历，基于计数器的：" class="headerlink" title="1、传统的for循环遍历，基于计数器的："></a>1、传统的for循环遍历，基于计数器的：</h2><p>因为是基于元素的位置，按位置读取。所以我们可以知道，对于顺序存储，因为读取特定位置元素的平均时间复杂度是O(1)，所以遍历整个集合的平均时间复杂度为O(n)。而对于链式存储，因为读取特定位置元素的平均时间复杂度是O(n)，所以遍历整个集合的平均时间复杂度为O(n2)（n的平方）。</p>
+<p>ArrayList按位置读取的代码：直接按元素位置读取。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">transient Object[] elementData;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    <span class="keyword">return</span> elementData(index);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">E <span class="title">elementData</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (E) elementData[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>LinkedList按位置读取的代码：每次都需要从第0个元素开始向后读取。其实它内部也做了小小的优化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">transient <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">transient Node&lt;E&gt; first;</span><br><span class="line">transient Node&lt;E&gt; last;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    checkElementIndex(index);</span><br><span class="line">    <span class="keyword">return</span> node(index).item;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Node&lt;E&gt; node(<span class="keyword">int</span> index) &#123;</span><br><span class="line">    <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;   <span class="comment">//查询位置在链表前半部分，从链表头开始查找</span></span><br><span class="line">        Node&lt;E&gt; x = first;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">            x = x.next;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;                     <span class="comment">//查询位置在链表后半部分，从链表尾开始查找</span></span><br><span class="line">        Node&lt;E&gt; x = last;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; index; i--)</span><br><span class="line">            x = x.prev;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、迭代器遍历，Iterator："><a href="#2、迭代器遍历，Iterator：" class="headerlink" title="2、迭代器遍历，Iterator："></a>2、迭代器遍历，Iterator：</h2><p>那么对于RandomAccess类型的集合来说，没有太多意义，反而因为一些额外的操作，还会增加额外的运行时间。但是对于Sequential Access的集合来说，就有很重大的意义了，因为Iterator内部维护了当前遍历的位置，所以每次遍历，读取下一个位置并不需要从集合的第一个元素开始查找，只要把指针向后移一位就行了，这样一来，遍历整个集合的时间复杂度就降低为O(n)；</p>
+<p>（这里只用LinkedList做例子）LinkedList的迭代器，内部实现，就是维护当前遍历的位置，然后操作指针移动就可以了：<br>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    checkForComodification();</span><br><span class="line">    <span class="keyword">if</span> (!hasNext())</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line"></span><br><span class="line">    lastReturned = next;</span><br><span class="line">    next = next.next;</span><br><span class="line">    nextIndex++;</span><br><span class="line">    <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">previous</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    checkForComodification();</span><br><span class="line">    <span class="keyword">if</span> (!hasPrevious())</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line"></span><br><span class="line">    lastReturned = next = (next == null) ? last : next.prev;</span><br><span class="line">    nextIndex--;</span><br><span class="line">    <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3、foreach循环遍历："><a href="#3、foreach循环遍历：" class="headerlink" title="3、foreach循环遍历："></a>3、foreach循环遍历：</h2><p>分析Java字节码可知，foreach内部实现原理，也是通过Iterator实现的，只不过这个Iterator是Java编译器帮我们生成的，所以我们不需要再手动去编写。但是因为每次都要做类型转换检查，所以花费的时间比Iterator略长。时间复杂度和Iterator一样。</p>
+<p>使用Iterator的字节码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Code:</span><br><span class="line">       <span class="number">0</span>: <span class="keyword">new</span>           #<span class="number">16</span>                 <span class="comment">// class java/util/ArrayList</span></span><br><span class="line">       <span class="number">3</span>: dup</span><br><span class="line">       <span class="number">4</span>: invokespecial #<span class="number">18</span>                 <span class="comment">// Method java/util/ArrayList."&lt;init&gt;":()V</span></span><br><span class="line">       <span class="number">7</span>: astore_1</span><br><span class="line">       <span class="number">8</span>: aload_1</span><br><span class="line">       <span class="number">9</span>: invokeinterface #<span class="number">19</span>,  <span class="number">1</span>           <span class="comment">// InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;</span></span><br><span class="line">      <span class="number">14</span>: astore_2</span><br><span class="line">      <span class="number">15</span>: <span class="keyword">goto</span>          <span class="number">25</span></span><br><span class="line">      <span class="number">18</span>: aload_2</span><br><span class="line">      <span class="number">19</span>: invokeinterface #<span class="number">25</span>,  <span class="number">1</span>           <span class="comment">// InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;</span></span><br><span class="line">      <span class="number">24</span>: pop</span><br><span class="line">      <span class="number">25</span>: aload_2</span><br><span class="line">      <span class="number">26</span>: invokeinterface #<span class="number">31</span>,  <span class="number">1</span>           <span class="comment">// InterfaceMethod java/util/Iterator.hasNext:()Z</span></span><br><span class="line">      <span class="number">31</span>: ifne          <span class="number">18</span></span><br><span class="line">      <span class="number">34</span>: <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<p>使用foreach的字节码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Code:</span><br><span class="line">    <span class="number">0</span>: <span class="keyword">new</span>           #<span class="number">16</span>                 <span class="comment">// class java/util/ArrayList</span></span><br><span class="line">    <span class="number">3</span>: dup</span><br><span class="line">    <span class="number">4</span>: invokespecial #<span class="number">18</span>                 <span class="comment">// Method java/util/ArrayList."&lt;init&gt;":()V</span></span><br><span class="line">    <span class="number">7</span>: astore_1</span><br><span class="line">    <span class="number">8</span>: aload_1</span><br><span class="line">    <span class="number">9</span>: invokeinterface #<span class="number">19</span>,  <span class="number">1</span>           <span class="comment">// InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;</span></span><br><span class="line">   <span class="number">14</span>: astore_3</span><br><span class="line">   <span class="number">15</span>: <span class="keyword">goto</span>          <span class="number">28</span></span><br><span class="line">   <span class="number">18</span>: aload_3</span><br><span class="line">   <span class="number">19</span>: invokeinterface #<span class="number">25</span>,  <span class="number">1</span>           <span class="comment">// InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;</span></span><br><span class="line">   <span class="number">24</span>: checkcast     #<span class="number">31</span>                 <span class="comment">// class loop/Model</span></span><br><span class="line">   <span class="number">27</span>: astore_2</span><br><span class="line">   <span class="number">28</span>: aload_3</span><br><span class="line">   <span class="number">29</span>: invokeinterface #<span class="number">33</span>,  <span class="number">1</span>           <span class="comment">// InterfaceMethod java/util/Iterator.hasNext:()Z</span></span><br><span class="line">   <span class="number">34</span>: ifne          <span class="number">18</span></span><br><span class="line">   <span class="number">37</span>: <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<h1 id="各遍历方式的适用于什么场合？"><a href="#各遍历方式的适用于什么场合？" class="headerlink" title="各遍历方式的适用于什么场合？"></a>各遍历方式的适用于什么场合？</h1><h2 id="1、传统的for循环遍历，基于计数器的：-1"><a href="#1、传统的for循环遍历，基于计数器的：-1" class="headerlink" title="1、传统的for循环遍历，基于计数器的："></a>1、传统的for循环遍历，基于计数器的：</h2><p>顺序存储：读取性能比较高。适用于遍历顺序存储集合。<br>链式存储：时间复杂度太大，不适用于遍历链式存储的集合。</p>
+<h2 id="2、迭代器遍历，Iterator：-1"><a href="#2、迭代器遍历，Iterator：-1" class="headerlink" title="2、迭代器遍历，Iterator："></a>2、迭代器遍历，Iterator：</h2><p>顺序存储：如果不是太在意时间，推荐选择此方式，毕竟代码更加简洁，也防止了Off-By-One的问题。<br>链式存储：意义就重大了，平均时间复杂度降为O(n)，还是挺诱人的，所以推荐此种遍历方式。</p>
+<h2 id="3、foreach循环遍历：-1"><a href="#3、foreach循环遍历：-1" class="headerlink" title="3、foreach循环遍历："></a>3、foreach循环遍历：</h2><p>foreach只是让代码更加简洁了，但是他有一些缺点，就是遍历过程中不能操作数据集合（删除等），所以有些场合不使用。而且它本身就是基于Iterator实现的，但是由于类型转换的问题，所以会比直接使用Iterator慢一点，但是还好，时间复杂度都是一样的。所以怎么选择，参考上面两种方式，做一个折中的选择。</p>
+<h1 id="Java的最佳实践是什么？"><a href="#Java的最佳实践是什么？" class="headerlink" title="Java的最佳实践是什么？"></a>Java的最佳实践是什么？</h1><p><strong>Java数据集合框架中，提供了一个RandomAccess接口，该接口没有方法，只是一个标记。通常被List接口的实现使用，用来标记该List的实现是否支持Random Access</strong>。</p>
+<p>一个数据集合实现了该接口，就意味着它支持Random Access，按位置读取元素的平均时间复杂度为O(1)。比如ArrayList。</p>
+<p>而没有实现该接口的，就表示不支持Random Access。比如LinkedList。</p>
+<p>所以看来JDK开发者也是注意到这个问题的，那么推荐的做法就是，如果想要遍历一个List，那么先判断是否支持Random Access，也就是 list instanceof RandomAccess。</p>
+<p>比如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">list</span> instanceof RandomAccess) &#123;</span><br><span class="line">    <span class="comment">//使用传统的for循环遍历。</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//使用Iterator或者foreach。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -878,7 +1000,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -892,7 +1014,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/" class="post-title-link" itemprop="url">如何实现http协议中的重定向？</a>
+            <a href="/2020/07/04/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
         </h1>
 
         <div class="post-meta">
@@ -901,26 +1023,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-31 12:32:39" itemprop="dateModified" datetime="2019-10-31T12:32:39+08:00">2019-10-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-web/" itemprop="url" rel="index">
-                    <span itemprop="name">java web</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:08" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -929,7 +1034,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>3.5k</span>
             </span>
 
         </div>
@@ -941,15 +1046,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>伴随着系统流量的增大,出现了应用集群。在 Redis 中为了保证 Redis 的高可用也为 Redis 搭建了集群对数据进行分槽存放。在 Mysql数据库要存储的量达到一个很高的地步的时候,我们会对数据库进行分库分表操作。OK，到这儿先假设我们不知道什么是集群、什么是分库分表,我们先来看一个数据库水平切分演变的例子:</p>
+<blockquote>
+<p>假设我们的系统中有一张会员表 customer_info, 我们的系统刚开始无人问津,我们在一个单个的数据库中放这张表，所有的会员记录都插入到这个数据库的这张表中，这没什么问题，是一个很正常且合理的操作。某段时间，我们的系统突然火爆了起来，注册会员激增，达到了千万级别并且还在快速增长，这时候所有的用户请求数据都会请求这张表，毫无疑问数据库的压力很大，于是可能会经常发生宕机事件，给系统造成了很大影响。为了解决这件事情，我们将单张表的数据切分到多个服务器上去，每个服务器具有相应的库与表，只是表中数据不同。 这样做能够有效的缓解单机数据库的压力和系统的性能瓶颈。</p>
+</blockquote>
+<p>看完了这个例子,我们对水平拆分数据库有了一个大致的印象，其实就是把很多的数据按照一定的规则存放在不同的服务器上，然后查找的时候能够根据存放的时候的规则去找到前面存放的数据。那么我们要说的一致性哈希算法，其实就是解决了这里面的 存取规则 的问题，有了这个一致性哈希算法，我们能够准确的知道我们要取的数据落在哪个机器的哪个数据库中。</p>
+<h1 id="简单哈希"><a href="#简单哈希" class="headerlink" title="简单哈希"></a>简单哈希</h1><p>还是上面水平拆分数据库的例子,假设我们现在不知道什么一致性哈希什么集群分槽，就让我们自己想的话，我们可以很容器的想到 java 中的 HashMap 的原理，它通过计算了一个 key 的哈希值，然后拿这个哈希值对底层数组取模就得到了一个哈希桶，如果数据存在的话，就一定在这个哈希桶里，否则就不存在。类似的可以想到，假设我们的 customer_info 我们可以按照用户id去分库分表，假设此时存在水平的三个库表,如下,我们分别称之为 节点D1,节点D2,节点D0</p>
+<p>机器 ip    数据库    数据表</p>
+<blockquote>
+<p>127.0.0.1    customer    customer_info<br>127.0.0.2    customer    customer_info<br>127.0.0.3    customer    customer_info</p>
+</blockquote>
+<p>分库分表的时候,用户 A 的记录落在了 D1 机器，用户 B 的记录落在了 D2 机器，用户 C 的机器落在了 D0 机器上，用户 A 要存在哪条数据库上的计算过程是用户 A 的会员 id 的哈希值对 3 取模，因为现在只有 3 台机器，伪代码: A_id.hash() % / 3，用户 B 和用户 C 依次类推。如下图所示<br><img src="https://img-blog.csdnimg.cn/20200629231022751.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"><br>这好像很方便的解决了存取规则的问题，我们来分析一波:<br>假设我们的系统用户量又激增了，我们就需要再加一些机器,此时我们再计算哈希值的时候，取模不再是对 3 取模了，而是对 4 进行取模了，之前 A_id.hash() % / 3 = 1,而现在 A_id.hash() % / 4 = ? 这个值很大概率不会是 1，所以这就会出现用户明明存在记录但是却查不到的情况，这就问题很大了，如果要解决这个问题只能在机器节点数量变化的时候对数据重新哈希，这代价就有点大了。所以，我们需要想办法让这种情况不发生，这种情况发生的根本是哈希算法本身的特性导致的，直接使用取模的话这是无法避免的。所以就有了一致性哈希</p>
+<h1 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h1><p>上面通过数据库的例子介绍了哈希算法，然后也分析了它的劣势,当机器数量发生变动的时候，几乎所有的数据都会移动(不移动的应该是运气比较好吧前后取模都是同一个值)，这个代价很大。此时的问题从水平如何拆分变成了，当增加或者删除节点时，对于大多数记录，保证原来分配到的某个节点，现在仍然应该分配到那个节点，将数据迁移量的降到最低，这就是一致性哈希要做的事情。在这里我们不指定是数据库还是什么，反正都是分布式存储节点。</p>
+<h2 id="一致性hash介绍"><a href="#一致性hash介绍" class="headerlink" title="一致性hash介绍"></a>一致性hash介绍</h2><p>一致性 Hash 算法也是使用取模的思想，只是，刚才描述的取模法是对节点数量进行取模，而一致性Hash算法是对 2^32 取模，什么意思呢？简单来说，一致性Hash算法将整个哈希值空间组织成一个虚拟的圆环，如假设某哈希函数H的值空间为0-2^32-1（即哈希值是一个32位无符号整形），整个哈希环如下，从 0 ~ 2^32-1 代表的分别是一个个的节点,这个环也叫哈希环<br><img src="https://img-blog.csdnimg.cn/20200629231122911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"><br>然后我们将我们的节点进行一次哈希，按照一定的规则，比如按照 ip 地址的哈希值，让节点落在哈希环上。比如此时我们可能得到了如下图的环:</p>
+<p><img src="https://img-blog.csdnimg.cn/20200629231139440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"><br>然后就是需要通过数据 key 找到对应的服务器然后存储了，我们约定,通过数据 key 的哈希值落在哈希环上的节点，如果命中了机器节点就落在这个机器上，否则落在顺时针直到碰到第一个机器。如下图所示 : A 的哈希值落在了 D2 节点的前面，往下找落在了 D2 机器上，D的哈希值 在 D1 节点的前面，往下找到了 D1 机器，B的哈希值刚好落在了D1 节点上，依次<del>~</del></p>
+<p><img src="https://img-blog.csdnimg.cn/20200629231154875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"></p>
+<h2 id="一致性hash分析"><a href="#一致性hash分析" class="headerlink" title="一致性hash分析"></a>一致性hash分析</h2><p>一致性哈希主要就是解决当机器减少或增加的时候，大面积的数据重新哈希的问题，主要从下面 2 个方向去考虑的，当节点宕机时，数据记录会被定位到下一个节点上，当新增节点的时候 ，相关区间内的数据记录就需要重新哈希。</p>
+<h3 id="某节点宕机"><a href="#某节点宕机" class="headerlink" title="某节点宕机"></a>某节点宕机</h3><p>我们假设上图中的 节点 D2 因为一些原因宕机了,可以看到，只有数据 A 的记录需要重新重新定位存储到节点 D1 上，因为 D1 是 D2 的下一个节点，其它的数据都没有被影响到，此时被影响的仅仅是 图中的 D0-D2 这段区间的记录，也就是之前落在 D2 上的数据现在都要落到 D1 上面了。如下图<img src="https://img-blog.csdnimg.cn/20200629231339864.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="节点宕机"></p>
+<h3 id="新增节点"><a href="#新增节点" class="headerlink" title="新增节点"></a>新增节点</h3><p>我们假设我们需要增加一台机器，也就是增加一个节点D4，如下图所示，这个节点落在 D2-D1 之间，按照上述的哈希环上的哈希值落在节点的规则，那么此时之前落在 D2 到 D4 之间的数据都需要重新定位到新的节点上面了，而其它位置的数据是不需要有改变的。<br><img src="https://img-blog.csdnimg.cn/20200629231356294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="新增节点"></p>
+<h2 id="一致性哈希的数据倾斜问题"><a href="#一致性哈希的数据倾斜问题" class="headerlink" title="一致性哈希的数据倾斜问题"></a>一致性哈希的数据倾斜问题</h2><p>一致性Hash算法在服务节点太少时，容易因为节点分部不均匀而造成数据倾斜（被缓存的对象大部分集中缓存在某一台服务器上）问题。比如只有 2 台机器，这 2 台机器离的很近，那么顺时针第一个机器节点上将存在大量的数据，第二个机器节点上数据会很少。如下图所示，D0 机器承载了绝大多数的数据<br><img src="https://img-blog.csdnimg.cn/20200629231447277.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="虚拟节点解决数据倾斜问题"><a href="#虚拟节点解决数据倾斜问题" class="headerlink" title="虚拟节点解决数据倾斜问题"></a>虚拟节点解决数据倾斜问题</h2><p>为了避免出现数据倾斜问题，一致性 Hash 算法引入了虚拟节点的机制，也就是每个机器节点会进行多次哈希，最终每个机器节点在哈希环上会有多个虚拟节点存在，使用这种方式来大大削弱甚至避免数据倾斜问题。同时数据定位算法不变，只是多了一步虚拟节点到实际节点的映射，例如定位到“D1#1”、“D1#2”、“D1#3”三个虚拟节点的数据均定位到 D1 上。这样就解决了服务节点少时数据倾斜的问题。在实际应用中，通常将虚拟节点数设置为32甚至更大，因此即使很少的服务节点也能做到相对均匀的数据分布。这也是 Dubbo 负载均衡中有一种一致性哈希负载均衡的实现思想。<br><img src="https://img-blog.csdnimg.cn/20200629231459476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="一致性哈希的应用案例"><a href="#一致性哈希的应用案例" class="headerlink" title="一致性哈希的应用案例"></a>一致性哈希的应用案例</h2><p>一致性哈希用到的地方很多，特别是中间件里面，比如 Dubbo 的负载均衡也有一种策略是一致性哈希策略，使用的就是虚拟节点实现的。Redis 集群中也用到了相关思想但是没有用它而是根据实际情况改进了一下。而对于存储数据的节点水平切分的时候它的作用就更不可代替了。and so on···</p>
+<h1 id="Redis-集群分槽的实现"><a href="#Redis-集群分槽的实现" class="headerlink" title="Redis 集群分槽的实现"></a>Redis 集群分槽的实现</h1><p>Redis 集群并没有直接使用一致性哈希，而是使用了哈希槽 （slot） 的概念，Redis 没有直接使用哈希算法 hash()，而是使用了crc16校验算法。槽位其实就是一个个的空间的单位。其实哈希槽的本质和一致性哈希算法非常相似，不同点就是对于哈希空间的定义。一致性哈希的空间是一个圆环，节点分布是基于圆环的，无法很好的控制数据分布，可能会产生数据倾斜问题。而 Redis 的槽位空间是自定义分配的，类似于Windows盘分区的概念。这种分区是可以自定义大小，自定义位置的。Redis 集群包含了 16384 个哈希槽，每个 Key 经过计算后会落在一个具体的槽位上，而槽位具体在哪个机器上是用户自己根据自己机器的情况配置的，机器硬盘小的可以分配少一点槽位，硬盘大的可以分配多一点。如果节点硬盘都差不多则可以平均分配。所以哈希槽这种概念很好地解决了一致性哈希的弊端。<br>另外在容错性和扩展性上与一致性哈希一样，都是对受影响的数据进行转移而不影响其它的数据。而哈希槽本质上是对槽位的转移，把故障节点负责的槽位转移到其他正常的节点上。扩展节点也是一样，把其他节点上的槽位转移到新的节点上。</p>
+<p>需要注意的是，对于槽位的转移和分派，Redis集群是不会自动进行的，而是需要人工配置的。所以Redis集群的高可用是依赖于节点的主从复制与主从间的自动故障转移。<br><img src="https://img-blog.csdnimg.cn/20200629231814902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
       
     </div>
 
@@ -968,7 +1088,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -982,7 +1102,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">如何在Linux中安装MySQL数据库</a>
+            <a href="/2020/07/04/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82HashMap/" class="post-title-link" itemprop="url">一文读懂HashMap</a>
         </h1>
 
         <div class="post-meta">
@@ -991,26 +1111,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-31 12:33:02" itemprop="dateModified" datetime="2019-10-31T12:33:02+08:00">2019-10-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
             </span>
 
           <br>
@@ -1019,7 +1122,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>14k</span>
             </span>
 
         </div>
@@ -1031,15 +1134,80 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>最近在阿里云买了一个云服务器，centos 7.3。打算把自己写的项目部署进去来玩一玩，熟悉线上部署的流程。部署项目之前肯定要搭建好环境，比如jdk、tomcat、maven、mysql等等的安装。因为之前没有用过linux系统，对其中的原理和各种命令不尽熟悉，所以遇到了许多困难。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p><strong><em>本文准备从以下几个方面去讲解HashMap：<br>1）HashMap源码详细分析<br>2）HashMap为什么是线程不安全的？<br>3）HashMap和HashTable的区别<br>4）1.7和1.8的HashMap实现区别总结</em></strong></p>
+<h1 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h1><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>让我们先从构造函数说起，HashMap有四个构造方法，别慌。</p>
+<h3 id="无参：HashMap"><a href="#无参：HashMap" class="headerlink" title="无参：HashMap()"></a>无参：HashMap()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.无参构造方法、</span></span><br><span class="line">   <span class="comment">// 构造一个空的HashMap，初始容量为16，负载因子为0.75</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR; <span class="comment">// all other fields defaulted</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>无参构造方法就没什么好说的了。</p>
+<h3 id="传容量：-HashMap-int-initialCapacity"><a href="#传容量：-HashMap-int-initialCapacity" class="headerlink" title="传容量： HashMap(int initialCapacity)"></a>传容量： HashMap(int initialCapacity)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.构造一个初始容量为initialCapacity，负载因子为0.75的空的HashMap，</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>HashMap(int initialCapacity) 这个构造方法调用了3中的构造方法。</p>
+<h3 id="传容量和负载因子：HashMap-int-initialCapacity-float-loadFactor"><a href="#传容量和负载因子：HashMap-int-initialCapacity-float-loadFactor" class="headerlink" title="传容量和负载因子：HashMap(int initialCapacity, float loadFactor)"></a>传容量和负载因子：HashMap(int initialCapacity, float loadFactor)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造一个空的初始容量为initialCapacity，负载因子为loadFactor的HashMap</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +initialCapacity);</span><br><span class="line">       <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">           initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">       <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +loadFactor);</span><br><span class="line">       <span class="keyword">this</span>.loadFactor = loadFactor;</span><br><span class="line">       <span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//最大容量</span></span><br><span class="line">   <span class="comment">//static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span></span><br></pre></td></tr></table></figure>
+<p>当指定的<strong>初始容量&lt; 0时抛出IllegalArgumentException</strong>异常；当指定的<strong>初始容量&gt; MAXIMUM_CAPACITY时，就让初始容量 = MAXIMUM_CAPACITY</strong>；<br>当<strong>负载因子小于0或者不是数字时，抛出IllegalArgumentException异常</strong>。</p>
+<p>设定threshold。 这个threshold = capacity * load factor 。当HashMap的size到了threshold时，就要进行resize，也就是扩容。</p>
+<p>tableSizeFor()的主要功能是<strong>返回一个比给定整数大且最接近的2的幂次方整数%</strong>，如给定10，返回2的4次方16。</p>
+<p>我们进入tableSizeFor(int cap)的源码中看看：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Returns a power of two size for the given target capacity.</span></span><br><span class="line">   <span class="function"><span class="keyword">static</span> final <span class="keyword">int</span> <span class="title">tableSizeFor</span><span class="params">(<span class="keyword">int</span> cap)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> n = cap - <span class="number">1</span>;</span><br><span class="line">       n |= n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">       n |= n &gt;&gt;&gt; <span class="number">2</span>;</span><br><span class="line">       n |= n &gt;&gt;&gt; <span class="number">4</span>;</span><br><span class="line">       n |= n &gt;&gt;&gt; <span class="number">8</span>;</span><br><span class="line">       n |= n &gt;&gt;&gt; <span class="number">16</span>;</span><br><span class="line">       <span class="keyword">return</span> (n &lt; <span class="number">0</span>) ? <span class="number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>note</em></strong>： <em>HashMap要求容量必须是2的幂</em>。</p>
+<p>首先，int n = cap -1是为了防止cap已经是2的幂时，执行完后面的几条无符号右移操作之后，返回的capacity是这个cap的2倍，因为cap已经是2的幂了，就已经满足条件了。 如果不懂可以往下看完几个无符号移位后再回来看。</p>
+<p>•如果n这时为0了（经过了cap-1之后），则经过后面的几次无符号右移依然是0，最后返回的capacity是1（最后有个n+1的操作）。这里只讨论n不等于0的情况。</p>
+<p>以16位为例，假设开始时 n 为 0000 1xxx xxxx xxxx （x代表不关心0还是1）</p>
+<p>•第一次右移 n |= n &gt;&gt;&gt; 1;</p>
+<p>由于n不等于0，则n的二进制表示中总会有一bit为1，这时考虑最高位的1。通过无符号右移1位，则将最高位的1右移了1位，再做或操作，使得n的二进制表示中与最高位的1紧邻的右边一位也为1，变为0000 11xx xxxx xxxx 。</p>
+<p>•第二次右移 n |= n &gt;&gt;&gt; 2;</p>
+<p>注意，这个n已经经过了n |= n &gt;&gt;&gt; 1; 操作。此时n为0000 11xx xxxx xxxx ，则n无符号右移两位，会将最高位两个连续的1右移两位，然后再与原来的n做或操作，这样n的二进制表示的高位中会有4个连续的1。如0000 1111 xxxx xxxx 。</p>
+<p>•第三次右移 n |= n &gt;&gt;&gt; 4;</p>
+<p>这次把已经有的高位中的连续的4个1，右移4位，再做或操作，这样n的二进制表示的高位中会有8个连续的1。如0000 1111 1111 xxxx 。</p>
+<p>第。。。，你还忍心让我继续推么？相信聪明的你已经想出来了，容量最大也就是32位的正数，所以最后一次 n |= n &gt;&gt;&gt; 16; 可以保证最高位后面的全部置为1。当然如果是32个1的话，此时超出了MAXIMUM_CAPACITY ，所以取值到 MAXIMUM_CAPACITY 。</p>
+<p>使用如下例子可以清晰看到：<br><img src="https://img-blog.csdnimg.cn/20200327161335685.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>注意，得到的这个capacity却被赋值给了threshold。 </p>
+<p>这里我和这篇博客的博主开始的想法一样，认为应该这么写：this.threshold = tableSizeFor(initialCapacity) * this.loadFactor; 因为这样子才符合threshold的定义：threshold = capacity * load factor 。但是，请注意，在构造方法中，并没有对table这个成员变量进行初始化，table的初始化被推迟到了put方法中，在put方法中会对threshold重新计算 。</p>
+<h3 id="为什么容量必须是2的幂"><a href="#为什么容量必须是2的幂" class="headerlink" title="为什么容量必须是2的幂"></a>为什么容量必须是2的幂</h3><p>此处讲解一下为什么hashmap的容量必须为2的幂。</p>
+<p>我个人认为主要有两方面：提高hashmap的效率，使hash散列的均匀分布。</p>
+<p>HashMap的容量为什么是2的n次幂，和这个(n - 1) &amp; hash的计算方法有着千丝万缕的关系，符号&amp;是按位与的计算，这是位运算，计算机能直接运算，特别高效。<br>Hash 值的<br>范围值-2147483648 到 2147483647，前后加起来大概 40 亿的映射空间，只要哈希函数映射得比较均匀松散，一般应<br>用是很难出现碰撞的。但问题是一个 40 亿长度的数组，内存是放不下的。所以这个散列值是不能直接拿来用的。用之<br>前还要先做对数组的长度取模运算，得到的余数才能用来要存放的位置也就是对应的数组下标。这个数组下标的计算方法是“ (n - 1) &amp; hash ”。（n 代表数组长度）。这也就解释了 HashMap 的长度为什么是 2 的幂次方。</p>
+<p>我们首先可能会想到采用%取余的操作来实现。但是，重点来了：“取余(%)操作中如果除数是 2 的幂次则等价于与其除数减一的与(&amp;)操作（<strong>也就是说 hash%length==hash&amp;(length-1)的前提是 length 是 2 的 n 次方；</strong>）。” 并且 采用二进制位操作 &amp;，相对于%能够提高运算效率，这就解释了 HashMap 的长度为什么是 2 的幂次方。</p>
+<p>计算数组的索引使用的是与的方式，只有用1与才能使得hash更加均匀，如果是0则会大大加大的hash冲突的概率。因为0与上任何值都为0，而1与上1为1，与0为0，减小了hash冲突的概率。</p>
+<p>终上所述，HashMap计算添加元素的位置时，使用的位运算，这是特别高效的运算；另外，HashMap的初始容量是2的n次幂，扩容也是2倍的形式进行扩容，是因为容量是2的n次幂，可以使得添加的元素均匀分布在HashMap中的数组上，减少hash碰撞，避免形成链表的结构，使得查询效率降低！</p>
+<h3 id="传map：HashMap-Map-lt-extends-K-extends-V-gt-m"><a href="#传map：HashMap-Map-lt-extends-K-extends-V-gt-m" class="headerlink" title="传map：HashMap(Map&lt;? extends K, ? extends V&gt; m)"></a>传map：HashMap(Map&lt;? extends K, ? extends V&gt; m)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4. 构造一个和指定Map有相同mappings的HashMap，初始容量能充足的容下指定的Map,负载因子为0.75</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;</span><br><span class="line">       putMapEntries(m, <span class="literal">false</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>套路，直接看 putMapEntries(m,false) 。源码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 将m的所有元素存入本HashMap实例中</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function">final <span class="keyword">void</span> <span class="title">putMapEntries</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m, boolean evict)</span> </span>&#123;</span><br><span class="line">     <span class="comment">//得到 m 中元素的个数</span></span><br><span class="line">     <span class="keyword">int</span> s = m.size();</span><br><span class="line">     <span class="comment">//当 m 中有元素时，则需将map中元素放入本HashMap实例。</span></span><br><span class="line">     <span class="keyword">if</span> (s &gt; <span class="number">0</span>) &#123;</span><br><span class="line">         <span class="comment">// 判断table是否已经初始化，如果未初始化，则先初始化一些变量。（table初始化是在put时）</span></span><br><span class="line">         <span class="keyword">if</span> (table == null) &#123; <span class="comment">// pre-size</span></span><br><span class="line"> 			<span class="comment">// 根据待插入的map 的 size 计算要创建的　HashMap 的容量。</span></span><br><span class="line">             <span class="keyword">float</span> ft = ((<span class="keyword">float</span>)s / loadFactor) + <span class="number">1.0F</span>;</span><br><span class="line">             <span class="keyword">int</span> t = ((ft &lt; (<span class="keyword">float</span>)MAXIMUM_CAPACITY) ?</span><br><span class="line">                      (<span class="keyword">int</span>)ft : MAXIMUM_CAPACITY);</span><br><span class="line">             <span class="comment">// 把要创建的　HashMap 的容量存在　threshold　中</span></span><br><span class="line">             <span class="keyword">if</span> (t &gt; threshold)</span><br><span class="line">                 threshold = tableSizeFor(t);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">// 如果table初始化过，因为别的函数也会调用它，所以有可能HashMap已经被初始化过了。</span></span><br><span class="line">         <span class="comment">// 判断待插入的　map 的 size,若　size 大于　threshold，则先进行　resize()，进行扩容</span></span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (s &gt; threshold)</span><br><span class="line">             resize();</span><br><span class="line">         <span class="comment">//然后就开始遍历 带插入的 map ，将每一个 &lt;Key ,Value&gt; 插入到本HashMap实例。</span></span><br><span class="line">         <span class="keyword">for</span> (Map.Entry&lt;? extends K, ? extends V&gt; e : m.entrySet()) &#123;</span><br><span class="line">             K key = e.getKey();</span><br><span class="line">             V value = e.getValue();</span><br><span class="line">             <span class="comment">// put(K,V)也是调用　putVal　函数进行元素的插入</span></span><br><span class="line">             putVal(hash(key), key, value, <span class="literal">false</span>, evict);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>来到putMapEntries函数中，如果table为null，那么这时就设置合适的threshold，如果不为空并且指定的map的size&gt;threshold，那么就resize()。然后把指定的map的所有Key，Value，通过putVal添加到我们创建的新的map中。</p>
+<h2 id="HashMap的put方法"><a href="#HashMap的put方法" class="headerlink" title="HashMap的put方法"></a>HashMap的put方法</h2><p>hashmap的put方法如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>put方法底层是调用的putVal方法。<br>介绍putVal方法前，说一下HashMap的几个重要的成员变量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The table, initialized on first use, and resized as</span></span><br><span class="line"><span class="comment">    * necessary. When allocated, length is always a power of two.</span></span><br><span class="line"><span class="comment">    * (We also tolerate length zero in some operations to allow</span></span><br><span class="line"><span class="comment">    * bootstrapping mechanics that are currently not needed.)</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="comment">//实际存储key，value的数组，只不过key，value被封装成Node了</span></span><br><span class="line">   <span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The number of key-value mappings contained in this map.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The number of times this HashMap has been structurally modified</span></span><br><span class="line"><span class="comment">    * Structural modifications are those that change the number of mappings in</span></span><br><span class="line"><span class="comment">    * the HashMap or otherwise modify its internal structure (e.g.,</span></span><br><span class="line"><span class="comment">    * rehash).  This field is used to make iterators on Collection-views of</span></span><br><span class="line"><span class="comment">    * the HashMap fail-fast.  (See ConcurrentModificationException).</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">transient</span> <span class="keyword">int</span> modCount;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The next size value at which to resize (capacity * load factor).</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@serial</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="comment">// (The javadoc description is true upon serialization.</span></span><br><span class="line">   <span class="comment">// Additionally, if the table array has not been allocated, this</span></span><br><span class="line">   <span class="comment">// field holds the initial array capacity, or zero signifying</span></span><br><span class="line">   <span class="comment">// DEFAULT_INITIAL_CAPACITY.)</span></span><br><span class="line">   <span class="comment">//因为 tableSizeFor(int) 返回值给了threshold</span></span><br><span class="line">   <span class="keyword">int</span> threshold;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The load factor for the hash table.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@serial</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">final</span> <span class="keyword">float</span> loadFactor;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其实就是哈希表。HashMap使用链表法避免哈希冲突（相同hash值），当链表长度大于TREEIFY_THRESHOLD（默认为8）时，将链表转换为红黑树，当然小于UNTREEIFY_THRESHOLD（默认为6）时，又会转回链表以达到性能均衡。</strong></p>
+<p> 我们看一张HashMap的数据结构（<strong>数组+链表+红黑树</strong> ）就更能理解table了：<br><img src="https://img-blog.csdnimg.cn/2020032716181136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>putVal中传入了个hash(key)，那我们就先来看看hash(key):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** key 的 hash值的计算是通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)</span></span><br><span class="line"><span class="comment">* 主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候</span></span><br><span class="line"><span class="comment">* 也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h;</span><br><span class="line">        <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>异或运算：(h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)</p>
+<p>原 来 的 hashCode : 1111 1111 1111 1111 0100 1100 0000 1010<br>移位后的hashCode: 0000 0000 0000 0000 1111 1111 1111 1111<br>进行异或运算 结果：1111 1111 1111 1111 1011 0011 1111 0101</p>
+<p>这样做的好处是，可以将hashcode高位和低位的值进行混合做异或运算，而且混合后，低位的信息中加入了高位的信息，这样高位的信息被变相的保留了下来。掺杂的元素多了，那么生成的hash值的随机性会增大。</p>
+<p>刚才我们漏掉了resize()和putVal() 两个函数，现在我们按顺序分析一波：</p>
+<p>首先resize() ,先看一下哪些函数调用了resize()，从而在整体上有个概念：<br><img src="https://img-blog.csdnimg.cn/20200327161938680.png" alt="在这里插入图片描述"><br>接下来上源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">final</span> Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">        <span class="comment">// 保存当前table</span></span><br><span class="line">        Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">        <span class="comment">// 保存当前table的容量</span></span><br><span class="line">        <span class="keyword">int</span> oldCap = (oldTab == <span class="keyword">null</span>) ? <span class="number">0</span> : oldTab.length;</span><br><span class="line">        <span class="comment">// 保存当前阈值</span></span><br><span class="line">        <span class="keyword">int</span> oldThr = threshold;</span><br><span class="line">        <span class="comment">// 初始化新的table容量和阈值 </span></span><br><span class="line">        <span class="keyword">int</span> newCap, newThr = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        1. resize（）函数在size　&gt; threshold时被调用。oldCap大于 0 代表原来的 table 表非空，</span></span><br><span class="line"><span class="comment">           oldCap 为原表的大小，oldThr（threshold） 为 oldCap × load_factor</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">if</span> (oldCap &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 若旧table容量已超过最大容量，更新阈值为Integer.MAX_VALUE（最大整形值），这样以后就不会自动扩容了。</span></span><br><span class="line">            <span class="keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">                threshold = Integer.MAX_VALUE;</span><br><span class="line">                <span class="keyword">return</span> oldTab;</span><br><span class="line">            &#125;</span><br><span class="line">             <span class="comment">// 容量翻倍，使用左移，效率更高</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                     oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">                <span class="comment">// 阈值翻倍</span></span><br><span class="line">                newThr = oldThr &lt;&lt; <span class="number">1</span>; <span class="comment">// double threshold</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        2. resize（）函数在table为空被调用。oldCap 小于等于 0 且 oldThr 大于0，代表用户创建了一个 HashMap，但是使用的构造函数为      </span></span><br><span class="line"><span class="comment">           HashMap(int initialCapacity, float loadFactor) 或 HashMap(int initialCapacity)</span></span><br><span class="line"><span class="comment">           或 HashMap(Map&lt;? extends K, ? extends V&gt; m)，导致 oldTab 为 null，oldCap 为0， oldThr 为用户指定的 HashMap的初始容量。</span></span><br><span class="line"><span class="comment">    　　*/</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (oldThr &gt; <span class="number">0</span>) <span class="comment">// initial capacity was placed in threshold</span></span><br><span class="line">            <span class="comment">//当table没初始化时，threshold持有初始容量。还记得threshold = tableSizeFor(t)么;</span></span><br><span class="line">            newCap = oldThr;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        3. resize（）函数在table为空被调用。oldCap 小于等于 0 且 oldThr 等于0，用户调用 HashMap()构造函数创建的　HashMap，所有值均采用默认值，oldTab（Table）表为空，oldCap为0，oldThr等于0，</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">else</span> &#123;               <span class="comment">// zero initial threshold signifies using defaults</span></span><br><span class="line">            newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">            newThr = (<span class="keyword">int</span>)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 新阈值为0</span></span><br><span class="line">        <span class="keyword">if</span> (newThr == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">float</span> ft = (<span class="keyword">float</span>)newCap * loadFactor;</span><br><span class="line">            newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="keyword">float</span>)MAXIMUM_CAPACITY ?</span><br><span class="line">                      (<span class="keyword">int</span>)ft : Integer.MAX_VALUE);</span><br><span class="line">        &#125;</span><br><span class="line">        threshold = newThr;</span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"rawtypes"</span>,<span class="string">"unchecked"</span>&#125;)</span><br><span class="line">        <span class="comment">// 初始化table</span></span><br><span class="line">        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])<span class="keyword">new</span> Node[newCap];</span><br><span class="line">        table = newTab;</span><br><span class="line">        <span class="keyword">if</span> (oldTab != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 把 oldTab 中的节点　reHash 到　newTab 中去</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; oldCap; ++j) &#123;</span><br><span class="line">                Node&lt;K,V&gt; e;</span><br><span class="line">                <span class="keyword">if</span> ((e = oldTab[j]) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    oldTab[j] = <span class="keyword">null</span>;</span><br><span class="line">                    <span class="comment">// 若节点是单个节点，直接在 newTab　中进行重定位</span></span><br><span class="line">                    <span class="keyword">if</span> (e.next == <span class="keyword">null</span>)</span><br><span class="line">                        newTab[e.hash &amp; (newCap - <span class="number">1</span>)] = e;</span><br><span class="line">                    <span class="comment">// 若节点是　TreeNode 节点，要进行 红黑树的 rehash　操作</span></span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">                        ((TreeNode&lt;K,V&gt;)e).split(<span class="keyword">this</span>, newTab, j, oldCap);</span><br><span class="line">                    <span class="comment">// 若是链表，进行链表的 rehash　操作</span></span><br><span class="line">                    <span class="keyword">else</span> &#123; <span class="comment">// preserve order</span></span><br><span class="line">                        Node&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</span><br><span class="line">                        Node&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</span><br><span class="line">                        Node&lt;K,V&gt; next;</span><br><span class="line">                        <span class="comment">// 将同一桶中的元素根据(e.hash &amp; oldCap)是否为0进行分割（代码后有图解，可以回过头再来看），分成两个不同的链表，完成rehash</span></span><br><span class="line">                        <span class="keyword">do</span> &#123;</span><br><span class="line">                            next = e.next;</span><br><span class="line">                            <span class="comment">// 根据算法　e.hash &amp; oldCap 判断节点位置rehash　后是否发生改变</span></span><br><span class="line">                            <span class="comment">//最高位==0，这是索引不变的链表。</span></span><br><span class="line">                            <span class="keyword">if</span> ((e.hash &amp; oldCap) == <span class="number">0</span>) &#123; </span><br><span class="line">                                <span class="keyword">if</span> (loTail == <span class="keyword">null</span>)</span><br><span class="line">                                    loHead = e;</span><br><span class="line">                                <span class="keyword">else</span></span><br><span class="line">                                    loTail.next = e;</span><br><span class="line">                                loTail = e;</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="comment">//最高位==1 （这是索引发生改变的链表）</span></span><br><span class="line">                            <span class="keyword">else</span> &#123;  </span><br><span class="line">                                <span class="keyword">if</span> (hiTail == <span class="keyword">null</span>)</span><br><span class="line">                                    hiHead = e;</span><br><span class="line">                                <span class="keyword">else</span></span><br><span class="line">                                    hiTail.next = e;</span><br><span class="line">                                hiTail = e;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">while</span> ((e = next) != <span class="keyword">null</span>);</span><br><span class="line">                        <span class="keyword">if</span> (loTail != <span class="keyword">null</span>) &#123;  <span class="comment">// 原bucket位置的尾指针不为空(即还有node)  </span></span><br><span class="line">                            loTail.next = <span class="keyword">null</span>; <span class="comment">// 链表最后得有个null</span></span><br><span class="line">                            newTab[j] = loHead; <span class="comment">// 链表头指针放在新桶的相同下标(j)处</span></span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span> (hiTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">                            hiTail.next = <span class="keyword">null</span>;</span><br><span class="line">                            <span class="comment">// rehash　后节点新的位置一定为原来基础上加上　oldCap，具体解释看下图</span></span><br><span class="line">                            newTab[j + oldCap] = hiHead;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newTab;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>引自美团点评技术博客。我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。看下图可以明白这句话的意思，n为table的长度，图（a）表示扩容前的key1和key2两种key确定索引位置的示例，图（b）表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的哈希与高位运算结果。<br><img src="https://img-blog.csdnimg.cn/20200327162113978.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="hashMap 1.8 哈希算法例图1"><br>元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：<br><img src="https://img-blog.csdnimg.cn/20200327162133375.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="hashMap 1.8 哈希算法例图2"><br>因此，我们在扩充HashMap的时候，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”，可以看看下图为16扩充为32的resize示意图 ：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200327162302493.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>什么时候扩容：通过HashMap源码可以看到是在put操作时，即向容器中添加元素时，判断当前容器中元素的个数是否达到阈值（当前数组长度乘以加载因子的值）的时候，就要自动扩容了。</p>
+<p>扩容(resize)：其实就是重新计算容量；而这个扩容是计算出所需容器的大小之后重新定义一个新的容器，将原来容器中的元素放入其中。</p>
+<p>resize()告一段落，接下来看 putVal() 。</p>
+<p>上源码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现put和相关方法。</span></span><br><span class="line">    <span class="function">final V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, boolean onlyIfAbsent,</span></span></span><br><span class="line"><span class="function"><span class="params">                   boolean evict)</span> </span>&#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">        <span class="comment">//如果table为空或者长度为0，则resize()</span></span><br><span class="line">        <span class="keyword">if</span> ((tab = table) == null || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">        <span class="comment">//确定插入table的位置，算法是(n - 1) &amp; hash，在n为2的幂时，相当于取摸操作。</span></span><br><span class="line">        <span class="comment">////找到key值对应的槽并且是第一个，直接加入</span></span><br><span class="line">        <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        <span class="comment">//在table的i位置发生碰撞，有两种情况，1、key值是一样的，替换value值，</span></span><br><span class="line">        <span class="comment">//2、key值不一样的有两种处理方式：2.1、存储在i位置的链表；2.2、存储在红黑树中</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            Node&lt;K,V&gt; e; K k;</span><br><span class="line">            <span class="comment">//第一个node的hash值即为要加入元素的hash</span></span><br><span class="line">            <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            <span class="comment">//2.2</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p instanceof TreeNode)</span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">            <span class="comment">//2.1</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//不是TreeNode,即为链表,遍历链表</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                <span class="comment">///链表的尾端也没有找到key值相同的节点，则生成一个新的Node,</span></span><br><span class="line">                <span class="comment">//并且判断链表的节点个数是不是到达转换成红黑树的上界达到，则转换成红黑树。</span></span><br><span class="line">                    <span class="keyword">if</span> ((e = p.next) == null) &#123;</span><br><span class="line">                         <span class="comment">// 创建链表节点并插入尾部</span></span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        <span class="comment">////超过了链表的设置长度8就转换成红黑树</span></span><br><span class="line">                        <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果e不为空就替换旧的oldValue值</span></span><br><span class="line">            <span class="keyword">if</span> (e != null) &#123; <span class="comment">// existing mapping for key</span></span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                <span class="keyword">if</span> (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                <span class="keyword">return</span> oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        <span class="keyword">return</span> null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>注：hash 冲突发生的几种情况：<br>1.两节点key 值相同（hash值一定相同），导致冲突；<br>2.两节点key 值不同，由于 hash 函数的局限性导致hash 值相同，冲突；<br>3.两节点key 值不同，hash 值不同，但 hash 值对数组长度取模后相同，冲突；</p>
+<p>相比put方法，get方法就比较简单，这里就不说了。</p>
+<h1 id="1-7和1-8的HashMap的不同点"><a href="#1-7和1-8的HashMap的不同点" class="headerlink" title="1.7和1.8的HashMap的不同点"></a>1.7和1.8的HashMap的不同点</h1><p>（1）JDK1.7用的是头插法，而JDK1.8及之后使用的都是尾插法，那么为什么要这样做呢？因为JDK1.7是用单链表进行的纵向延伸，当采用头插法就是能够提高插入的效率，但是也会容易出现逆序且环形链表死循环问题。但是在JDK1.8之后是因为加入了红黑树使用尾插法，能够避免出现逆序且链表死循环的问题。</p>
+<p>（2）扩容后数据存储位置的计算方式也不一样：<br>1.在JDK1.7的时候是直接用hash值和需要扩容的二进制数进行&amp;（这里就是为什么扩容的时候为啥一定必须是2的多少次幂的原因所在，因为如果只有2的n次幂的情况时最后一位二进制数才一定是1，这样能最大程度减少hash碰撞）（hash值 &amp; length-1） 。<br>2.而在JDK1.8的时候直接用了JDK1.7的时候计算的规律，也就是扩容前的原始位置+扩容的大小值=JDK1.8的计算方式，而不再是JDK1.7的那种异或的方法。但是这种方式就相当于只需要判断Hash值的新增参与运算的位是0还是1就直接迅速计算出了扩容后的储存方式。<br>（3）JDK1.7的时候使用的是数组+ 单链表的数据结构。但是在JDK1.8及之后时，使用的是数组+链表+红黑树的数据结构（当链表的深度达到8的时候，也就是默认阈值，就会自动扩容把链表转成红黑树的数据结构来把时间复杂度从O（N）变成O（logN）提高了效率）。</p>
+<h1 id="HashMap为什么是线程不安全的？"><a href="#HashMap为什么是线程不安全的？" class="headerlink" title="HashMap为什么是线程不安全的？"></a>HashMap为什么是线程不安全的？</h1><p>HashMap 在并发时可能出现的问题主要是两方面：<br>1.put的时候导致的多线程数据不一致<br> 比如有两个线程A和B，首先A希望插入一个key-value对到HashMap中，首先计算记录所要落到的 hash桶的索引坐标，然后获取到该桶里面的链表头结点，此时线程A的时间片用完了，而此时线程B被调度得以执行，和线程A一样执行，只不过线程B成功将记录插到了桶里面，假设线程A插入的记录计算出来的 hash桶索引和线程B要插入的记录计算出来的 hash桶索引是一样的，那么当线程B成功插入之后，线程A再次被调度运行时，它依然持有过期的链表头但是它对此一无所知，以至于它认为它应该这样做，如此一来就覆盖了线程B插入的记录，这样线程B插入的记录就凭空消失了，造成了数据不一致的行为。<br>2.resize而引起死循环<br> 这种情况发生在HashMap自动扩容时，当2个线程同时检测到元素个数超过 数组大小 × 负载因子。此时2个线程会在put()方法中调用了resize()，两个线程同时修改一个链表结构会产生一个循环链表（JDK1.7中，会出现resize前后元素顺序倒置的情况）。接下来再想通过get()获取某一个元素，就会出现死循环。</p>
+<h1 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h1><p>HashMap和Hashtable都实现了Map接口，但决定用哪一个之前先要弄清楚它们之间的分别。主要的区别有：线程安全性，同步(synchronization)，以及速度。</p>
+<p>1、HashMap几乎可以等价于Hashtable，除了HashMap是非synchronized的，并可以接受null(HashMap可以接受为null的键值(key)和值(value)，而Hashtable则不行)。</p>
+<p>2、HashMap是非synchronized，而Hashtable是synchronized，这意味着Hashtable是线程安全的，多个线程可以共享一个Hashtable；而如果没有正确的同步的话，多个线程是不能共享HashMap的。Java 5提供了ConcurrentHashMap，它是HashTable的替代，比HashTable的扩展性更好。</p>
+<p>3.、另一个区别是HashMap的迭代器(Iterator)是fail-fast迭代器，而Hashtable的enumerator迭代器不是fail-fast的。所以当有其它线程改变了HashMap的结构（增加或者移除元素），将会抛出ConcurrentModificationException，但迭代器本身的remove()方法移除元素则不会抛出ConcurrentModificationException异常。但这并不是一个一定发生的行为，要看JVM。这条同样也是Enumeration和Iterator的区别。</p>
+<p>4、由于Hashtable是线程安全的也是synchronized，所以在单线程环境下它比HashMap要慢。如果你不需要同步，只需要单一线程，那么使用HashMap性能要好过Hashtable。</p>
+<p>5、HashMap不能保证随着时间的推移Map中的元素次序是不变的。</p>
+<p>需要注意的重要术语：</p>
+<p>1.sychronized意味着在一次仅有一个线程能够更改Hashtable。就是说任何线程要更新Hashtable时要首先获得同步锁，其它线程要等到同步锁被释放之后才能再次获得同步锁更新Hashtable。</p>
+<p>2.Fail-safe和iterator迭代器相关。如果某个集合对象创建了Iterator或者ListIterator，然后其它的线程试图“结构上”更改集合对象，将会抛出ConcurrentModificationException异常。但其它线程可以通过set()方法更改集合对象是允许的，因为这并没有从“结构上”更改集合。但是假如已经从结构上进行了更改，再调用set()方法，将会抛出IllegalArgumentException异常。</p>
+<p>3.结构上的更改指的是删除或者插入一个元素，这样会影响到map的结构。</p>
+<p>HashMap可以通过下面的语句进行同步：<br>Map m = Collections.synchronizeMap(hashMap);</p>
+
       
     </div>
 
@@ -1058,7 +1226,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1104,7 +1272,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1165,7 +1333,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">226k</span>
 </div>
 <span id="busuanzi_container_site_pv">
     本站总访问量<span id="busuanzi_value_site_pv"></span>次
