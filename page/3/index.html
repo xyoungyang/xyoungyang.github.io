@@ -159,7 +159,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">39</span></a>
 
   </li>
   </ul>
@@ -184,90 +184,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">springboot的MVC自动配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@[TOC]<br>springboot为我们提供了springmvc的自动配置，所以我们可以直接编写逻辑就能实现功能。（如下内容都是基于springboot2.2.5）</p>
-<p>比如万能的helloworld：<br><img src="https://img-blog.csdnimg.cn/20200315153747721.png" alt="在这里插入图片描述"><br>我们只要写一个controller就能自动映射到。</p>
-<p>访问localhost:8080/hello，如下<br><img src="https://img-blog.csdnimg.cn/20200315153841850.png" alt="在这里插入图片描述"><br>那么springboot是如何帮助我们自动配置的呢？</p>
-<h1 id="springboot对mvc的自动配置"><a href="#springboot对mvc的自动配置" class="headerlink" title="springboot对mvc的自动配置"></a>springboot对mvc的自动配置</h1><p>对于springmvc的自动配置全部在WebMvcAutoConfiguration.class类中。</p>
-<p>ctrl+n搜索类，进入：<br><img src="https://img-blog.csdnimg.cn/20200315154044100.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="对静态资源的自动配置"><a href="#对静态资源的自动配置" class="headerlink" title="对静态资源的自动配置"></a>对静态资源的自动配置</h2><p>看到如下关键方法：<br><img src="https://img-blog.csdnimg.cn/20200315154425747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="webjars"><a href="#webjars" class="headerlink" title="webjars"></a>webjars</h3><p>首先webjars是什么呢？<br>看官网的描述：<br><img src="https://img-blog.csdnimg.cn/20200315155118221.png" alt="在这里插入图片描述"><br>其实说白了，就是讲静态资源通过jar包的方式导入进来。</p>
-<p>那么我们看看springboot是如何配置webjars的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!registry.hasMappingForPattern(<span class="string">"/webjars/**"</span>)) &#123;</span><br><span class="line">	customizeResourceHandlerRegistration(registry.addResourceHandler(<span class="string">"/webjars/**"</span>)</span><br><span class="line">				.addResourceLocations(<span class="string">"classpath:/META-INF/resources/webjars/"</span>)</span><br><span class="line">				.setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
-<p>关于webjars，会自动帮我们添加一个映射。对于/webjars/**这样的资源回去类路径下的？META-INF/resources/webjars/路径下面去找。<br><img src="https://img-blog.csdnimg.cn/20200315154828716.png" alt="在这里插入图片描述">并且可以设置缓存时间，而缓存时间是从ResourceProperties下面去找的。<br><img src="https://img-blog.csdnimg.cn/20200315154919727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>关于ResourcesProperties我们可以从配置文件的spring.resources前缀的属性注入进来。</p>
-<p>这样在浏览器访问localhost:8080/webjars/<strong>这个路径就会通过根路径的respurces/webjars/</strong>这个路径来寻找。<br>比如：我们导入jquery的一个jar包：<br><img src="https://img-blog.csdnimg.cn/20200315155351961.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>只要导入进来，我们就可以通过访问localhost:8080/webjars/jquery/3.3.1/jquery.js来访问了，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20200315155507640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="静态资源的位置配置"><a href="#静态资源的位置配置" class="headerlink" title="静态资源的位置配置"></a>静态资源的位置配置</h3><p>那么我们编写的静态资源应该放到哪里才可以被访问到呢，比如下面的ilogin.html<br><img src="https://img-blog.csdnimg.cn/2020031515565130.png" alt="在这里插入图片描述"></p>
-<p>再来看springboot的自动配置：<br><img src="https://img-blog.csdnimg.cn/20200315155749234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那我们点进去看一下这是给我们配置到哪里去了呢？<br><img src="https://img-blog.csdnimg.cn/2020031515582611.png" alt="在这里插入图片描述"><br>经过一路跟踪，终于找到，springboot为我们自动配置的静态资源位置是如下几个：classpath:/MATA-INF/resources/、classpath:/resources/、classpath:/public/、classpath:/static/这几个位置，无论我们把静态资源放到这几个的哪一个都可以访问到：<br><img src="https://img-blog.csdnimg.cn/20200315160111167.png" alt="在这里插入图片描述"><br>通过测试abcd四个html都能被访问到。</p>
-<h2 id="欢迎页的配置"><a href="#欢迎页的配置" class="headerlink" title="欢迎页的配置"></a>欢迎页的配置</h2><p>对于欢迎页的配置，springboot又是如何自动配置的呢？<br>还是进入WebMvcAutoConfiguration.class这个类：<br><img src="https://img-blog.csdnimg.cn/2020031516032831.png" alt="在这里插入图片描述"><br>进入这个构造方法里边，<br><img src="https://img-blog.csdnimg.cn/20200315160407460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200315160433808.png" alt="在这里插入图片描述"><br>观察这个类的注释：支持静态资源和模板文件，但是更喜欢静态资源。</p>
-<p>也就是我们无论是吧index.html页面放到静态资源文件夹下，还是放在templates文件夹下都可以被访问到，但是如果两个路径下都包括index.html，那么优先加载静态资源下的index。</p>
-<h2 id="全面接管springmvc"><a href="#全面接管springmvc" class="headerlink" title="全面接管springmvc"></a>全面接管springmvc</h2><p>如何全面接管springmvc呢，我们只要在一个组件上面加上@EnableWebMvc注解就行。</p>
-<p>这样springboot为我们做的mvc自动配置全部都会失效，只会保留最初始的功能。<br>如下所示：<br><img src="https://img-blog.csdnimg.cn/20200315162509225.png" alt="在这里插入图片描述"><br>这样如果我们在访问webjars，比如：<a href="http://localhost:8080/webjars/jquery/3.3.1/jquery.js" target="_blank" rel="noopener">http://localhost:8080/webjars/jquery/3.3.1/jquery.js</a><br><img src="https://img-blog.csdnimg.cn/20200315162554334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就不能访问到了。</p>
-<p>为什么只要添加一个注解就不能访问到了呢？<br>可以进这个注解看一下：<br><img src="https://img-blog.csdnimg.cn/20200315162639603.png" alt="在这里插入图片描述"><br>这个注解很简单，就是向容器中导入了一个组件，那我们点进去看一下：<br><img src="https://img-blog.csdnimg.cn/20200315162724412.png" alt="在这里插入图片描述"><br>我们可以看到这个类继承了WrbConfigurationSupport这个类，再看看mvc的自动配置类：<br><img src="https://img-blog.csdnimg.cn/20200315162840580.png" alt="在这里插入图片描述"><br>mvc的自动配置类会判断在没有这个组件的情况下，才会生效</p>
-<p>也就是说我们使用了这个@EnableWebMvc注解，就会使springboot自动配置的mvc失效。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -1210,6 +1126,90 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">MySQL性能优化之索引优化分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-13 23:24:41 / 修改时间：23:30:59" itemprop="dateCreated datePublished" datetime="2019-11-13T23:24:41+08:00">2019-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>数据库中索引的重要性毋庸置疑，系统的性能下降可能包含很多原因，其中就包括SQL慢，执行时间长或者等待时间长，其原因包括查询语句写的烂、索引失效、关联太多join（设计缺陷或不得已的需求）、服务器调优及各个参数设置（缓冲\线程数等 ）等原因。其中很大的原因就是索引方面有待优化。<br>本篇文章围绕在开发过程中的索引优化展开描述。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/13/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%88%86%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1260,7 +1260,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1321,7 +1321,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">226k</span>
+    <span title="站点总字数">219k</span>
 </div>
 <span id="busuanzi_container_site_pv">
     本站总访问量<span id="busuanzi_value_site_pv"></span>次
