@@ -149,17 +149,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">39</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">37</span></a>
 
   </li>
   </ul>
@@ -184,87 +184,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/linux%E4%B8%AD%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Bfirewalld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/linux%E4%B8%AD%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8Bfirewalld/" class="post-title-link" itemprop="url">linux中的防火墙之firewalld</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:09" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>532</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>linux中有多种防火墙，centos7.0之前使用的是iptables，在7.0之后使用firewalld。下面我会介绍firewalld防火墙。</p>
-<h2 id="1、查看防火墙状态"><a href="#1、查看防火墙状态" class="headerlink" title="1、查看防火墙状态"></a>1、查看防火墙状态</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/2020042212381214.png" alt="在这里插入图片描述"></p>
-<h2 id="2、开启防火墙"><a href="#2、开启防火墙" class="headerlink" title="2、开启防火墙"></a>2、开启防火墙</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#<span class="meta"># systemctl start firewalld</span></span><br></pre></td></tr></table></figure>
-<h2 id="3、关闭防火墙"><a href="#3、关闭防火墙" class="headerlink" title="3、关闭防火墙"></a>3、关闭防火墙</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="4、重启防火墙"><a href="#4、重启防火墙" class="headerlink" title="4、重启防火墙"></a>4、重启防火墙</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="5、设置开机自启动"><a href="#5、设置开机自启动" class="headerlink" title="5、设置开机自启动"></a>5、设置开机自启动</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="6、关闭开机自启动"><a href="#6、关闭开机自启动" class="headerlink" title="6、关闭开机自启动"></a>6、关闭开机自启动</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="7、查看firewalld开放的端口号"><a href="#7、查看firewalld开放的端口号" class="headerlink" title="7、查看firewalld开放的端口号"></a>7、查看firewalld开放的端口号</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --<span class="built_in">list</span>-all</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200422124007767.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>或者使用</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --<span class="built_in">list</span>-ports</span><br></pre></td></tr></table></figure>
-<p>也可以查看开放的端口号：<br><img src="https://img-blog.csdnimg.cn/20200422124537581.png" alt="在这里插入图片描述"></p>
-<h2 id="8、开放端口号（开放端口号之后必须重启防火墙）"><a href="#8、开放端口号（开放端口号之后必须重启防火墙）" class="headerlink" title="8、开放端口号（开放端口号之后必须重启防火墙）"></a>8、开放端口号（开放端口号之后必须重启防火墙）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-port=<span class="number">80</span>/tcp --permanent</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200422124319852.png" alt="在这里插入图片描述"><br>其中–permanent代表永久开启改端口，如果不加这个参数，重启之后将失效。</p>
-<h2 id="9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）"><a href="#9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）" class="headerlink" title="9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）"></a>9、移除开放的端口号（该操作之后也需要重启防火墙才能生效）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --remove-port=<span class="number">80</span>/tcp --permanent</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200422124709714.png" alt="在这里插入图片描述"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -1154,6 +1073,94 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/04/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">线程池的五种状态详解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:08" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>线程池的5种状态：Running、ShutDown、Stop、Tidying、Terminated。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>最好的学习方式就是看源码，众所周知，创建线程池肯定会使用到ThreadPoolExecutor类，其中ThreadPoolExecutor的源码的注释不仅讲述了线程池的几种状态，还详细讲解了什么时候或者调用什么方法之后进行状态转换，如下：<br><img src="https://img-blog.csdnimg.cn/20200629115508356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200629115532740.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>接下来就按照我的理解讲解一下这几种状态以及状态之间如何切换。</p>
+<h1 id="1、RUNNING"><a href="#1、RUNNING" class="headerlink" title="1、RUNNING"></a>1、RUNNING</h1><blockquote>
+<p>状态说明：在RUNNING状态下，线程池可以接收新的任务和执行已添加的任务。</p>
+</blockquote>
+<p>线程池的初始化状态是RUNNING。换句话说，线程池被一旦被创建（比如调用Executors.newFixedThreadPool()或者使用ThreadPoolExecutor进行创建），就处于RUNNING状态，并且线程池中的任务数为0！线程池处在RUNNING状态时，能够接收新任务，以及对已添加的任务进行处理。 </p>
+<h1 id="2、-SHUTDOWN"><a href="#2、-SHUTDOWN" class="headerlink" title="2、 SHUTDOWN"></a>2、 SHUTDOWN</h1><blockquote>
+<p>状态说明：线程池处在SHUTDOWN状态时，不接收新任务，但能处理已添加的任务。 </p>
+</blockquote>
+<p>当一个线程池调用shutdown()方法时，线程池由RUNNING -&gt; SHUTDOWN。</p>
+<h1 id="3、STOP"><a href="#3、STOP" class="headerlink" title="3、STOP"></a>3、STOP</h1><blockquote>
+<p>状态说明：线程池处在STOP状态时，不接收新任务，不处理已添加的任务，并且会中断正在执行的任务。 </p>
+</blockquote>
+<p>调用线程池的shutdownNow()方法的时候，线程池由(RUNNING或者SHUTDOWN ) -&gt; STOP。</p>
+<h1 id="4、TIDYING"><a href="#4、TIDYING" class="headerlink" title="4、TIDYING"></a>4、TIDYING</h1><blockquote>
+<p>状态说明：当所有的任务已终止，记录的”任务数量”为0，线程池会变为TIDYING状态。当线程池变为TIDYING状态时，会执行钩子函数terminated()。</p>
+</blockquote>
+<p>terminated()方法在ThreadPoolExecutor类中是空的，没有任何实现。<br><img src="https://img-blog.csdnimg.cn/20200629151535122.png" alt="在这里插入图片描述"><br>若用户想在线程池变为TIDYING时，进行相应的处理；可以通过重写terminated()函数来实现。 当线程池在SHUTDOWN状态下，阻塞队列为空并且线程池中执行的任务也为空时，就会由 SHUTDOWN -&gt; TIDYING。 当线程池在STOP状态下，线程池中执行的任务为空时，会由STOP -&gt; TIDYING。</p>
+<h1 id="5、-TERMINATED"><a href="#5、-TERMINATED" class="headerlink" title="5、 TERMINATED"></a>5、 TERMINATED</h1><blockquote>
+<p>状态说明：当钩子函数terminated()被执行完成之后，线程池彻底终止，就变成TERMINATED状态。 </p>
+</blockquote>
+<p>线程池处在TIDYING状态时，执行完terminated()之后，就会由 TIDYING -&gt; TERMINATED。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>状态之间状态，和各个状态之间的的切换总结<br><img src="https://img-blog.csdnimg.cn/20200629150312492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="线程池各个状态切换框架图："></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1204,20 +1211,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1265,7 +1272,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">219k</span>
+    <span title="站点总字数">216k</span>
 </div>
 <span id="busuanzi_container_site_pv">
     本站总访问量<span id="busuanzi_value_site_pv"></span>次
