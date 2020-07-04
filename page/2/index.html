@@ -149,12 +149,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">17</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">25</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">17</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -184,785 +184,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">Springboot中对mvc进行扩展</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@[TOC]<br>声明：本篇文章所有的内容都是基于<strong><em>springboot2.2.5</em></strong>的。</p>
-<p>关于springboot对mvc的自动配置见我的另一篇博客：<a href="https://blog.csdn.net/qq_42013590/article/details/104879704" target="_blank" rel="noopener">https://blog.csdn.net/qq_42013590/article/details/104879704</a></p>
-<p>对于已经有的自动配置显然很多时候并不能满足我们的需求，那么我们如何实现对mvc的扩展呢？</p>
-<p><strong>观看其他博客结合看源码发现：<br>1）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置<br> 2）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（如：ViewResolver），sprngboot就会将用户配置的和自己默认的组合起来；<br> 3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置</strong></p>
-<h1 id="实现WebMvcConfigurer接口"><a href="#实现WebMvcConfigurer接口" class="headerlink" title="实现WebMvcConfigurer接口"></a>实现WebMvcConfigurer接口</h1><p>springboot官方对于mvc的扩展时，建议我们实现WebMvcConfigurer接口，并且要将该实现类加入到容器中。</p>
-<p>在以前比如 springboot1.x.x 的时候，我们可以继承WebMvcConfigurerAdapter这个抽象类来完成对mvc的扩展，但是这个类值·全部是对WebMvcConfigurer的空实现，远吗如下：<br><img src="https://img-blog.csdnimg.cn/20200319153243942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>对于在springboot 2.2.5版本已经废弃了这个类，idea中提示：<br><img src="https://img-blog.csdnimg.cn/20200319153343212.png" alt="在这里插入图片描述"><br>所以我们可以直接实现WebMvcConfigurer接口，反正WebMvcConfigurerAdapter也只是全部空实现。</p>
-<p>并且WebMvcConfigurer接口中的方法全是default方法（java8之后支持在接口中定义default和static方法），所以我们可以只重写我们需要重写的方法：<br><img src="https://img-blog.csdnimg.cn/20200319154607545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>我们可以复写这个接口中的default方法实现扩展，比如：<br><img src="https://img-blog.csdnimg.cn/20200319155144587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中编写的我自己的登录拦截器如下所示：<br><img src="https://img-blog.csdnimg.cn/2020031916020254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="将组件加入到容器中替代默认配置"><a href="#将组件加入到容器中替代默认配置" class="headerlink" title="将组件加入到容器中替代默认配置"></a>将组件加入到容器中替代默认配置</h2><p>比如国际化需要的组件LocaleResolver：<br><img src="https://img-blog.csdnimg.cn/20200319155750729.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以观察他的注解，只有<strong>容器中没有LocaleResolver这个组建的时候才帮我们自动配置</strong>，如果我们不想使用springboot的自动配置，我们可以写一个LocaleResolver并加入到容器中，这样默认的就会失效。</p>
-<p><strong>步骤一：编写一个自己的LocaleResolver</strong><br>这个解析器的功能就是从get方式的请求中获取参数，在进行国际化，如下：<br><img src="https://img-blog.csdnimg.cn/20200319160245164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>步骤二：将国际化解析器加入到容器中</strong><br><img src="https://img-blog.csdnimg.cn/20200319163117609.png" alt="在这里插入图片描述"><br>这样就会自动替代springboot帮我们默认实现的。</p>
-<h2 id="加入容器中一起生效"><a href="#加入容器中一起生效" class="headerlink" title="加入容器中一起生效"></a>加入容器中一起生效</h2><p>对于可以有多个生效的组件，我们只要将我们DIY的加入到容器中即可，例如ViewResolver，查看WebMvcAutoConfiguger：<br><img src="https://img-blog.csdnimg.cn/20200319162216134.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>源码也是非常的体贴，还帮我们写了注释，ContentNegotiatingViewResolver会使用所有其他的视图解析器去定位一个视图，所以他应该有一个高的优先级，也就是会先加载他，他去帮我们调用其他的视图解析器。，之后debug的时候也可以看到。</p>
-<p><strong>第一步：编写我自己ViewResolver：</strong><br><img src="https://img-blog.csdnimg.cn/20200319160952405.png" alt="在这里插入图片描述"><br> <strong>第二步：将自己编写的组件加入到容器中使之生效</strong><br><img src="https://img-blog.csdnimg.cn/20200319163742139.png" alt="在这里插入图片描述"><br><strong>第三步：debug查看我们的视图解析器是否生效</strong><br>DispaterServlet是web的入口，所有的请求都要经过它，其中的核心方法就是doService方法，doService()方法调用的是doDispater()方法，在这里设置一个断点，查看是否生效：<br><img src="https://img-blog.csdnimg.cn/20200319164053875.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200319164140114.png" alt="在这里插入图片描述"><br>可以观察到我们自己编写的ViewResolver已经加载进来了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">springboot中的日志框架</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.1k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="日志框架"><a href="#日志框架" class="headerlink" title="日志框架"></a>日志框架</h1><p>在项目的开发中，日志是必不可少的一个记录事件的组件，所以也会相应的在项目中实现和构建我们所需要的日志框架。</p>
-<p>而市面上常见的日志框架有很多，比如：JCL(Jakarta Commons Logging)、SLF4J、Jboss-logging、jUL(java.util.logging)、log4j、log4j2、logback等等，我们该如何选择呢？</p>
-<p>通常情况下，<strong><em>日志是由一个抽象层+实现层的组合来搭建的</em></strong>。<br><img src="https://img-blog.csdnimg.cn/20200314115440271.png" alt="在这里插入图片描述"><br>而SpringBoot机智的选择了SLF4J+Logback的组合，这个组合是当下比较合适的一组（log4j2其实很厉害，但是太厉害还不能很好地整合）。</p>
-<h1 id="SLF4J框架"><a href="#SLF4J框架" class="headerlink" title="SLF4J框架"></a>SLF4J框架</h1><p>SLF4J框架是一个常用的日志抽象层。<br>官网是最好的学习助手。<br>来到slf4j的官网的用户手册，我们可以在下边看到这张图：<br><img src="https://img-blog.csdnimg.cn/20200314115918774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>首先SLF4J是一个日志门面，我们如果使用需要再另外找到一个日志实现框架，比如log4j、logback、log4j2、jcl、jul等等。</p>
-<p>并且slf4j和log4j以及logback是同一个人写的，先有的log4j，但是作者觉得这个框架功能并不是很理想，并且在log4j的基础上进行改进的话改进要很大，所以作者干脆一不做二不休又编写了另一个框架，也就是大名鼎鼎的Logback。</p>
-<p>假如我们使用slf4j+logback，因为logback已经知道了slf4j的存在，所以可以完美搭配。但如果slf4j想要搭配其他框架的话，就要导入一个中间的过渡jar包，因为其他框架在编写之前并不知道slf4j的存在。</p>
-<p>各种框架的过渡jar包如下所示：<br><img src="https://img-blog.csdnimg.cn/20200314120555427.png" alt="在这里插入图片描述"><br>这些jar包，往上实现了slf4j，往下内部又调用了log4j，jcl或者jul等等的方法，所以称之为过渡包。</p>
-<p><strong>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，配置文件还是做成日志实现框架自己本身的配置文件</strong></p>
-<h1 id="遗留问题的解决"><a href="#遗留问题的解决" class="headerlink" title="遗留问题的解决"></a>遗留问题的解决</h1><p>在我们的项目中，可能同时使用到了许多框架，比如spring、mybatis、hibernate等等。但是这些框架底层使用到了许多不同的日志框架，比如spring的默认日志框架是commens-logging。</p>
-<p>不同的框架使用不同的日志框架，这样我们的项目看起来就像是一个日志的杂交系统。</p>
-<p><strong><em>那如何解决这种问题呢？</em></strong></p>
-<p>来看看slf4j的官网告诉我们如何使用吧：<br><img src="https://img-blog.csdnimg.cn/20200314121150178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>slf4j官网的指示很明显，就是再用的时候需要导入一个“偷天换日包”。</p>
-<p>因为如果直接将这些框架所依赖的日志框架jar包排除出去，系统肯定会报错。我们就要使用一个偷天换日包，偷梁换柱包，比如：<br><img src="https://img-blog.csdnimg.cn/20200314121345179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>拿spring举例子，因为spring必须使用commens-logging日志框架，而我们又想使用slf4j+logback的日志组合，那么我们必须要把commens-logging排除出去，但是怎么让系统不报错呢？</p>
-<p>我们使用这些偷天换日包的话，就像jcl-over-slf4j.jar。这个jar的名字很明显就是从JCL想slf4j转化，它内部包的包名，包括类名都和JCL的完全相同，但是这些类中的方法全部是调用的slf4j的方法进行实现，这样我们就可以完美实现slf4j+logback组合，并且令系统不报错。</p>
-<p>这样spring依旧使用JCL作为日志支持，但是他所使用的JCL已经不是原来的JCL了，原来的JCL已经被我们排除出去，使用的是我们导入的偷天换日包，这样就不会报错了。</p>
-<p><strong><em>统一日志记录的思路（SpringBoot实现统一日志记录为slf4j的做法）：</em></strong></p>
-<ol>
-<li>先排除掉其他日志框架</li>
-<li>然后用中间包来替换排除掉的日志框架</li>
-<li>最后再添加目标日志框架</li>
-</ol>
-<h2 id="springboot的日志解决方案"><a href="#springboot的日志解决方案" class="headerlink" title="springboot的日志解决方案"></a>springboot的日志解决方案</h2><p>springboot使用的是<strong><em>slf4j+logback</em></strong>的组合。</p>
-<p><strong><em>按照以前的想法：</em></strong><br>springboot的底层是spring，那么他必然依赖JCL，所以我们要先将原来的JCL排除出去，加入我们的偷天换日包。这个偷天换日包，包名和类名都是各种框架需要的包名和类名，以保证框架不会报错，但是底层实现都是通过slf4j的方法来实现的。这样就能实现slf4j+logback的组合了。</p>
-<p>但是在我使用springboot2.2.5版本的时候发现，框架组合并不是按照原来盗用原来日志框架的包名和类名来实现的，而是通过桥接方式实现，如下所示：<br><img src="https://img-blog.csdnimg.cn/20200314174107763.png" alt="在这里插入图片描述"><br>那么包名不是原来的包名的话，使用到jul的框架依旧会报错，点进这个类发现，虽然包名不是jul的包名，但是通过桥接模式依旧能让我们实现jul–&gt;slf4j的改变。</p>
-<p><strong>在springboot2.0之后：</strong></p>
-<p>在SpringBoot2.x版本的时候，上述的实现方式发生了一些改变，中间引入了”桥接”的概念，没有直接通过模拟类名实现，比如类：SLF4JBridgeHandler，但是其底层的实现方法都是类似的，都是通过排除原有依赖实现。</p>
-<p>比如springboot2.2.5，快速创建一个springboot的web项目，进入pom文件：<br><img src="https://img-blog.csdnimg.cn/20200314122224798.png" alt="在这里插入图片描述"><br>打开项目的依赖图：<br><img src="https://img-blog.csdnimg.cn/20200314122308975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们可以看到，jul-to-slf4j.jar和log4j-to-slf4j.jar等等这些jar包，这些包都是偷天换日包，内部调用的都是slf4j的方法但是包名和类名都不变，这样就可以很好地和slf4j整合在一起了。</p>
-<p>比如我们打开jul-to-slf4j.jar：<br><img src="https://img-blog.csdnimg.cn/20200314174107763.png" alt="在这里插入图片描述"><br>打开这个类，可以看到这个类的注释：<br><img src="https://img-blog.csdnimg.cn/2020031417483942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大概意思是：这个handler将会把JUL重定向（redirect）到slf4j，但是这个handler仅仅能将JUL桥接到slf4j。</p>
-<p>我觉得这种方式和原来的方式大同小异，都是排除原来依赖的日志jar包，然后导入一个过渡包，实现slf4j+JCL或者slf4j+JUL的整合。</p>
-<p><strong><em>SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可。</em></strong></p>
-<h1 id="日志的使用"><a href="#日志的使用" class="headerlink" title="日志的使用"></a>日志的使用</h1><h2 id="springboot日志配置"><a href="#springboot日志配置" class="headerlink" title="springboot日志配置"></a>springboot日志配置</h2><p>那我们在配置好日志之后，如何使用呢？<br>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line">@Test</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//日志的级别；</span></span><br><span class="line"><span class="comment">//由低到高 trace&lt;debug&lt;info&lt;warn&lt;error</span></span><br><span class="line"><span class="comment">//可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效</span></span><br><span class="line">logger.trace(<span class="string">"这是trace日志..."</span>);</span><br><span class="line">logger.debug(<span class="string">"这是debug日志..."</span>);</span><br><span class="line"><span class="comment">//SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别</span></span><br><span class="line">logger.info(<span class="string">"这是info日志..."</span>);</span><br><span class="line">logger.warn(<span class="string">"这是warn日志..."</span>);</span><br><span class="line">logger.error(<span class="string">"这是error日志..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到<br><img src="https://img-blog.csdnimg.cn/20200314182841210.png" alt="在这里插入图片描述"><br>输出只有info，warn和error级别。日志的默认级别是info（也就是root级别），只有info和高于info级别的日志才能输出。</p>
-<p>我们可以在配置文件application.properties中进行配置，如：<br><img src="https://img-blog.csdnimg.cn/2020031418311933.png" alt="在这里插入图片描述"><br>trace是最低级别，这样所有级别的日志信息都能输出出来。</p>
-<p>我们还可以配置哪些东西呢？<br>比如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">logging.level.com.atguigu=trace</span><br><span class="line">#logging.path=</span><br><span class="line"># 不指定路径在当前项目下生成springboot.<span class="built_in">log</span>日志</span><br><span class="line"># 可以指定完整的路径；</span><br><span class="line">#logging.file=G:/springboot.<span class="built_in">log</span></span><br><span class="line"># 在当前磁盘的根路径下创建spring文件夹和里面的<span class="built_in">log</span>文件夹；使用 spring.<span class="built_in">log</span> 作为默认文件</span><br><span class="line">logging.path=/spring/<span class="built_in">log</span></span><br><span class="line"># 在控制台输出的日志的格式</span><br><span class="line">logging.pattern.console=%d&#123;yyyy‐MM‐dd&#125; [%thread] %‐<span class="number">5l</span>evel %logger&#123;<span class="number">50</span>&#125; ‐ %msg%n</span><br><span class="line"># 指定文件中日志输出的格式</span><br><span class="line">logging.pattern.file=%d&#123;yyyy‐MM‐dd&#125; === [%thread] === %‐<span class="number">5l</span>evel === %logger&#123;<span class="number">50</span>&#125; ==== %msg%n</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20200314183341183.png" alt="在这里插入图片描述"><br>像这样配置到application.properties这样，如果这样的话也太low了，我们可以写一个logback的专门的配置文件，那么这个配置文件放到哪里呢？</p>
-<p>再次提到我觉得官网是最好的学习助手。</p>
-<p>来到spring官网没查看springboot2.2.5的使用手册，在logging一栏：<br><img src="https://img-blog.csdnimg.cn/2020031418590245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>所以我们可以把编写的logback.xml配置文件放到类路径的根目录下。这样springboot就可以自己帮我们加载进行配置了。</p>
-<p>还有在命名为logback.xml之外，还有一个logback-spring.xml，如果这样命名的话就可以使用spriingboot为我们提供的logback的额外功能，官网是这么说的如如下图所示：<img src="https://img-blog.csdnimg.cn/20200314191756666.png" alt="在这里插入图片描述"><br>点进去主要有两个扩展功能：<br><img src="https://img-blog.csdnimg.cn/20200314192323153.png" alt="在这里插入图片描述"><br>那为什么我们改个名字就可以使用springboot为我们提供的额外功能呢？<br><img src="https://img-blog.csdnimg.cn/20200314192521424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大概内容是这样的：因为标准的logback.xml文件会被日志框架过早的加载，所以你需要去使用logback-spring.xml或者定义一个logging.config。<br>这个拓展在logback的配置扫描下不能使用（logback-spring.xml会被spring扫描到），如果你非要这样使用，那么就会报这样一个错误。</p>
-<p><strong><em>额外特性1：profile配置</em></strong><br><img src="https://img-blog.csdnimg.cn/20200314193209483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大概意思就是，我们可以定义一个<springProfile></springProfile>标签，里边有个name属性，我们在name属性中指定这个配置在哪个profile中生效，在其他profile不会生效。如下所示：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;appender name=<span class="string">"stdout"</span> class=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span><br><span class="line">&lt;!‐‐</span><br><span class="line">日志输出格式：</span><br><span class="line">%d表示日期时间，</span><br><span class="line">%thread表示线程名，</span><br><span class="line">%‐<span class="number">5l</span>evel：级别从左显示<span class="number">5</span>个字符宽度</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; 表示logger名字最长<span class="number">50</span>个字符，否则按照句点分割。</span><br><span class="line">%msg：日志消息，</span><br><span class="line">%n是换行符</span><br><span class="line">‐‐&gt;</span><br><span class="line">&lt;layout class=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span><br><span class="line">&lt;springProfile name=<span class="string">"dev"</span>&gt;</span><br><span class="line">&lt;pattern&gt;%d&#123;yyyy‐MM‐dd HH:mm:ss.SSS&#125; ‐‐‐‐&gt; [%thread] ‐‐‐&gt; %‐<span class="number">5l</span>evel</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; ‐ %msg%n&lt;/pattern&gt;</span><br><span class="line">&lt;/springProfile&gt;</span><br><span class="line">&lt;springProfile name=<span class="string">"!dev"</span>&gt;</span><br><span class="line">&lt;pattern&gt;%d&#123;yyyy‐MM‐dd HH:mm:ss.SSS&#125; ==== [%thread] ==== %‐<span class="number">5l</span>evel</span><br><span class="line">%logger&#123;<span class="number">50</span>&#125; ‐ %msg%n&lt;/pattern&gt;</span><br><span class="line">&lt;/springProfile&gt;</span><br><span class="line">&lt;/layout&gt;</span><br><span class="line">&lt;/appender&gt;</span><br></pre></td></tr></table></figure>
-<p><strong><em>额外功能2：环境属性</em></strong><br><img src="https://img-blog.csdnimg.cn/20200314193807757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>可以使用<springProperty></springProperty>标签，这个标签可以允许我们从application.yml中获取值，而并不是直接设一个值scope属性为该值使用的范围，source是获取值得来源，并使用${}的方式获该值。<br>使用方法如下所示：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;springProperty scope=<span class="string">"context"</span> name=<span class="string">"fluentHost"</span> source=<span class="string">"myapp.fluentd.host"</span></span><br><span class="line">        defaultValue=<span class="string">"localhost"</span>/&gt;</span><br><span class="line">&lt;appender name=<span class="string">"FLUENT"</span> class=<span class="string">"ch.qos.logback.more.appenders.DataFluentAppender"</span>&gt;</span><br><span class="line">    &lt;remoteHost&gt;$&#123;fluentHost&#125;&lt;/remoteHost&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/appender&gt;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">springboot的MVC自动配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:11:14 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:11:14+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@[TOC]<br>springboot为我们提供了springmvc的自动配置，所以我们可以直接编写逻辑就能实现功能。（如下内容都是基于springboot2.2.5）</p>
-<p>比如万能的helloworld：<br><img src="https://img-blog.csdnimg.cn/20200315153747721.png" alt="在这里插入图片描述"><br>我们只要写一个controller就能自动映射到。</p>
-<p>访问localhost:8080/hello，如下<br><img src="https://img-blog.csdnimg.cn/20200315153841850.png" alt="在这里插入图片描述"><br>那么springboot是如何帮助我们自动配置的呢？</p>
-<h1 id="springboot对mvc的自动配置"><a href="#springboot对mvc的自动配置" class="headerlink" title="springboot对mvc的自动配置"></a>springboot对mvc的自动配置</h1><p>对于springmvc的自动配置全部在WebMvcAutoConfiguration.class类中。</p>
-<p>ctrl+n搜索类，进入：<br><img src="https://img-blog.csdnimg.cn/20200315154044100.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="对静态资源的自动配置"><a href="#对静态资源的自动配置" class="headerlink" title="对静态资源的自动配置"></a>对静态资源的自动配置</h2><p>看到如下关键方法：<br><img src="https://img-blog.csdnimg.cn/20200315154425747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="webjars"><a href="#webjars" class="headerlink" title="webjars"></a>webjars</h3><p>首先webjars是什么呢？<br>看官网的描述：<br><img src="https://img-blog.csdnimg.cn/20200315155118221.png" alt="在这里插入图片描述"><br>其实说白了，就是讲静态资源通过jar包的方式导入进来。</p>
-<p>那么我们看看springboot是如何配置webjars的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!registry.hasMappingForPattern(<span class="string">"/webjars/**"</span>)) &#123;</span><br><span class="line">	customizeResourceHandlerRegistration(registry.addResourceHandler(<span class="string">"/webjars/**"</span>)</span><br><span class="line">				.addResourceLocations(<span class="string">"classpath:/META-INF/resources/webjars/"</span>)</span><br><span class="line">				.setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
-<p>关于webjars，会自动帮我们添加一个映射。对于/webjars/**这样的资源回去类路径下的？META-INF/resources/webjars/路径下面去找。<br><img src="https://img-blog.csdnimg.cn/20200315154828716.png" alt="在这里插入图片描述">并且可以设置缓存时间，而缓存时间是从ResourceProperties下面去找的。<br><img src="https://img-blog.csdnimg.cn/20200315154919727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>关于ResourcesProperties我们可以从配置文件的spring.resources前缀的属性注入进来。</p>
-<p>这样在浏览器访问localhost:8080/webjars/<strong>这个路径就会通过根路径的respurces/webjars/</strong>这个路径来寻找。<br>比如：我们导入jquery的一个jar包：<br><img src="https://img-blog.csdnimg.cn/20200315155351961.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>只要导入进来，我们就可以通过访问localhost:8080/webjars/jquery/3.3.1/jquery.js来访问了，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20200315155507640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="静态资源的位置配置"><a href="#静态资源的位置配置" class="headerlink" title="静态资源的位置配置"></a>静态资源的位置配置</h3><p>那么我们编写的静态资源应该放到哪里才可以被访问到呢，比如下面的ilogin.html<br><img src="https://img-blog.csdnimg.cn/2020031515565130.png" alt="在这里插入图片描述"></p>
-<p>再来看springboot的自动配置：<br><img src="https://img-blog.csdnimg.cn/20200315155749234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那我们点进去看一下这是给我们配置到哪里去了呢？<br><img src="https://img-blog.csdnimg.cn/2020031515582611.png" alt="在这里插入图片描述"><br>经过一路跟踪，终于找到，springboot为我们自动配置的静态资源位置是如下几个：classpath:/MATA-INF/resources/、classpath:/resources/、classpath:/public/、classpath:/static/这几个位置，无论我们把静态资源放到这几个的哪一个都可以访问到：<br><img src="https://img-blog.csdnimg.cn/20200315160111167.png" alt="在这里插入图片描述"><br>通过测试abcd四个html都能被访问到。</p>
-<h2 id="欢迎页的配置"><a href="#欢迎页的配置" class="headerlink" title="欢迎页的配置"></a>欢迎页的配置</h2><p>对于欢迎页的配置，springboot又是如何自动配置的呢？<br>还是进入WebMvcAutoConfiguration.class这个类：<br><img src="https://img-blog.csdnimg.cn/2020031516032831.png" alt="在这里插入图片描述"><br>进入这个构造方法里边，<br><img src="https://img-blog.csdnimg.cn/20200315160407460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200315160433808.png" alt="在这里插入图片描述"><br>观察这个类的注释：支持静态资源和模板文件，但是更喜欢静态资源。</p>
-<p>也就是我们无论是吧index.html页面放到静态资源文件夹下，还是放在templates文件夹下都可以被访问到，但是如果两个路径下都包括index.html，那么优先加载静态资源下的index。</p>
-<h2 id="全面接管springmvc"><a href="#全面接管springmvc" class="headerlink" title="全面接管springmvc"></a>全面接管springmvc</h2><p>如何全面接管springmvc呢，我们只要在一个组件上面加上@EnableWebMvc注解就行。</p>
-<p>这样springboot为我们做的mvc自动配置全部都会失效，只会保留最初始的功能。<br>如下所示：<br><img src="https://img-blog.csdnimg.cn/20200315162509225.png" alt="在这里插入图片描述"><br>这样如果我们在访问webjars，比如：<a href="http://localhost:8080/webjars/jquery/3.3.1/jquery.js" target="_blank" rel="noopener">http://localhost:8080/webjars/jquery/3.3.1/jquery.js</a><br><img src="https://img-blog.csdnimg.cn/20200315162554334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就不能访问到了。</p>
-<p>为什么只要添加一个注解就不能访问到了呢？<br>可以进这个注解看一下：<br><img src="https://img-blog.csdnimg.cn/20200315162639603.png" alt="在这里插入图片描述"><br>这个注解很简单，就是向容器中导入了一个组件，那我们点进去看一下：<br><img src="https://img-blog.csdnimg.cn/20200315162724412.png" alt="在这里插入图片描述"><br>我们可以看到这个类继承了WrbConfigurationSupport这个类，再看看mvc的自动配置类：<br><img src="https://img-blog.csdnimg.cn/20200315162840580.png" alt="在这里插入图片描述"><br>mvc的自动配置类会判断在没有这个组件的情况下，才会生效</p>
-<p>也就是说我们使用了这个@EnableWebMvc注解，就会使springboot自动配置的mvc失效。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/" class="post-title-link" itemprop="url">docke学习内容之二</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:10:15 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:10:15+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.1k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="docker镜像"><a href="#docker镜像" class="headerlink" title="docker镜像"></a>docker镜像</h1><p>镜像是一种轻量级、可执行的独立软件包，<strong>用来打包软件运行环境和基于运行环境开发的软件</strong>，它包含运行某个软件所需的所有内容，包括代码、运行时、库、环境变量和配置文件。</p>
-<h2 id="UnionFS"><a href="#UnionFS" class="headerlink" title="UnionFS"></a>UnionFS</h2><p>UnionFS（联合文件系统）：Union文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像。</p>
-<h2 id="docker镜像加载原理"><a href="#docker镜像加载原理" class="headerlink" title="docker镜像加载原理"></a>docker镜像加载原理</h2><p>docker的镜像实际上由一层一层的文件系统组成，这种层级的文件系统是UnionFS。</p>
-<p>bootfs(boot file system)主要包含bootloader和kernel, bootloader主要是引导加载kernel， Linux刚启动时会加载bootfs文件系统，<strong>在Docker镜像的最底层是bootfs</strong>。这一层与我们典型的Linux/Unix系统是一样的，包含boot加载器和内核。当boot加载完成之后整个内核就都在内存中了，此时内存的使用权已由bootfs转交给内核，此时系统也会卸载bootfs。</p>
-<p>rootfs (root file system) ，在bootfs之上。包含的就是典型 Linux 系统中的 /dev, /proc, /bin, /etc 等标准目录和文件。rootfs就是各种不同的操作系统发行版，比如Ubuntu，Centos等等。<br><img src="https://img-blog.csdnimg.cn/202001062159462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> <strong>平时我们安装进虚拟机的CentOS都是好几个G，为什么docker这里才200M？？</strong><br><img src="https://img-blog.csdnimg.cn/20200106220000303.png" alt="在这里插入图片描述"><br>对于一个精简的OS，rootfs可以很小，只需要包括最基本的命令、工具和程序库就可以了，因为底层直接用Host的kernel，自己只需要提供 rootfs 就行了。由此可见对于不同的linux发行版, bootfs基本是一致的, rootfs会有差别, 因此不同的发行版可以公用bootfs。</p>
-<h2 id="分层的镜像"><a href="#分层的镜像" class="headerlink" title="分层的镜像"></a>分层的镜像</h2><p>以我们的pull为例，在下载的过程中我们可以看到docker的镜像好像是在一层一层的在下载。<br><img src="https://img-blog.csdnimg.cn/2020010622011221.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>为什么docker镜像要采用这种分层的结构呢？</strong><br>最大的一个好处就是 - <strong>共享资源</strong>。<br>比如：有多个镜像都从相同的 base 镜像构建而来，那么宿主机只需在磁盘上保存一份base镜像，<br>同时内存中也只需加载一份 base 镜像，就可以为所有容器服务了。而且镜像的每一层都可以被共享。</p>
-<h2 id="镜像的特点"><a href="#镜像的特点" class="headerlink" title="镜像的特点"></a>镜像的特点</h2><p>docker镜像都是只读的。<br>当容器启动时，一个新的可写层被加载到镜像的顶部。<br>这一层通常称做“容器层”，“容器层”之下的都叫“镜像层”。</p>
-<h2 id="docker镜像commit操作补充"><a href="#docker镜像commit操作补充" class="headerlink" title="docker镜像commit操作补充"></a>docker镜像commit操作补充</h2><p>docker commit是提交容器副本使之成为一个新的镜像。<br><strong>命令：docker commit -m=“提交的描述信息” -a=“作者” 容器ID 要创建的目标镜像名:标签名</strong></p>
-<p><strong>案例演示：</strong><br>1、从Hub上下载tomcat镜像到本地并运行：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull tomcat</span><br><span class="line">docker run -it -p <span class="number">8888</span>:<span class="number">8080</span> --name mytomcat tomcat</span><br></pre></td></tr></table></figure>
-<p>其中：-p：主机端口：docker端口；-i：交互；-t：终端。<br><img src="https://img-blog.csdnimg.cn/2020010622095457.png" alt="在这里插入图片描述"><br>启动成功后再本地访问8888端口就可以访问到那只cat了。<br><img src="https://img-blog.csdnimg.cn/20200106221311754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2、故意删除上一步镜像产生tomcat容器的文档使此容器成为我自己的tomcat容器<br><img src="https://img-blog.csdnimg.cn/20200106221603606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3、将删除doc文档的容器作为一个模板提交到仓库<img src="https://img-blog.csdnimg.cn/20200106221628128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这样我们就剩成了一个属于自己的镜像文件并提交到了仓库中。</p>
-<h1 id="docker容器数据卷"><a href="#docker容器数据卷" class="headerlink" title="docker容器数据卷"></a>docker容器数据卷</h1><p>先来看看Docker的理念：</p>
-<ul>
-<li>将应用与运行的环境打包形成容器运行 ，运行可以伴随着容器，但是我们对数据的要求希望是持久化的</li>
-<li>容器之间希望有可能共享数据</li>
-</ul>
-<p>Docker容器产生的数据，如果不通过docker commit生成新的镜像，使得数据做为镜像的一部分保存下来，<br>那么当容器删除后，数据自然也就没有了。</p>
-<p>为了能保存docker中的数据我们使用卷，有点类似redis中的RDB(Redis database)和AOF(append only file)持久化。</p>
-<p>卷就是目录或文件，存在于一个或多个容器中，由docker挂载到容器，但不属于联合文件系统，因此能够绕过Union File System提供一些用于持续存储或共享数据的特性：</p>
-<p>卷的设计目的就是数据的持久化，完全独立于容器的生存周期，因此Docker不会在容器删除时删除其挂载的数据卷</p>
-<p>特点：<br>1：数据卷可在容器之间共享或重用数据<br>2：卷中的更改可以直接生效<br>3：数据卷中的更改不会包含在镜像的更新中<br>4：数据卷的生命周期一直持续到没有容器使用它为止</p>
-<h2 id="容器内添加数据卷的两种方式"><a href="#容器内添加数据卷的两种方式" class="headerlink" title="容器内添加数据卷的两种方式"></a>容器内添加数据卷的两种方式</h2><h3 id="使用命令添加"><a href="#使用命令添加" class="headerlink" title="使用命令添加"></a>使用命令添加</h3><p><strong>docker run -it -v /宿主机绝对路径目录:/容器内目录 centos /bin/bash</strong><br><img src="https://img-blog.csdnimg.cn/20200106222147346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后在其中一方的目录中进行修改，另一方都可以看到，即实现了数据共享和持久化。<br><img src="https://img-blog.csdnimg.cn/20200106222401460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>注：在容器停止退出之后，主机修改数据是否同步？<br>答：在容器重新启动之后依旧会同步。<br><img src="https://img-blog.csdnimg.cn/20200106222508707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>命令中可带权限，如<strong>docker run -it -v /宿主机绝对路径:/容器内目录:ro 镜像名</strong><br>其中：ro代表read only(只读)<br><img src="https://img-blog.csdnimg.cn/20200106222637273.png" alt="在这里插入图片描述"></p>
-<h3 id="使用Docker-File添加"><a href="#使用Docker-File添加" class="headerlink" title="使用Docker File添加"></a>使用Docker File添加</h3><p><strong>步骤：</strong><br><strong>1、根目录下创建/mydocker并进入；</strong><br><strong>2、编写Dockerfile文件；</strong><br>创建Dockerfile文件，并在Dockerfile中使用VOLUME指令来给镜像添加一个或多个数据卷。<br><img src="https://img-blog.csdnimg.cn/20200106223323252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> <strong>说明：</strong><br>出于可移植和分享的考虑，用-v 主机目录:容器目录这种方法不能够直接在Dockerfile中实现。由于宿主机目录是依赖于特定宿主机的，并不能够保证在所有的宿主机上都存在这样的特定目录。<br><strong>3、build生成镜像；</strong><br><img src="https://img-blog.csdnimg.cn/20200106223348838.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其中-f代表file，指定Dockerfile的位置，若不使用-f选项，那么默认的文件是本目录的“Dockerfile”文件。<br>这样就生成了一个新的镜像zzyy/centos。<br><strong>4、run容器</strong><br><img src="https://img-blog.csdnimg.cn/20200106223427321.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过上述方法，容器中的卷目录地址已经知道，那么主机中对应的主机目录地址在哪里？<br><img src="https://img-blog.csdnimg.cn/20200106223516621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200106223825568.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200106223838557.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>注：</strong><br>Docker挂载主机目录Docker访问出现cannot open directory .: Permission denied<br>解决办法：在挂载目录后多加一个–privileged=true参数即可</p>
-<h2 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h2><p>命名的容器挂载数据卷，其它容器通过挂载这个(父容器)实现数据共享，挂载数据卷的容器，称之为<strong>数据卷容器</strong>。</p>
-<p>以上一步新建的zzyy/centos为模板，创建并运行容器dc01、dc02、dc03，那么他们已经有容器卷/dataVolumeContainer1和/dataVolumeContainer2了。</p>
-<p><strong>容器中的传递共享：</strong></p>
-<p><strong>1、先启动一个父容器dc01，并且在/dataVolumeContainer2内新增内容</strong><br><img src="https://img-blog.csdnimg.cn/2020010622420771.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>2、dc02和dc03继承自dc01，并且dc02和dc03也在/dataVolumeContainer2新增内容。</strong><br><img src="https://img-blog.csdnimg.cn/20200106224333497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>3、回到dc01可以看到02和03各自添加的内容了，证明数据可以共享。</strong></p>
-<p><strong>问题1：删除dc01，并修改dc02之后dc03可否看到？</strong><br>答：可以！<br><img src="https://img-blog.csdnimg.cn/20200106224617612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>问题2：删除dc02后dc03可否访问？</strong><br><img src="https://img-blog.csdnimg.cn/20200106224919738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200106224942109.png" alt="在这里插入图片描述"><br><strong>结论：<br>容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止。</strong></p>
-<h1 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h1><p>Dockerfile是用来构建docker镜像的构建文件，是有一系列命令和参数构成的脚本。</p>
-<p>构建的步骤：<br>1、编写Dockerfile文件；<br>2、docker build；<br>3、docker run。</p>
-<h2 id="Dockerfile构建过程解析"><a href="#Dockerfile构建过程解析" class="headerlink" title="Dockerfile构建过程解析"></a>Dockerfile构建过程解析</h2><h3 id="Dockerfile内容基础知识："><a href="#Dockerfile内容基础知识：" class="headerlink" title="Dockerfile内容基础知识："></a>Dockerfile内容基础知识：</h3><p><img src="https://img-blog.csdnimg.cn/20200107110856372.png" alt="1、"></p>
-<h3 id="docker执行Dockerfile的大致流程"><a href="#docker执行Dockerfile的大致流程" class="headerlink" title="docker执行Dockerfile的大致流程"></a>docker执行Dockerfile的大致流程</h3><p><img src="https://img-blog.csdnimg.cn/20200107111108848.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><p>从应用软件的角度来看，Dockerfile、Docker镜像与Docker容器分别代表软件的三个不同阶段，</p>
-<ul>
-<li>Dockerfile是软件的原材料</li>
-<li>Docker镜像是软件的交付品</li>
-<li>Docker容器则可以认为是软件的运行态。<br>Dockerfile面向开发，Docker镜像成为交付标准，Docker容器则涉及部署与运维，三者缺一不可，合力充当Docker体系的基石。<br><img src="https://img-blog.csdnimg.cn/20200107111238124.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>1 Dockerfile，需要定义一个Dockerfile，Dockerfile定义了进程需要的一切东西。Dockerfile涉及的内容包括执行代码或者是文件、环境变量、依赖包、运行时环境、动态链接库、操作系统的发行版、服务进程和内核进程(当应用进程需要和系统服务和内核进程打交道，这时需要考虑如何设计namespace的权限控制)等等;</li>
-</ul>
-<p>2 Docker镜像，在用Dockerfile定义一个文件之后，docker build时会产生一个Docker镜像，当运行 Docker镜像时，会真正开始提供服务;</p>
-<p>3 Docker容器，容器是直接提供服务的。</p>
-<h2 id="Dockerfile的体系结构（保留字指令）"><a href="#Dockerfile的体系结构（保留字指令）" class="headerlink" title="Dockerfile的体系结构（保留字指令）"></a>Dockerfile的体系结构（保留字指令）<img src="https://img-blog.csdnimg.cn/20200107111508611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></h2><p><strong>CMD和ENTRYPOINT镜像案例</strong>：<br>两者都是指定容器启东市要运行的命令。<br>1、Dockerfile中可以有多个CMD命令，但是只有最后一个生效，CMD会被docker run之后的参数替换掉，如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -p <span class="number">8888</span>:<span class="number">8080</span> tomcat /bash/shell</span><br></pre></td></tr></table></figure>
-<p>2、而ENTRYPOINT会将docker run之后的参数追加到ENTRYPOINT后面。比如若在Dockerfile中是：<code>ENTRYPOINT [ &quot;ls&quot;, &quot;-l&quot; ]</code>，运行指令是：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -p <span class="number">8888</span>:<span class="number">8080</span> tomcat -a</span><br></pre></td></tr></table></figure>
-<p>那么最后的ENTRYPOINT运行结果为ENTRYPOINT [ “ls”, “-l”,”-a” ]即进行追加。</p>
-<p><strong>ONBUILD指令案例</strong>：<br><img src="https://img-blog.csdnimg.cn/20200107111700649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="案例：自定义tomcat镜像"><a href="#案例：自定义tomcat镜像" class="headerlink" title="案例：自定义tomcat镜像"></a>案例：自定义tomcat镜像</h2><p>Docker Hub中99%的镜像都是通过base镜像（scratch）中安装和配置需要的软件构建出来的。如：<br><img src="https://img-blog.csdnimg.cn/20200107111849313.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>1、创建目录</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mydocker/dockerfile/tomcat9</span><br></pre></td></tr></table></figure>
-<p><strong>2、在上述目录下 touch c.txt<br>3、将jdk和tomcat安装的压缩包靠近上一步的目录中</strong><br><img src="https://img-blog.csdnimg.cn/20200107113222243.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2020010711323214.png" alt="在这里插入图片描述"><br><strong>4、在上一步目录中新建Dockerfile文件</strong>，内容为：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">FROM         centos</span><br><span class="line">MAINTAINER    xyy&lt;<span class="number">1274268227</span>@qq.com&gt;</span><br><span class="line">#把宿主机当前上下文的c.txt拷贝到容器/usr/local/路径下</span><br><span class="line">COPY c.txt /usr/local/cincontainer.txt</span><br><span class="line">#把java与tomcat添加到容器中</span><br><span class="line">ADD jdk<span class="number">-8u</span>171-linux-x64.tar.gz /usr/local/</span><br><span class="line">ADD apache-tomcat<span class="number">-9.0</span><span class="number">.8</span>.tar.gz /usr/local/</span><br><span class="line">#安装vim编辑器</span><br><span class="line">RUN yum -y install vim</span><br><span class="line">#设置工作访问时候的WORKDIR路径，登录落脚点</span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line">#配置java与tomcat环境变量</span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1<span class="number">.8</span><span class="number">.0</span>_171</span><br><span class="line">ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">ENV CATALINA_HOME /usr/local/apache-tomcat<span class="number">-9.0</span><span class="number">.8</span></span><br><span class="line">ENV CATALINA_BASE /usr/local/apache-tomcat<span class="number">-9.0</span><span class="number">.8</span></span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin</span><br><span class="line">#容器运行时监听的端口</span><br><span class="line">EXPOSE  <span class="number">8080</span></span><br><span class="line">#启动时运行tomcat</span><br><span class="line"># ENTRYPOINT [<span class="string">"/usr/local/apache-tomcat-9.0.8/bin/startup.sh"</span> ]</span><br><span class="line"># CMD [<span class="string">"/usr/local/apache-tomcat-9.0.8/bin/catalina.sh"</span>,<span class="string">"run"</span>]</span><br><span class="line">CMD /usr/local/apache-tomcat<span class="number">-9.0</span><span class="number">.8</span>/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat<span class="number">-9.0</span><span class="number">.8</span>/bin/logs/catalina.out</span><br></pre></td></tr></table></figure>
-<p>5、docker build构建镜像文件<br>6、docker run创建并运行容器<br>7、访问本地端口，查看能否访问到那只猫</p>
-<h2 id="小总结-1"><a href="#小总结-1" class="headerlink" title="小总结"></a>小总结</h2><p><img src="https://img-blog.csdnimg.cn/20200107113609376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/docker%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%B8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/docker%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%B8%80/" class="post-title-link" itemprop="url">docker学习内容之一</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:10:15 / 修改时间：20:08:10" itemprop="dateCreated datePublished" datetime="2020-07-04T20:10:15+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.3k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="docker简介"><a href="#docker简介" class="headerlink" title="docker简介"></a>docker简介</h1><h2 id="为什么会有docker出现"><a href="#为什么会有docker出现" class="headerlink" title="为什么会有docker出现"></a>为什么会有docker出现</h2><p>一款产品从开发到上线，从操作系统，到运行环境，再到应用配置。作为开发+运维之间的协作我们需要关心很多东西，这也是很多互联网公司都不得不面对的问题，特别是各种版本的迭代之后，不同版本环境的兼容，对运维人员都是考验。</p>
-<p>Docker之所以发展如此迅速，也是因为它对此给出了一个标准化的解决方案。</p>
-<p>环境配置如此麻烦，换一台机器，就要重来一次，费力费时。很多人想到，能不能从根本上解决问题，<strong>软件可以带环境安装？</strong>也就是说，<strong>安装的时候，把原始环境一模一样地复制过来。开发人员利用 Docker 可以消除协作编码时“在我的机器上可正常工作”的问题</strong>。<br><img src="https://img-blog.csdnimg.cn/2020010619251885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>之前在服务器配置一个应用的运行环境，要安装各种软件，就拿我做过的的电商项目的环境来说吧，Java/Tomcat/MySQL/JDBC驱动包等。安装和配置这些东西有多麻烦就不说了，它还不能跨平台。假如我们是在 Windows 上安装的这些环境，到了 Linux 又得重新装。况且就算不跨操作系统，换另一台同样操作系统的服务器，要移植应用也是非常麻烦的。</p>
-<p>传统上认为，软件编码开发/测试结束后，所产出的成果即是程序或是能够编译执行的二进制字节码等(java为例)。而为了让这些程序可以顺利执行，开发团队也得准备完整的部署文件，让维运团队得以部署应用程式，<strong>开发需要清楚的告诉运维部署团队，用的全部配置文件+所有软件环境。不过，即便如此，仍然常常发生部署失败的状况。Docker镜像的设计，使得Docker得以打破过去「程序即应用」的观念。透过镜像(images)将作业系统核心除外，运作应用程式所需要的系统环境，由下而上打包，达到应用程式跨平台间的无缝接轨运作。</strong></p>
-<h2 id="关于docker"><a href="#关于docker" class="headerlink" title="关于docker"></a>关于docker</h2><p>Docker是基于Go语言实现的云开源项目。</p>
-<p>Docker的主要目标是“Build，Ship and Run Any App,Anywhere”，也就是通过对应用组件的封装、分发、部署、运行等生命周期的管理，使用户的APP（可以是一个WEB应用或数据库应用等等）及其运行环境能够做到<strong>“一次封装，到处运行</strong>”。<br><img src="https://img-blog.csdnimg.cn/20200106192641662.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Linux 容器技术的出现就解决了这样一个问题，而 Docker 就是在它的基础上发展过来的。将应用运行在 Docker 容器上面，而 Docker 容器在任何操作系统上都是一致的，这就实现了跨平台、跨服务器。<strong>只需要一次配置好环境，换到别的机子上就可以一键部署好，大大简化了操作。</strong></p>
-<h2 id="容器虚拟化技术与虚拟机技术"><a href="#容器虚拟化技术与虚拟机技术" class="headerlink" title="容器虚拟化技术与虚拟机技术"></a>容器虚拟化技术与虚拟机技术</h2><h3 id="虚拟机技术"><a href="#虚拟机技术" class="headerlink" title="虚拟机技术"></a>虚拟机技术</h3><p>虚拟机（virtual machine）就是带环境安装的一种解决方案。<br>它可以在一种操作系统里面运行另一种操作系统，比如在Windows 系统里面运行Linux 系统。应用程序对此毫无感知，因为虚拟机看上去跟真实系统一模一样，而对于底层系统来说，虚拟机就是一个普通文件，不需要了就删掉，对其他部分毫无影响。这类虚拟机完美的运行了另一套系统，能够使应用程序，操作系统和硬件三者之间的逻辑不变。<br><img src="https://img-blog.csdnimg.cn/20200106192853747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>虚拟机的缺点：</strong><br>        1    资源占用多               2    冗余步骤多                 3    启动慢</p>
-<h3 id="容器虚拟化技术"><a href="#容器虚拟化技术" class="headerlink" title="容器虚拟化技术"></a>容器虚拟化技术</h3><p>由于前面虚拟机存在这些缺点，Linux 发展出了另一种虚拟化技术：Linux 容器（Linux Containers，缩写为 LXC）。</p>
-<p><strong>Linux 容器不是模拟一个完整的操作系统</strong>，而是对进程进行隔离。有了容器，就可以将软件运行所需的所有资源打包到一个隔离的容器中。容器与虚拟机不同，不需要捆绑一整套操作系统，只需要软件工作所需的库资源和设置。系统因此而变得高效轻量并保证部署在任何环境中的软件都能始终如一地运行。<br><img src="https://img-blog.csdnimg.cn/20200106193143427.png" alt="在这里插入图片描述"><br><strong>比较了 Docker 和传统虚拟化方式的不同之处：</strong><br>1、传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；<br>2、而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。<br>3、每个容器之间互相隔离，每个容器有自己的文件系统 ，容器之间进程不会相互影响，能区分计算资源。</p>
-<h3 id="为什么docker比虚拟机快"><a href="#为什么docker比虚拟机快" class="headerlink" title="为什么docker比虚拟机快"></a>为什么docker比虚拟机快</h3><p>(1)docker有着比虚拟机更少的抽象层。由亍docker不需要Hypervisor实现硬件资源虚拟化,运行在docker容器上的程序直接使用的都是实际物理机的硬件资源。因此在CPU、内存利用率上docker将会在效率上有明显优势。<br>(2)docker利用的是宿主机的内核,而不需要Guest OS。因此,当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统内核。仍而避免引寻、加载操作系统内核返个比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载Guest OS,返个新建过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了返个过程,因此新建一个docker容器只需要几秒钟。<br><img src="https://img-blog.csdnimg.cn/202001062029425.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200106202953816.png" alt="在这里插入图片描述"></p>
-<h2 id="docker的优势"><a href="#docker的优势" class="headerlink" title="docker的优势"></a>docker的优势</h2><p><strong>1、更快速的应用交付和部署</strong><br>传统的应用开发完成后，需要提供一堆安装程序和配置说明文档，安装部署后需根据配置文档进行繁杂的配置才能正常运行。Docker化之后只需要交付少量容器镜像文件，在正式生产环境加载镜像并运行即可，应用安装配置在镜像里已经内置好，大大节省部署配置和测试验证时间。<br><strong>2、更便捷的升级和扩缩容</strong><br>随着微服务架构和Docker的发展，大量的应用会通过微服务方式架构，应用的开发构建将变成搭乐高积木一样，每个Docker容器将变成一块“积木”，应用的升级将变得非常容易。当现有的容器不足以支撑业务处理时，可通过镜像运行新的容器进行快速扩容，使应用系统的扩容从原先的天级变成分钟级甚至秒级。<br><strong>3、更简单的系统运维</strong><br>应用容器化运行后，生产环境运行的应用可与开发、测试环境的应用高度一致，容器会将应用程序相关的环境和状态完全封装起来，不会因为底层基础架构和操作系统的不一致性给应用带来影响，产生新的BUG。当出现程序异常时，也可以通过测试环境的相同容器进行快速定位和修复。<br><strong>4、更高效的计算资源利用</strong><br>Docker是内核级虚拟化，其不像传统的虚拟化技术一样需要额外的Hypervisor支持，所以在一台物理机上可以运行很多个容器实例，可大大提升物理服务器的CPU和内存的利用率。</p>
-<h2 id="docker的三大基本组成"><a href="#docker的三大基本组成" class="headerlink" title="docker的三大基本组成"></a>docker的三大基本组成</h2><p>docker的整体架构图如下所示：<br><img src="https://img-blog.csdnimg.cn/20200106195139668.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>1、镜像（image）</strong>：Docker 镜像（Image）就是一个<strong>只读</strong>的模板。镜像可以用来创建 Docker 容器，<strong>一个镜像可以创建很多容器</strong>。（镜像和容器我觉得和java中的类和对象相似，类就是创建对象的模板，并且一个类可以创建多个对象。）<br><strong>2、容器（container）</strong>：Docker 利用容器（Container）独立运行的一个或一组应用。<strong>容器是用镜像创建的运行实例。</strong></p>
-<p>它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。</p>
-<p><strong>可以把容器看做是一个简易版的 Linux 环境</strong>（包括root用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。</p>
-<p>容器的定义和镜像几乎一模一样，也是一堆层的统一视角，唯一区别在于容器的最上面那一层是可读可写的。<br><strong>3、仓库（repository）</strong>：仓库（Repository）是集中存放镜像文件的场所。</p>
-<p>仓库(Repository)和仓库注册服务器（Registry）是有区别的。仓库注册服务器上往往存放着多个仓库，每个仓库中又包含了多个镜像，每个镜像有不同的标签（tag）。</p>
-<p>仓库分为公开仓库（Public）和私有仓库（Private）两种形式。最大的公开仓库是 Docker Hub(<a href="https://hub.docker.com/)，存放了数量庞大的镜像供用户下载。国内的公开仓库包括阿里云" target="_blank" rel="noopener">https://hub.docker.com/)，存放了数量庞大的镜像供用户下载。国内的公开仓库包括阿里云</a> 、网易云 等。</p>
-<p><strong>总结：</strong><br>我们需要正确的理解仓储/镜像/容器这几个概念。Docker 本身是一个容器运行载体或称之为管理引擎。我们把应用程序和配置依赖打包好形成一个可交付的运行环境，这个打包好的运行环境就似乎 image镜像文件。只有通过这个镜像文件才能生成 Docker 容器。image 文件可以看作是容器的模板。Docker 根据 image 文件生成容器的实例。同一个 image 文件，可以生成多个同时运行的容器实例。</p>
-<p>image 文件生成的容器实例，本身也是一个文件，称为镜像文件。 一个容器运行一种服务，当我们需要的时候，就可以通过docker客户端创建一个对应的运行实例，也就是我们的容器。至于仓储，就是放了一堆镜像的地方，我们可以把镜像发布到仓储中，需要的时候从仓储中拉下来就可以了。</p>
-<h1 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h1><p>Docker支持以下的CentOS版本：CentOS 7 (64-bit)，CentOS 6.5 (64-bit) 或更高的版本。</p>
-<p>目前，CentOS 仅发行版本中的内核支持 Docker。<br>Docker 运行在 CentOS 7 上，要求系统为64位、系统内核版本为 3.10 以上。<br>Docker 运行在 CentOS-6.5 或更高的版本的 CentOS 上，要求系统为64位、系统内核版本为 2.6.32-431 或者更高版本。</p>
-<p><strong>如何查看自己的内核：</strong><br>uname命令用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）。<br><img src="https://img-blog.csdnimg.cn/20200106194238941.png" alt="在这里插入图片描述"><br><strong>查看已安装的CentOS版本信息（CentOS6.8有，CentOS7无该命令）：</strong><br><img src="https://img-blog.csdnimg.cn/20200106194327871.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20200106194330561.png" alt="在这里插入图片描述"></p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>可以去docker的官网下载安装包：<a href="http://www.docker.com" target="_blank" rel="noopener">http://www.docker.com</a><br>docker的仓库：<a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>centos 6和centos 7的安装步骤略有不同，我是centos 7.3，所以是centos 7的安装教程。<br>1、安装gcc</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
-<p>2、如果原来安装过docker，需要卸载掉旧版本</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br></pre></td></tr></table></figure>
-<p>3、安装需要的软件包</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-<p>4、设置stable镜像仓库</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http:<span class="comment">//mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span></span><br></pre></td></tr></table></figure>
-<p>5、更新yum软件包索引</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-<p>6、安装DOCKER CE</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce</span><br></pre></td></tr></table></figure>
-<p>7、启动docker</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-<p>8、测试</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
-<p>9、去阿里云配置镜像加速<br>阿里云官网的容器镜像服务栏中找到镜像加速器，根据提示设置即可：<br><img src="https://img-blog.csdnimg.cn/20200106202449834.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>10、卸载</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syatemctl stop docker</span><br><span class="line">yum -y remove docker-ce</span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
-<h1 id="docker的常用命令"><a href="#docker的常用命令" class="headerlink" title="docker的常用命令"></a>docker的常用命令</h1><h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help</span><br></pre></td></tr></table></figure>
-<h2 id="镜像命令"><a href="#镜像命令" class="headerlink" title="镜像命令"></a>镜像命令</h2><p><strong>1、docker images</strong>：列出本地主机上的镜像。<br><img src="https://img-blog.csdnimg.cn/20200106210229594.png" alt="在这里插入图片描述"><br>上图中各个选项说明:<br>REPOSITORY：表示镜像的仓库源<br>TAG：镜像的标签<br>IMAGE ID：镜像ID<br>CREATED：镜像创建时间<br>SIZE：镜像大小<br> 同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，我们使用 REPOSITORY:TAG 来定义不同的镜像。如果你不指定一个镜像的版本标签，例如你只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像。<br> 选项说明：<br> -a：列出本地所有的镜像（含中间映像层）；<br> -q：只显示镜像ID；<br> –digests：显示镜像的摘要信息<br> –no-trunc：显示完整的镜像信息<br> <strong>2、docker search 镜像名字</strong>：从dockerHub上查找响应的镜像。<br>  <strong>3、docker pull 镜像名字:TAG</strong>：下载镜像，若不指定TAG标签，则默认下载latest镜像。<br>  <strong>4、docker rmi 镜像名字id</strong>：删除镜像<br>  删除单个：docker rmi -f 镜像ID；<br>  删除多个：docker rmi -f 镜像名1:TAG1 镜像名2:TAG2；<br>  删除全部：docker rmi -f $(docker images -qa)；</p>
-<h2 id="容器命令"><a href="#容器命令" class="headerlink" title="容器命令"></a>容器命令</h2><p>有镜像才能生成容器实例，首先先从镜像仓库pull镜像文件，如：docker pull centos。<br><strong>1、新建并启动容器:docker run [options] image [commends]</strong></p>
-<p>OPTIONS说明（常用）：有些是一个减号，有些是两个减号<br>–name=”容器新名字”: 为容器指定一个名称；<br>-d: 后台运行容器，并返回容器ID，也即启动守护式容器；<br><strong>-i：以交互模式运行容器，通常与 -t 同时使用；<br>-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用；</strong><br>-P: 随机端口映射；<br>-p: 指定端口映射，有以下四种格式<br>      ip:hostPort:containerPort<br>      ip::containerPort<br>      <strong>hostPort:containerPort</strong><br>      containerPort</p>
-<p><strong>启动交互式容器：</strong><br>使用镜像centos:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。<br>docker run -it centos /bin/bash <img src="https://img-blog.csdnimg.cn/20200106212545439.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>2、列出当前所有正在运行的容器：docker ps [options]</strong></p>
-<p>OPTIONS说明（常用）：<br>-a :列出当前所有正在运行的容器+历史上运行过的<br>-l :显示最近创建的容器。<br>-n：显示最近n个创建的容器。<br>-q :静默模式，只显示容器编号。<br>–no-trunc :不截断输出。<br><strong>3、退出容器</strong><br>退出容器有两种方式：<br>1、exit：容器停止并退出。<br>2、ctrl+Q+P：容器不停止退出<br><strong>4、启动容器：docker start 容器ID或者容器名<br>5、重启容器：docker restart 容器ID或者容器名<br>6、停止容器：docker stop 容器ID或者容器名<br>7、强制停止容器：docker kill 容器ID或者容器名<br>8、删除已停止的容器：docker rm 容器ID</strong><br>一次性删除多个容器：docker rm -f $(docker ps -qa)</p>
-<p><strong>重要命令总结：</strong><br><strong>1、启动守护式容器：docker run -d 容器名</strong></p>
-<p>使用镜像centos:latest以后台模式启动一个容器<br>docker run -d centos<br>问题：然后docker ps -a 进行查看, 会发现容器已经退出<br>很重要的要说明的一点: Docker容器后台运行,就必须有一个前台进程.<br>容器运行的命令如果不是那些一直挂起的命令（比如运行top，tail），就是会自动退出的。</p>
-<p>这个是docker的机制问题,比如你的web容器,我们以nginx为例，正常情况下,我们配置启动服务只需要启动响应的service即可。例如<br>service nginx start<br>但是,这样做,nginx为后台进程模式运行,就导致docker前台没有运行的应用,<br>这样的容器后台启动后,会立即自杀因为他觉得他没事可做了.<br>所以，最佳的解决方案是,将你要运行的程序以前台进程的形式运行。<br><strong>2、查看容器日志：docker logs -f -t -tail容器ID</strong><br>其中：</p>
-<ul>
-<li>-t 是加入时间戳</li>
-<li>-f 跟随最新的日志打印</li>
-<li>–tail 数字 显示最后多少条</li>
-<li>如：首先启动守护式容器：docker run -d centos /bin/sh -c “while true;do echo hello zzyy;sleep 2;done”<br><img src="https://img-blog.csdnimg.cn/20200106213545344.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200106213622451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li><em>3、查看容器内运行的进程：docker top 容器ID<br>4、查看容器内部细节：docker inspect 容器ID<br>5、进入正在运行的容器并以命令行交互：*</em><br>1、docker exec -it 容器ID basnshell<br><img src="https://img-blog.csdnimg.cn/20200106213846640.png" alt="在这里插入图片描述"><br>2、重新进入：docker attach 容器ID<br>上述两种方式的区别：<br>attach直接进入容器启动命令的终端，不会启动新的进程；<br>exec是在容器中打开新的终端，并且可以启动新的进程。</li>
-<li><em>6、从容器内拷贝文件到主机上：docker cp 容器ID:容器内路径 目的主机路径*</em></li>
-</ul>
-<p><strong>总结：</strong><br><img src="https://img-blog.csdnimg.cn/20200106214131826.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>attach    Attach to a running container                 # 当前 shell 下 attach 连接指定运行镜像<br>build     Build an image from a Dockerfile              # 通过 Dockerfile 定制镜像<br>commit    Create a new image from a container changes   # 提交当前容器为新的镜像<br>cp        Copy files/folders from the containers filesystem to the host path   #从容器中拷贝指定文件或者目录到宿主机中<br>create    Create a new container                        # 创建一个新的容器，同 run，但不启动容器<br>diff      Inspect changes on a container’s filesystem   # 查看 docker 容器变化<br>events    Get real time events from the server          # 从 docker 服务获取容器实时事件<br>exec      Run a command in an existing container        # 在已存在的容器上运行命令<br>export    Stream the contents of a container as a tar archive   # 导出容器的内容流作为一个 tar 归档文件[对应 import ]<br>history   Show the history of an image                  # 展示一个镜像形成历史<br>images    List images                                   # 列出系统当前镜像<br>import    Create a new filesystem image from the contents of a tarball # 从tar包中的内容创建一个新的文件系统映像[对应export]<br>info      Display system-wide information               # 显示系统相关信息<br>inspect   Return low-level information on a container   # 查看容器详细信息<br>kill      Kill a running container                      # kill 指定 docker 容器<br>load      Load an image from a tar archive              # 从一个 tar 包中加载一个镜像[对应 save]<br>login     Register or Login to the docker registry server    # 注册或者登陆一个 docker 源服务器<br>logout    Log out from a Docker registry server          # 从当前 Docker registry 退出<br>logs      Fetch the logs of a container                 # 输出当前容器日志信息<br>port      Lookup the public-facing port which is NAT-ed to PRIVATE_PORT    # 查看映射端口对应的容器内部源端口<br>pause     Pause all processes within a container        # 暂停容器<br>ps        List containers                               # 列出容器列表<br>pull      Pull an image or a repository from the docker registry server   # 从docker镜像源服务器拉取指定镜像或者库镜像<br>push      Push an image or a repository to the docker registry server    # 推送指定镜像或者库镜像至docker源服务器<br>restart   Restart a running container                   # 重启运行的容器<br>rm        Remove one or more containers                 # 移除一个或者多个容器<br>rmi       Remove one or more images             # 移除一个或多个镜像[无容器使用该镜像才可删除，否则需删除相关容器才可继续或 -f 强制删除]<br>run       Run a command in a new container              # 创建一个新的容器并运行一个命令<br>save      Save an image to a tar archive                # 保存一个镜像为一个 tar 包[对应 load]<br>search    Search for an image on the Docker Hub         # 在 docker hub 中搜索镜像<br>start     Start a stopped containers                    # 启动容器<br>stop      Stop a running containers                     # 停止容器<br>tag       Tag an image into a repository                # 给源中镜像打标签<br>top       Lookup the running processes of a container   # 查看容器中运行的进程信息<br>unpause   Unpause a paused container                    # 取消暂停容器<br>version   Show the docker version information           # 查看 docker 版本号<br>wait      Block until a container stops, then print its exit code   # 截取容器停止时的退出状态值</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/Java%208%E4%B9%8B%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/Java%208%E4%B9%8B%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/" class="post-title-link" itemprop="url">Java 8之流式计算</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:10:15 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:10:15+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Java 8 引入了流式操作（Stream），通过该操作可以实现对集合（Collection）的并行处理和函数式操作。用周阳大神的话说就是：SQL就是JAVA，JAVA就是SQL。使用java.util.stream包中的Stream接口即可完成SQL中的计算、order by、where等操作。根据操作返回的结果不同，流式操作分为中间操作和最终操作两种。最终操作返回一特定类型的结果，而中间操作返回流本身，这样就可以将多个操作依次串联起来。根据流的并发性，流又可以分为串行和并行两种。流式操作实现了集合的过滤、排序、映射等功能。</p>
-<h1 id="四大内置核心函数式接口"><a href="#四大内置核心函数式接口" class="headerlink" title="四大内置核心函数式接口"></a>四大内置核心函数式接口</h1><p>大部分函数式接口都不用我们自己写，Java 8都给我们写好了，这些接口都在java.util.function包里，下面简单介绍其中的几个。而在讲到Java 8中利用Stream的流式计算的时候，就不得不提及到java.util.function包中的四大函数式接口，分别是<strong>Function</strong>函数接口、<strong>Predicate</strong>函数式接口、<strong>Consumer</strong>函数式接口和<strong>Supplier</strong>函数式接口。</p>
-<h2 id="Function函数型函数式接口"><a href="#Function函数型函数式接口" class="headerlink" title="Function函数型函数式接口"></a>Function函数型函数式接口</h2><p> Function接口为函数型接口，该接口的抽象方法接收一个参数并且做一些处理然后返回返回一个参数。其中T为接收参数类型，R为返回参数类型。<br> 源码如下：其中的抽象方法为 <strong>R apply(T t)</strong><img src="https://img-blog.csdnimg.cn/20191115170254736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="Predicate断言型函数式接口"><a href="#Predicate断言型函数式接口" class="headerlink" title="Predicate断言型函数式接口"></a>Predicate断言型函数式接口</h2><p>Predicate 用于做判断操作，所以抽象方法返回的是Boolean。<br>源码如下：抽象方法为： <strong>boolean test(T t)</strong><br><img src="https://img-blog.csdnimg.cn/20191115170814909.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="Consumer消费型函数式接口"><a href="#Consumer消费型函数式接口" class="headerlink" title="Consumer消费型函数式接口"></a>Consumer<strong>消费型函数式接口</strong></h2><p>Consumer表示执行在单个参数上面的操作，但没有返回值的（正如消费有去无回）。<br>该类的源码如下：抽象方法为：<strong>void accept(T t)</strong><br><img src="https://img-blog.csdnimg.cn/20191115171119346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="Supplier供给型函数式接口"><a href="#Supplier供给型函数式接口" class="headerlink" title="Supplier供给型函数式接口"></a>Supplier<strong>供给型函数式接口</strong></h2><p>该接口不接受任何参数，返回一个任意泛型的值。<br>该类的源码如下：<strong>T get()</strong><br><img src="https://img-blog.csdnimg.cn/20191115171253184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="https://img-blog.csdnimg.cn/20191115171323494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="Stream流式计算"><a href="#Stream流式计算" class="headerlink" title="Stream流式计算"></a>Stream流式计算</h1><p>流(Stream) 到底是什么呢？<br>是数据渠道，用于操作数据源（集合、数组等）所生成的元素序列。<br>“集合讲的是数据，流讲的是计算！”</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1、Stream 自己不会存储元素。<br>2、Stream 不会改变源对象。相反，他们会返回一个持有结果的新Stream。<br>3、Stream 操作是延迟执行的。这意味着他们会等到需要结果的时候才执行。</p>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>1、创建一个Stream：一个数据源（数组、集合）。（如list.stream()将List转换为Stream）<br>2、中间操作：一个中间操作，处理数据源数据。<br>3、终止操作：一个终止操作，执行中间操作链，产生结果。</p>
-<p>示例代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.juc.study;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"><span class="keyword">import</span> java.util.function.*;</span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String  userName;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>     age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 题目：请按照给出数据，找出同时满足</span></span><br><span class="line"><span class="comment"> *      偶数ID且年龄大于24且用户名转为大写且用户名字母倒排序</span></span><br><span class="line"><span class="comment"> *      最后只输出一个用户名字</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreamDemo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        User u1 = <span class="keyword">new</span> User(<span class="number">11</span>,<span class="string">"a"</span>,<span class="number">23</span>);</span><br><span class="line">        User u2 = <span class="keyword">new</span> User(<span class="number">12</span>,<span class="string">"b"</span>,<span class="number">24</span>);</span><br><span class="line">        User u3 = <span class="keyword">new</span> User(<span class="number">13</span>,<span class="string">"c"</span>,<span class="number">22</span>);</span><br><span class="line">        User u4 = <span class="keyword">new</span> User(<span class="number">14</span>,<span class="string">"d"</span>,<span class="number">28</span>);</span><br><span class="line">        User u5 = <span class="keyword">new</span> User(<span class="number">16</span>,<span class="string">"e"</span>,<span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; <span class="built_in">list</span> = Arrays.asList(u1,u2,u3,u4,u5);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">list</span>.stream().filter(p -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> p.getId() % <span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line">        &#125;).filter(p -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> p.getAge() &gt; <span class="number">24</span>;</span><br><span class="line">        &#125;).<span class="built_in">map</span>(f -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> f.getUserName().toUpperCase();</span><br><span class="line">        &#125;).sorted((o1, o2) -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> o2.compareTo(o1);</span><br><span class="line">        &#125;).limit(<span class="number">1</span>).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//    R apply(T t);</span></span><br><span class="line">        Function&lt;String,Integer&gt; function = t -&gt; &#123;<span class="keyword">return</span> t.length();&#125;;</span><br><span class="line">        System.out.println(function.apply(<span class="string">"abc"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// boolean test(T t);</span></span><br><span class="line">        Predicate&lt;String&gt; predicate = t -&gt; &#123;<span class="keyword">return</span> t.startsWith(<span class="string">"a"</span>);&#125;;</span><br><span class="line">        System.out.println(predicate.test(<span class="string">"a"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//void accept(T t);</span></span><br><span class="line">        Consumer&lt;String&gt; consumer = t -&gt; &#123;System.out.println(t);&#125;;</span><br><span class="line">        consumer.accept(<span class="string">"java1018"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//    T get();</span></span><br><span class="line">        Supplier&lt;String&gt; supplier =  () -&gt; &#123;<span class="keyword">return</span> UUID.randomUUID().toString();&#125;;</span><br><span class="line">        System.out.println(supplier.get());;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/ConcurrentModifcationException%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/ConcurrentModifcationException%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">ConcurrentModifcationException详解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:10:07 / 修改时间：20:08:09" itemprop="dateCreated datePublished" datetime="2020-07-04T20:10:07+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要讲解为什么会产生ConcurrentModifcationException，以及底层代码分析，并且避免产生该异常的方法。</p>
-<p>再讲ConcurrentModifcationException的时候，非常必要的说道集合的迭代器，不同的迭代器会产生不同的效果。</p>
-<h1 id="Java中的迭代器"><a href="#Java中的迭代器" class="headerlink" title="Java中的迭代器"></a>Java中的迭代器</h1><h2 id="快速失败（fail—fast）"><a href="#快速失败（fail—fast）" class="headerlink" title="快速失败（fail—fast）"></a>快速失败（fail—fast）</h2><p>在用迭代器遍历一个集合对象时，如果遍历过程中对集合对象的内容进行了修改（增加、删除、修改），则会抛出<strong>ConcurrentModificationException</strong>。</p>
-<p>执行该操作的迭代器称为快速失败迭代器，因为迭代器很快就完全失败，而不会冒着在将来某个时间任意发生不确定行为的风险。迭代器的快速失败行为无法得到保证，因为一般来说，不可能对是否出现不同步并发修改做出任何硬性保证。快速失败操作会尽最大努力抛出ConcurrentModificationException。</p>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>场景：<strong>java.util包下的集合类都是快速失败的，不能在多线程下发生并发修改（迭代过程中被修改）。不光是多线程，在单线程时也可能发生该异常。</strong></p>
-<p>多线程下发生该异常，代码如下：<br><img src="https://img-blog.csdnimg.cn/20200328134945803.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在遍历整个list集合的时候，向里边添加元素，因为改变了list的结构，modCount会发生改变，故发生该异常。<br><img src="https://img-blog.csdnimg.cn/20200328135103235.png" alt="在这里插入图片描述"><br>单线程下发生该异常：<br><img src="https://img-blog.csdnimg.cn/20200328135200996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为在for循环遍历时候删除元素，同样改变了list的结构导致modCount发生改变，所以会抛出异常。<br><img src="https://img-blog.csdnimg.cn/2020032813521648.png" alt="在这里插入图片描述"></p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>迭代器在遍历时直接访问集合中的内容，并且在遍历过程中使用一个<strong>modCount</strong>变量。集合在被遍历期间如果内容发生变化，就会改变modCount的值。每当迭代器使用next()遍历下一个元素之前，都会检测modCount变量是否为expectedmodCount值，是的话就返回遍历；否则抛出异常，终止遍历。</p>
-<p>例如我们查看ArrayList的关于iterator（）方法，是new了一个Itr对象。<br><img src="https://img-blog.csdnimg.cn/20200328131032502.png" alt="在这里插入图片描述"><br>那我们进来看看这是一个什么对象呢？这是AbstractList类的一个成员，查看他的next方法。<img src="https://img-blog.csdnimg.cn/20200328131741627.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在next方法内部查看是否还有剩余元素的时候，会首先调用checkForComodification（）方法，那么这个方法是干什么的呢？<br><img src="https://img-blog.csdnimg.cn/20200328131947797.png" alt="在这里插入图片描述"><br>这个方法很简单，就是查看modCount变量是否的等于expectedModcount，如果这个值和期待的不相同的话就会抛出ConcurrentModificationException。</p>
-<p>那么这个modCount是干什么的呢？</p>
-<p>还是查看AbstractList中的注释：<br><img src="https://img-blog.csdnimg.cn/20200328131429570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>对于英语0级的我们，我还是去百度翻一下吧。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">此列表在结构上被修改的次数。结构修改是那些改变列表大小的修改，</span><br><span class="line">或者以其他方式干扰列表，使得正在进行的迭代可能产生不正确的结果。</span><br><span class="line"></span><br><span class="line">此字段由迭代器和列表迭代器方法返回的迭代器和列表迭代器实现使用。</span><br><span class="line">如果此字段的值意外更改，则迭代器（或列表迭代器）将抛出ConcurrentModificationException</span><br><span class="line">以响应下一个、删除、上一个、设置或添加操作。</span><br><span class="line">这提供了快速失败的行为，而不是迭代过程中并发修改时的不确定行为。</span><br><span class="line"></span><br><span class="line">子类使用此字段是可选的。如果子类希望提供快速失败的迭代器（和列表</span><br><span class="line">迭代器），那么它只需在其add（<span class="keyword">int</span>，E）和remove（<span class="keyword">int</span>）方法（以及</span><br><span class="line">它重写的导致列表结构修改的任何其他方法）中增加这个字段。</span><br><span class="line">对add（<span class="keyword">int</span>，E）或remove（<span class="keyword">int</span>）的单个调用必须向该字段添加不超过一个，否则迭代器（和列表迭代器）将抛出虚假的ConcurrentModificationExceptions。</span><br><span class="line">如果实现不希望提供失败快速迭代器，则可以忽略此字段。</span><br></pre></td></tr></table></figure>
-<p>也就是说在对list的结构进行改变（list大小发生改变）的时候，modCount就会发生改变，旨在记录改变的次数。</p>
-<p>所以综上所述：在对java.util包下的集合类进行并发修改的时候，一边改变数组的结构，一遍进行遍历，由于modCount发生了改变，所以就会跑异常。</p>
-<h2 id="安全失败（fail—safe）"><a href="#安全失败（fail—safe）" class="headerlink" title="安全失败（fail—safe）"></a>安全失败（fail—safe）</h2><p>采用安全-失败机制的集合容器，在<strong>遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历</strong>。</p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>java.util.concurrent包下的容器都是安全失败，可以在多线程或者单线程下并发使用，并发修改。</p>
-<p>如多线程下：<br><img src="https://img-blog.csdnimg.cn/20200328135623859.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在单线程下：<br><img src="https://img-blog.csdnimg.cn/20200328135517905.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>由于迭代时是对原集合的拷贝进行遍历，所以在遍历过程中对原集合所作的修改并不能被迭代器检测到，所以不会触发Concurrent Modification Exception。</p>
-<p>同样地，迭代器并不能访问到修改后的内容，即：迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</p>
-<p>众所周知，使用java.util.concurrent包下的集合类比如对应ArrayList的CopyOnWriteArrayList类就可以避免该异常的出现，那么是什么原理呢？</p>
-<p>让我们来看看他的源码，来到iterator()方法：<br><img src="https://img-blog.csdnimg.cn/20200328133105324.png" alt="在这里插入图片描述"><br>这个方法调用的是COWIterator对象来完成遍历，并且把当前的list也就是底层存储数据的数组数据，和要返回的元素的索引传过来。来到COWIterator类的next()方法。<br><img src="https://img-blog.csdnimg.cn/20200328133451264.png" alt="在这里插入图片描述"><br>看到上边的注释了吧，unchecked就是不用检查，直接遍历，所以也就不会产生这个异常了。</p>
-<p>这是因为他遍历的是拷贝的数据快照，所以并不需要考虑并发修改的问题。</p>
-<p>但是也有一个缺点：就是在遍历的时候他为了避免产生并发修改异常，所以拷贝出一份快照用于遍历，在遍历期间修改（添加，修改，删除）的数据遍历不到。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2020/07/04/activeMQ%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/04/activeMQ%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">activeMQ入门</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-04 20:10:03 / 修改时间：20:08:11" itemprop="dateCreated datePublished" datetime="2020-07-04T20:10:03+08:00">2020-07-04</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="为什么要使用消息中间件？"><a href="#为什么要使用消息中间件？" class="headerlink" title="为什么要使用消息中间件？"></a>为什么要使用消息中间件？</h1><h2 id="系统解耦"><a href="#系统解耦" class="headerlink" title="系统解耦"></a>系统解耦</h2><p>假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。<br>那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。</p>
-<p>整个过程，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191217123156135.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>但是现在要是来了系统D、系统E、系统F、系统G，等等，十来个其他系统慢慢的都需要这份核心数据呢？如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191217123225235.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>大家可别以为这是开玩笑，一个大规模系统，往往会拆分为几十个甚至上百个子系统，每个子系统又对应N多个服务，这些系统与系统之间有着错综复杂的关系网络。</p>
-<p>如果某个系统产出一份核心数据，可能下游无数的其他系统都需要这份数据来实现各种业务逻辑。此时如果你要是采取上面那种模式来设计系统架构，那么绝对你负责系统A的同学要被烦死了。</p>
-<p>先是来一个人找他要求发送数据给一个新的系统H，系统A的同学要修改代码然后在那个代码里加入调用新系统H的流程。一会那个系统B是个陈旧老系统要下线了，告诉系统A的同学：别给我发送数据了，接着系统A再次修改代码不再给这个系统B。<br><strong>然后如果要是某个上游或者下游系统突然宕机了呢？</strong><br>系统A的调用代码里是不是会抛异常？那系统A的同学会收到报警说异常了，结果他还要去care是下游哪个系统宕机了。所以在实际的系统架构设计中，如果全部采取这种系统耦合的方式，在某些场景下绝对是不合适的，系统耦合度太严重。并且互相耦合起来并不是核心链路的调用，而是一些非核心的场景（比如上述的数据消费）导致了系统耦合，这样会严重的影响上下游系统的开发和维护效率。</p>
-<p><strong>因此在上述系统架构中，就可以采用MQ中间件来实现系统解耦。</strong><br>系统A就把自己的一份核心数据发到MQ里，下游哪个系统感兴趣自己去消费即可，不需要了就取消数据的消费，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191217123600178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="异步调用"><a href="#异步调用" class="headerlink" title="异步调用"></a>异步调用</h2><p>假设你有一个系统调用链路，是系统A调用系统B，一般耗时20ms；系统B调用系统C，一般耗时200ms；系统C调用系统D，一般耗时2s，如下图所示。<br><img src="https://img-blog.csdnimg.cn/20191217123647654.png" alt="在这里插入图片描述"><br><strong>现在最大的问题就是：</strong><br>用户一个请求过来巨慢无比，因为走完一个链路，需要耗费：<br>20ms + 200ms + 2000ms（2s） = 2220ms，</p>
-<p>也就是2秒多的时间。但是实际上，链路中的系统A调用系统B，系统B调用系统C，这两个步骤起来也就220ms。就因为引入了系统C调用系统D这个步骤，导致最终链路执行时间是2秒多，直接将链路调用性能降低了10倍，这就是导致链路执行过慢的罪魁祸首。</p>
-<p>那此时我们可以思考一下，是不是可以将系统D从链路中抽离出去做成异步调用呢？其实很多的业务场景是可以允许异步调用的。</p>
-<p>这样，实现思路就是系统A -&gt; 系统B -&gt; 系统C，直接就耗费220ms后直接成功了。然后系统C就是发送个消息到MQ中间件里，由系统D消费到消息之后慢慢的异步来执行这个耗时2s的业务处理。通过这种方式直接将核心链路的执行性能提升了10倍。整个过程，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20191217123928544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="流量削峰"><a href="#流量削峰" class="headerlink" title="流量削峰"></a>流量削峰</h2><p>假设你有一个系统，平时正常的时候每秒可能就几百个请求，系统部署在8核16G的机器的上，正常处理都是OK的，每秒几百请求是可以轻松抗住的，但是如下图所示，在高峰期一下子来了每秒钟几千请求，弹指一挥间出现了流量高峰，此时你的选择是要搞10台机器，抗住这个瞬时高峰吗？<br><img src="https://img-blog.csdnimg.cn/2019121712402454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>假设瞬时高峰每天就那么半个小时，其它时间基本为每秒就几百请求，如果你线上部署了很多台机器，那么每台机器就处理每秒几十个请求就可以了，这不是有点浪费机器资源吗？大部分时候，每秒几百请求，一台机器就足够了，但是为了抗那每天瞬时的高峰，硬是部署了10台机器，每天就那半个小时有用，别的时候都是浪费资源的。</p>
-<h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><img src="https://img-blog.csdnimg.cn/20191217124255634.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1、采用异步处理模式<br><img src="https://img-blog.csdnimg.cn/2019121712442112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/201912171244327.png" alt="在这里插入图片描述"><br>2、应用系统间解耦<br>发送者和接受者无需了解对方，只需发送或者接收消息即可。并且发送者和接受者无需同时在线。</p>
-<h1 id="activeMQ安装"><a href="#activeMQ安装" class="headerlink" title="activeMQ安装"></a>activeMQ安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去官网<a href="http://activemq.apache.org/，下载最新安装包，我使用的是5.15.10版本。" target="_blank" rel="noopener">http://activemq.apache.org/，下载最新安装包，我使用的是5.15.10版本。</a><br>将安装包apache-activemq-5.15.10-bin.tar下载到根目录的/opt下。</p>
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><p>使用</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-activemq<span class="number">-5.15</span><span class="number">.10</span>-bin.tar</span><br></pre></td></tr></table></figure>
-<p>对其进行解压，并把挤压后的文件放到根目录的/myactivemq/文件夹下。</p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /myactivemq/apache-activemq<span class="number">-5.15</span><span class="number">.10</span>/bin</span><br></pre></td></tr></table></figure>
-<p>进入activemq目录下的bin目录，使用</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./activemq start</span><br></pre></td></tr></table></figure>
-<p>启动activeMQ。<br>也可以</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./activemq status</span><br></pre></td></tr></table></figure>
-<p>查看activeMQ启动状态。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./activemq stop</span><br></pre></td></tr></table></figure>
-<p>关闭。</p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>在启动ActiveMQ之后，ActiveMQ会开放两个端口，一个是后台端口61616，另一个是前台端口8161.我们可以使用ip+端口号进行访问，如<a href="http://192.168.0.119:8161进行访问。能看到如下画面，即启动成功。" target="_blank" rel="noopener">http://192.168.0.119:8161进行访问。能看到如下画面，即启动成功。</a><br><img src="https://img-blog.csdnimg.cn/20191217195602857.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="Java编码实现ActiveMQ通信"><a href="#Java编码实现ActiveMQ通信" class="headerlink" title="Java编码实现ActiveMQ通信"></a>Java编码实现ActiveMQ通信</h1><h2 id="建立maven工程"><a href="#建立maven工程" class="headerlink" title="建立maven工程"></a>建立maven工程</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;project xmlns=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span><br><span class="line">         xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">         xsi:schemaLocation=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span><br><span class="line">    &lt;modelVersion&gt;<span class="number">4.0</span><span class="number">.0</span>&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.rocket&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;test_activemq&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.0</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF<span class="number">-8</span>&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;maven.compiler.source&gt;<span class="number">1.8</span>&lt;/maven.compiler.source&gt;</span><br><span class="line">        &lt;maven.compiler.targer&gt;<span class="number">1.8</span>&lt;/maven.compiler.targer&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!--activemq需要的jav包--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;activemq-all&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">5.15</span><span class="number">.9</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.apache.xbean&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;xbean-spring&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">3.16</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--下面是junit/log4等通用配置--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">1.7</span><span class="number">.25</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">1.2</span><span class="number">.3</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">1.16</span><span class="number">.18</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">4.12</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<p>ActiveMQ中的目的地有两种：<strong>queue和topic</strong>，其中队列是点对点的传输，只能有一个接收方，而topic可以有多个接收方，只要再发布消息之前订阅了该topic就可以接收到，并且实现了“负载均衡”，即多个接受者间隔接受。<br><img src="https://img-blog.csdnimg.cn/20191217194057953.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="点对点传输"><a href="#点对点传输" class="headerlink" title="点对点传输"></a>点对点传输</h2><p>在点对点传输下，目的地为队列queue。</p>
-<h3 id="生产者编码"><a href="#生产者编码" class="headerlink" title="生产者编码"></a>生产者编码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.activemq.<span class="built_in">queue</span>;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ClassName JmsProduce</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JmsProduce</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final String URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> final String queue_name = <span class="string">"queue01"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws JMSException </span>&#123;</span><br><span class="line">        <span class="comment">//创建连接工厂</span></span><br><span class="line">        ActiveMQConnectionFactory factory = <span class="keyword">new</span> ActiveMQConnectionFactory(URL);</span><br><span class="line">        <span class="comment">//利用工厂获取connection，并开始连接</span></span><br><span class="line">        Connection connection = factory.createConnection();</span><br><span class="line">        connection.start();</span><br><span class="line">		<span class="comment">//创建会话session，两个参数：事务和签收</span></span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>,Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        <span class="comment">//创建目的地Destination</span></span><br><span class="line">        Queue <span class="built_in">queue</span> = session.createQueue(queue_name);</span><br><span class="line">        <span class="comment">//创建生产者</span></span><br><span class="line">        MessageProducer producer = session.createProducer(<span class="built_in">queue</span>);</span><br><span class="line">		<span class="comment">//生产者发送消息</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            TextMessage textMessage = session.createTextMessage(<span class="string">"mag..."</span> + i);</span><br><span class="line">            producer.send(textMessage);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//关闭资源</span></span><br><span class="line">        producer.close();</span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">        System.out.println(<span class="string">"生产者生产数据成功！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行生产者代码之后ActiveMQ控制台如下所示：<br><img src="https://img-blog.csdnimg.cn/20191217194919499.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="消费者编码"><a href="#消费者编码" class="headerlink" title="消费者编码"></a>消费者编码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的生产者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JmsConsumer</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVE_MQ = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String QUEUE_NAME = <span class="string">"queue01"</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) throws JMSException, IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">"消费者01"</span>);</span><br><span class="line">        ActiveMQConnectionFactory factory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVE_MQ);</span><br><span class="line">        Connection connection = factory.createConnection();</span><br><span class="line">        connection.start();</span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        Queue <span class="built_in">queue</span> = session.createQueue(QUEUE_NAME);</span><br><span class="line">        MessageConsumer consumer = session.createConsumer(<span class="built_in">queue</span>);</span><br><span class="line">       <span class="comment">/*</span></span><br><span class="line"><span class="comment">       同步阻塞方式receive()</span></span><br><span class="line"><span class="comment">        while (true) &#123;</span></span><br><span class="line"><span class="comment">            TextMessage message = (TextMessage) consumer.receive();</span></span><br><span class="line"><span class="comment">            if (null != message) &#123;</span></span><br><span class="line"><span class="comment">                System.out.println("消费者受到消息，内容是：" + message.getText());</span></span><br><span class="line"><span class="comment">            &#125; else &#123;</span></span><br><span class="line"><span class="comment">                break;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        consumer.close();</span></span><br><span class="line"><span class="comment">        session.close();</span></span><br><span class="line"><span class="comment">        connection.close();*/</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//监听器方式</span></span><br><span class="line">        consumer.setMessageListener(<span class="keyword">new</span> MessageListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> onMessage(Message message) &#123;</span><br><span class="line">                <span class="keyword">if</span> (null != message &amp;&amp; message instanceof TextMessage) &#123;</span><br><span class="line">                    TextMessage textMessage = (TextMessage) message;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">"msg-----"</span> + textMessage.getText());</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (JMSException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.in.read();</span><br><span class="line">        consumer.close();</span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>消费者消息的接受存在两种方式，一种是同步阻塞方式，另一种是监听器方式。<br>同步阻塞方式中有receive()和receive(long time)两个方法，没有消息阻塞在这里或者没有消息超过一定时间之后退出。监听器方式为设置一个监听器，监听是否有消息传送过来。</p>
-<h2 id="基于发布订阅"><a href="#基于发布订阅" class="headerlink" title="基于发布订阅"></a>基于发布订阅</h2><h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu;</span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的生产者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JmsProduceTopic</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVE_URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String TOPIC_NAME = <span class="string">"topic-01"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws JMSException </span>&#123;</span><br><span class="line">        <span class="comment">//创建连接工厂，按照指定的url地址，采用默认用户名和密码</span></span><br><span class="line">        ActiveMQConnectionFactory activeMQConnectionFactory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVE_URL);</span><br><span class="line">        <span class="comment">//通过连接工厂创建连接，并启动访问</span></span><br><span class="line">        Connection connection = activeMQConnectionFactory.createConnection();</span><br><span class="line">        connection.start();</span><br><span class="line">        <span class="comment">//创建回话session，两个参数：事务和签收</span></span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        <span class="comment">//常见目的地（队列或queue者主题topic）</span></span><br><span class="line">        Topic topic = session.createTopic(TOPIC_NAME);</span><br><span class="line">        <span class="comment">//创建生产者</span></span><br><span class="line">        MessageProducer producer = session.createProducer(topic);</span><br><span class="line">        <span class="comment">//使用MessageProducer生产3条消息发送到MQ的队列里</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//创建消息</span></span><br><span class="line">            TextMessage textMessage = session.createTextMessage(<span class="string">"msg------"</span> + i);</span><br><span class="line">            <span class="comment">//通过生产者MessageProducer发送给MQ</span></span><br><span class="line">            producer.send(textMessage);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//关闭资源</span></span><br><span class="line">        producer.close();</span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.activemq.ActiveMQConnectionFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.jms.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActiveMQ</span></span><br><span class="line"><span class="comment"> * JMS（Java Message Service）的消费者编码</span></span><br><span class="line"><span class="comment"> * @author xxy</span></span><br><span class="line"><span class="comment"> * @date 2019/12/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JmsConsumerTopic</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String ACTIVEMQ_URL = <span class="string">"tcp://192.168.0.119:61616"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> final String TOPIC_NAME = <span class="string">"topic-01"</span>;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws JMSException, IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">"消费者TOPIC-3"</span>);</span><br><span class="line">        ActiveMQConnectionFactory factory = <span class="keyword">new</span> ActiveMQConnectionFactory(ACTIVEMQ_URL);</span><br><span class="line">        Connection connection = factory.createConnection();</span><br><span class="line">        connection.start();</span><br><span class="line">        Session session = connection.createSession(<span class="literal">false</span>, Session.AUTO_ACKNOWLEDGE);</span><br><span class="line">        Topic topic = session.createTopic(TOPIC_NAME);</span><br><span class="line">        MessageConsumer consumer = session.createConsumer(topic);</span><br><span class="line">        <span class="comment">//监听器方式</span></span><br><span class="line">        consumer.setMessageListener((message) -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (null != message &amp;&amp; message instanceof TextMessage) &#123;</span><br><span class="line">                TextMessage textMessage = (TextMessage) message;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    System.out.println(<span class="string">"msg-----"</span> + textMessage.getText());</span><br><span class="line">                &#125; <span class="keyword">catch</span> (JMSException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.in.read();</span><br><span class="line">        consumer.close();</span><br><span class="line">        session.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="queue和topic两种模式的对比"><a href="#queue和topic两种模式的对比" class="headerlink" title="queue和topic两种模式的对比"></a>queue和topic两种模式的对比</h2><p><img src="https://img-blog.csdnimg.cn/20191217201149319.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -1133,6 +354,732 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/" class="post-title-link" itemprop="url">MySQL性能优化之explain</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-17 17:43:54" itemprop="dateCreated datePublished" datetime="2019-07-17T17:43:54+08:00">2019-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-13 23:36:16" itemprop="dateModified" datetime="2019-11-13T23:36:16+08:00">2019-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>963</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在日常工作中，我们会有时会开慢查询去记录一些执行时间比较久的SQL语句，找出这些SQL语句并不意味着完事了，些时我们常常用到explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上索引，有没有做全表扫描，这都可以通过explain命令来查看。所以我们深入了解MySQL的基于开销的优化器，还可以获得很多可能被优化器考虑到的访问策略的细节，以及当运行SQL语句时哪种策略预计会被优化器采用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8Bexplain/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">MySQL性能优化之查询截取分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-17 17:22:45" itemprop="dateCreated datePublished" datetime="2019-07-17T17:22:45+08:00">2019-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-13 23:36:44" itemprop="dateModified" datetime="2019-11-13T23:36:44+08:00">2019-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>MySQL在查询数据的时候需要对响应的SQL语句进行优化，以提高速度和效率。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/17/MySQL%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E6%9F%A5%E8%AF%A2%E6%88%AA%E5%8F%96%E5%88%86%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">MySQL逻辑架构</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-13 09:23:22" itemprop="dateCreated datePublished" datetime="2019-07-13T09:23:22+08:00">2019-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-13 23:35:40" itemprop="dateModified" datetime="2019-11-13T23:35:40+08:00">2019-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="MySQL总体概览"><a href="#MySQL总体概览" class="headerlink" title="MySQL总体概览"></a>MySQL总体概览</h1><p><img src="https://img-blog.csdnimg.cn/20191108103653857.png" alt="在这里插入图片描述">)<img src="https://img-blog.csdnimg.cn/20191108103640296.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/13/MySQL%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/24/Java%E4%B9%8BJUC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/24/Java%E4%B9%8BJUC/" class="post-title-link" itemprop="url">Java之JUC</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-24 17:47:40" itemprop="dateCreated datePublished" datetime="2019-04-24T17:47:40+08:00">2019-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 20:42:45" itemprop="dateModified" datetime="2020-07-04T20:42:45+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>20k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Java中，线程部分是一个重点，本篇文章说的JUC也是关于线程的。JUC就是java.util .concurrent工具包的简称。这是一个处理线程的工具包，JDK 1.5开始出现的。下面一起来看看它怎么使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/24/Java%E4%B9%8BJUC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/" class="post-title-link" itemprop="url">JMS（Java Message Service）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 20:54:53" itemprop="dateModified" datetime="2020-07-04T20:54:53+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMS/" itemprop="url" rel="index">
+                    <span itemprop="name">JMS</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>JMS是Java EE中的一部分，好比是盘子和点心的关系，JMS是Java EE中的额一个组成部分。<br><img src="https://img-blog.csdnimg.cn/20191217201717408.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191217201745254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/JMS%EF%BC%88Java%20Message%20Service%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/" class="post-title-link" itemprop="url">Your password does not satisfy the current policy requirements</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-31 12:34:42" itemprop="dateModified" datetime="2019-10-31T12:34:42+08:00">2019-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>586</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在linux中部署项目，搭建数据库环境的时候，需要专门设置一个user来管理响应的数据库。这是我在初步使用mysql，向mysql中user表插入用户时遇到的问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/ERROR%201819%20(HY000)_%20Your%20password%20does%20not%20satisfy%20the%20current%20policy%20requirements/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">JUC之线程池</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 20:47:43" itemprop="dateModified" datetime="2020-07-04T20:47:43+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="线程池的优势"><a href="#线程池的优势" class="headerlink" title="线程池的优势"></a>线程池的优势</h1><p>线程池做的工作主要是控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中取出任务来执行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/JUC%E4%B9%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/JUC%E4%B9%8B%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/JUC%E4%B9%8B%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue/" class="post-title-link" itemprop="url">JUC之阻塞队列BlockingQueue</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 20:49:06" itemprop="dateModified" datetime="2020-07-04T20:49:06+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JUC/" itemprop="url" rel="index">
+                    <span itemprop="name">JUC</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在java.util.concurrent包中，BlockingQueue很好的解决了多线程中，如何高效安全“传输”数据的问题。通过这些高效并且线程安全的队列类，为我们快速搭建高质量的多线程程序带来极大的便利。本文详细介绍了BlockingQueue家庭中的一些成员，包括他们各自的功能以及常见使用场景。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/JUC%E4%B9%8B%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1190,13 +1137,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

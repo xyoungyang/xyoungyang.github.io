@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Yang's Blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="@[TOC]springboot为我们提供了springmvc的自动配置，所以我们可以直接编写逻辑就能实现功能。（如下内容都是基于springboot2.2.5） 比如万能的helloworld：我们只要写一个controller就能自动映射到。 访问localhost:8080&#x2F;hello，如下那么springboot是如何帮助我们自动配置的呢？">
+<meta name="keywords" content="SpringBoot,微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot的MVC自动配置">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;04&#x2F;22&#x2F;springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE&#x2F;index.html">
+<meta property="og:site_name" content="Yang&#39;s Blog">
+<meta property="og:description" content="@[TOC]springboot为我们提供了springmvc的自动配置，所以我们可以直接编写逻辑就能实现功能。（如下内容都是基于springboot2.2.5） 比如万能的helloworld：我们只要写一个controller就能自动映射到。 访问localhost:8080&#x2F;hello，如下那么springboot是如何帮助我们自动配置的呢？">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315153747721.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315153841850.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315154044100.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315154425747.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315155118221.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315154828716.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315154919727.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315155351961.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315155507640.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020031515565130.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315155749234.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020031515582611.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315160111167.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2020031516032831.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315160407460.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315160433808.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315162509225.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315162554334.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315162639603.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315162724412.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315162840580.png">
+<meta property="og:updated_time" content="2020-07-04T13:00:14.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200315153747721.png">
+
+<link rel="canonical" href="https://youngyang.top/2019/04/22/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>SpringBoot的MVC自动配置 | Yang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">37</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/springboot%E7%9A%84MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot的MVC自动配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 21:00:14" itemprop="dateModified" datetime="2020-07-04T21:00:14+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringBoot</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>@[TOC]<br>springboot为我们提供了springmvc的自动配置，所以我们可以直接编写逻辑就能实现功能。（如下内容都是基于springboot2.2.5）</p>
+<p>比如万能的helloworld：<br><img src="https://img-blog.csdnimg.cn/20200315153747721.png" alt="在这里插入图片描述"><br>我们只要写一个controller就能自动映射到。</p>
+<p>访问localhost:8080/hello，如下<br><img src="https://img-blog.csdnimg.cn/20200315153841850.png" alt="在这里插入图片描述"><br>那么springboot是如何帮助我们自动配置的呢？</p>
+<a id="more"></a>
+<h1 id="springboot对mvc的自动配置"><a href="#springboot对mvc的自动配置" class="headerlink" title="springboot对mvc的自动配置"></a>springboot对mvc的自动配置</h1><p>对于springmvc的自动配置全部在WebMvcAutoConfiguration.class类中。</p>
+<p>ctrl+n搜索类，进入：<br><img src="https://img-blog.csdnimg.cn/20200315154044100.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="对静态资源的自动配置"><a href="#对静态资源的自动配置" class="headerlink" title="对静态资源的自动配置"></a>对静态资源的自动配置</h2><p>看到如下关键方法：<br><img src="https://img-blog.csdnimg.cn/20200315154425747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="webjars"><a href="#webjars" class="headerlink" title="webjars"></a>webjars</h3><p>首先webjars是什么呢？<br>看官网的描述：<br><img src="https://img-blog.csdnimg.cn/20200315155118221.png" alt="在这里插入图片描述"><br>其实说白了，就是讲静态资源通过jar包的方式导入进来。</p>
+<p>那么我们看看springboot是如何配置webjars的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!registry.hasMappingForPattern(<span class="string">"/webjars/**"</span>)) &#123;</span><br><span class="line">	customizeResourceHandlerRegistration(registry.addResourceHandler(<span class="string">"/webjars/**"</span>)</span><br><span class="line">				.addResourceLocations(<span class="string">"classpath:/META-INF/resources/webjars/"</span>)</span><br><span class="line">				.setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));</span><br><span class="line">			&#125;</span><br></pre></td></tr></table></figure>
+<p>关于webjars，会自动帮我们添加一个映射。对于/webjars/**这样的资源回去类路径下的？META-INF/resources/webjars/路径下面去找。<br><img src="https://img-blog.csdnimg.cn/20200315154828716.png" alt="在这里插入图片描述">并且可以设置缓存时间，而缓存时间是从ResourceProperties下面去找的。<br><img src="https://img-blog.csdnimg.cn/20200315154919727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>关于ResourcesProperties我们可以从配置文件的spring.resources前缀的属性注入进来。</p>
+<p>这样在浏览器访问localhost:8080/webjars/<strong>这个路径就会通过根路径的respurces/webjars/</strong>这个路径来寻找。<br>比如：我们导入jquery的一个jar包：<br><img src="https://img-blog.csdnimg.cn/20200315155351961.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>只要导入进来，我们就可以通过访问localhost:8080/webjars/jquery/3.3.1/jquery.js来访问了，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20200315155507640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="静态资源的位置配置"><a href="#静态资源的位置配置" class="headerlink" title="静态资源的位置配置"></a>静态资源的位置配置</h3><p>那么我们编写的静态资源应该放到哪里才可以被访问到呢，比如下面的ilogin.html<br><img src="https://img-blog.csdnimg.cn/2020031515565130.png" alt="在这里插入图片描述"></p>
+<p>再来看springboot的自动配置：<br><img src="https://img-blog.csdnimg.cn/20200315155749234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那我们点进去看一下这是给我们配置到哪里去了呢？<br><img src="https://img-blog.csdnimg.cn/2020031515582611.png" alt="在这里插入图片描述"><br>经过一路跟踪，终于找到，springboot为我们自动配置的静态资源位置是如下几个：classpath:/MATA-INF/resources/、classpath:/resources/、classpath:/public/、classpath:/static/这几个位置，无论我们把静态资源放到这几个的哪一个都可以访问到：<br><img src="https://img-blog.csdnimg.cn/20200315160111167.png" alt="在这里插入图片描述"><br>通过测试abcd四个html都能被访问到。</p>
+<h2 id="欢迎页的配置"><a href="#欢迎页的配置" class="headerlink" title="欢迎页的配置"></a>欢迎页的配置</h2><p>对于欢迎页的配置，springboot又是如何自动配置的呢？<br>还是进入WebMvcAutoConfiguration.class这个类：<br><img src="https://img-blog.csdnimg.cn/2020031516032831.png" alt="在这里插入图片描述"><br>进入这个构造方法里边，<br><img src="https://img-blog.csdnimg.cn/20200315160407460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200315160433808.png" alt="在这里插入图片描述"><br>观察这个类的注释：支持静态资源和模板文件，但是更喜欢静态资源。</p>
+<p>也就是我们无论是吧index.html页面放到静态资源文件夹下，还是放在templates文件夹下都可以被访问到，但是如果两个路径下都包括index.html，那么优先加载静态资源下的index。</p>
+<h2 id="全面接管springmvc"><a href="#全面接管springmvc" class="headerlink" title="全面接管springmvc"></a>全面接管springmvc</h2><p>如何全面接管springmvc呢，我们只要在一个组件上面加上@EnableWebMvc注解就行。</p>
+<p>这样springboot为我们做的mvc自动配置全部都会失效，只会保留最初始的功能。<br>如下所示：<br><img src="https://img-blog.csdnimg.cn/20200315162509225.png" alt="在这里插入图片描述"><br>这样如果我们在访问webjars，比如：<a href="http://localhost:8080/webjars/jquery/3.3.1/jquery.js" target="_blank" rel="noopener">http://localhost:8080/webjars/jquery/3.3.1/jquery.js</a><br><img src="https://img-blog.csdnimg.cn/20200315162554334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就不能访问到了。</p>
+<p>为什么只要添加一个注解就不能访问到了呢？<br>可以进这个注解看一下：<br><img src="https://img-blog.csdnimg.cn/20200315162639603.png" alt="在这里插入图片描述"><br>这个注解很简单，就是向容器中导入了一个组件，那我们点进去看一下：<br><img src="https://img-blog.csdnimg.cn/20200315162724412.png" alt="在这里插入图片描述"><br>我们可以看到这个类继承了WrbConfigurationSupport这个类，再看看mvc的自动配置类：<br><img src="https://img-blog.csdnimg.cn/20200315162840580.png" alt="在这里插入图片描述"><br>mvc的自动配置类会判断在没有这个组件的情况下，才会生效</p>
+<p>也就是说我们使用了这个@EnableWebMvc注解，就会使springboot自动配置的mvc失效。</p>
+
+    </div>
+
+    
+    
+    
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag"># 微服务</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/04/22/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82Java%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" rel="next" title="一文读懂Java 代码块和代码执行顺序">
+                  <i class="fa fa-chevron-left"></i> 一文读懂Java 代码块和代码执行顺序
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/04/22/springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="prev" title="SpringBoot中的日志框架">
+                  SpringBoot中的日志框架 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot对mvc的自动配置"><span class="nav-number">1.</span> <span class="nav-text">springboot对mvc的自动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对静态资源的自动配置"><span class="nav-number">1.1.</span> <span class="nav-text">对静态资源的自动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webjars"><span class="nav-number">1.1.1.</span> <span class="nav-text">webjars</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态资源的位置配置"><span class="nav-number">1.1.2.</span> <span class="nav-text">静态资源的位置配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欢迎页的配置"><span class="nav-number">1.2.</span> <span class="nav-text">欢迎页的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全面接管springmvc"><span class="nav-number">1.3.</span> <span class="nav-text">全面接管springmvc</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="youngyang"
+    src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">youngyang</p>
+  <div class="site-description" itemprop="description">Record what you want!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyoungyang" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;xyoungyang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_42013590" title="CSDN &amp;rarr; https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42013590" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngyang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">216k</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+

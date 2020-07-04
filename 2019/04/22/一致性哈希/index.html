@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Yang's Blog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="前言伴随着系统流量的增大,出现了应用集群。在 Redis 中为了保证 Redis 的高可用也为 Redis 搭建了集群对数据进行分槽存放。在 Mysql数据库要存储的量达到一个很高的地步的时候,我们会对数据库进行分库分表操作。OK，到这儿先假设我们不知道什么是集群、什么是分库分表,我们先来看一个数据库水平切分演变的例子:  假设我们的系统中有一张会员表 customer_info, 我们的系统刚开">
+<meta name="keywords" content="分布式与集群">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一致性哈希">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;2019&#x2F;04&#x2F;22&#x2F;%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C&#x2F;index.html">
+<meta property="og:site_name" content="Yang&#39;s Blog">
+<meta property="og:description" content="前言伴随着系统流量的增大,出现了应用集群。在 Redis 中为了保证 Redis 的高可用也为 Redis 搭建了集群对数据进行分槽存放。在 Mysql数据库要存储的量达到一个很高的地步的时候,我们会对数据库进行分库分表操作。OK，到这儿先假设我们不知道什么是集群、什么是分库分表,我们先来看一个数据库水平切分演变的例子:  假设我们的系统中有一张会员表 customer_info, 我们的系统刚开">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231022751.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231122911.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231139440.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231154875.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231339864.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231356294.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231447277.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231459476.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231814902.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-07-04T12:56:17.076Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200629231022751.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="https://youngyang.top/2019/04/22/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>一致性哈希 | Yang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">37</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一致性哈希
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 20:56:17" itemprop="dateModified" datetime="2020-07-04T20:56:17+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8E%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式与集群</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>伴随着系统流量的增大,出现了应用集群。在 Redis 中为了保证 Redis 的高可用也为 Redis 搭建了集群对数据进行分槽存放。在 Mysql数据库要存储的量达到一个很高的地步的时候,我们会对数据库进行分库分表操作。OK，到这儿先假设我们不知道什么是集群、什么是分库分表,我们先来看一个数据库水平切分演变的例子:</p>
+<blockquote>
+<p>假设我们的系统中有一张会员表 customer_info, 我们的系统刚开始无人问津,我们在一个单个的数据库中放这张表，所有的会员记录都插入到这个数据库的这张表中，这没什么问题，是一个很正常且合理的操作。某段时间，我们的系统突然火爆了起来，注册会员激增，达到了千万级别并且还在快速增长，这时候所有的用户请求数据都会请求这张表，毫无疑问数据库的压力很大，于是可能会经常发生宕机事件，给系统造成了很大影响。为了解决这件事情，我们将单张表的数据切分到多个服务器上去，每个服务器具有相应的库与表，只是表中数据不同。 这样做能够有效的缓解单机数据库的压力和系统的性能瓶颈。</p>
+</blockquote>
+<p>看完了这个例子,我们对水平拆分数据库有了一个大致的印象，其实就是把很多的数据按照一定的规则存放在不同的服务器上，然后查找的时候能够根据存放的时候的规则去找到前面存放的数据。那么我们要说的一致性哈希算法，其实就是解决了这里面的 存取规则 的问题，有了这个一致性哈希算法，我们能够准确的知道我们要取的数据落在哪个机器的哪个数据库中。</p>
+<a id="more"></a>
+<h1 id="简单哈希"><a href="#简单哈希" class="headerlink" title="简单哈希"></a>简单哈希</h1><p>还是上面水平拆分数据库的例子,假设我们现在不知道什么一致性哈希什么集群分槽，就让我们自己想的话，我们可以很容器的想到 java 中的 HashMap 的原理，它通过计算了一个 key 的哈希值，然后拿这个哈希值对底层数组取模就得到了一个哈希桶，如果数据存在的话，就一定在这个哈希桶里，否则就不存在。类似的可以想到，假设我们的 customer_info 我们可以按照用户id去分库分表，假设此时存在水平的三个库表,如下,我们分别称之为 节点D1,节点D2,节点D0</p>
+<p>机器 ip    数据库    数据表</p>
+<blockquote>
+<p>127.0.0.1    customer    customer_info<br>127.0.0.2    customer    customer_info<br>127.0.0.3    customer    customer_info</p>
+</blockquote>
+<p>分库分表的时候,用户 A 的记录落在了 D1 机器，用户 B 的记录落在了 D2 机器，用户 C 的机器落在了 D0 机器上，用户 A 要存在哪条数据库上的计算过程是用户 A 的会员 id 的哈希值对 3 取模，因为现在只有 3 台机器，伪代码: A_id.hash() % / 3，用户 B 和用户 C 依次类推。如下图所示<br><img src="https://img-blog.csdnimg.cn/20200629231022751.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"><br>这好像很方便的解决了存取规则的问题，我们来分析一波:<br>假设我们的系统用户量又激增了，我们就需要再加一些机器,此时我们再计算哈希值的时候，取模不再是对 3 取模了，而是对 4 进行取模了，之前 A_id.hash() % / 3 = 1,而现在 A_id.hash() % / 4 = ? 这个值很大概率不会是 1，所以这就会出现用户明明存在记录但是却查不到的情况，这就问题很大了，如果要解决这个问题只能在机器节点数量变化的时候对数据重新哈希，这代价就有点大了。所以，我们需要想办法让这种情况不发生，这种情况发生的根本是哈希算法本身的特性导致的，直接使用取模的话这是无法避免的。所以就有了一致性哈希</p>
+<h1 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h1><p>上面通过数据库的例子介绍了哈希算法，然后也分析了它的劣势,当机器数量发生变动的时候，几乎所有的数据都会移动(不移动的应该是运气比较好吧前后取模都是同一个值)，这个代价很大。此时的问题从水平如何拆分变成了，当增加或者删除节点时，对于大多数记录，保证原来分配到的某个节点，现在仍然应该分配到那个节点，将数据迁移量的降到最低，这就是一致性哈希要做的事情。在这里我们不指定是数据库还是什么，反正都是分布式存储节点。</p>
+<h2 id="一致性hash介绍"><a href="#一致性hash介绍" class="headerlink" title="一致性hash介绍"></a>一致性hash介绍</h2><p>一致性 Hash 算法也是使用取模的思想，只是，刚才描述的取模法是对节点数量进行取模，而一致性Hash算法是对 2^32 取模，什么意思呢？简单来说，一致性Hash算法将整个哈希值空间组织成一个虚拟的圆环，如假设某哈希函数H的值空间为0-2^32-1（即哈希值是一个32位无符号整形），整个哈希环如下，从 0 ~ 2^32-1 代表的分别是一个个的节点,这个环也叫哈希环<br><img src="https://img-blog.csdnimg.cn/20200629231122911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"><br>然后我们将我们的节点进行一次哈希，按照一定的规则，比如按照 ip 地址的哈希值，让节点落在哈希环上。比如此时我们可能得到了如下图的环:</p>
+<p><img src="https://img-blog.csdnimg.cn/20200629231139440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"><br>然后就是需要通过数据 key 找到对应的服务器然后存储了，我们约定,通过数据 key 的哈希值落在哈希环上的节点，如果命中了机器节点就落在这个机器上，否则落在顺时针直到碰到第一个机器。如下图所示 : A 的哈希值落在了 D2 节点的前面，往下找落在了 D2 机器上，D的哈希值 在 D1 节点的前面，往下找到了 D1 机器，B的哈希值刚好落在了D1 节点上，依次<del>~</del></p>
+<p><img src="https://img-blog.csdnimg.cn/20200629231154875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="image.png"></p>
+<h2 id="一致性hash分析"><a href="#一致性hash分析" class="headerlink" title="一致性hash分析"></a>一致性hash分析</h2><p>一致性哈希主要就是解决当机器减少或增加的时候，大面积的数据重新哈希的问题，主要从下面 2 个方向去考虑的，当节点宕机时，数据记录会被定位到下一个节点上，当新增节点的时候 ，相关区间内的数据记录就需要重新哈希。</p>
+<h3 id="某节点宕机"><a href="#某节点宕机" class="headerlink" title="某节点宕机"></a>某节点宕机</h3><p>我们假设上图中的 节点 D2 因为一些原因宕机了,可以看到，只有数据 A 的记录需要重新重新定位存储到节点 D1 上，因为 D1 是 D2 的下一个节点，其它的数据都没有被影响到，此时被影响的仅仅是 图中的 D0-D2 这段区间的记录，也就是之前落在 D2 上的数据现在都要落到 D1 上面了。如下图<img src="https://img-blog.csdnimg.cn/20200629231339864.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="节点宕机"></p>
+<h3 id="新增节点"><a href="#新增节点" class="headerlink" title="新增节点"></a>新增节点</h3><p>我们假设我们需要增加一台机器，也就是增加一个节点D4，如下图所示，这个节点落在 D2-D1 之间，按照上述的哈希环上的哈希值落在节点的规则，那么此时之前落在 D2 到 D4 之间的数据都需要重新定位到新的节点上面了，而其它位置的数据是不需要有改变的。<br><img src="https://img-blog.csdnimg.cn/20200629231356294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="新增节点"></p>
+<h2 id="一致性哈希的数据倾斜问题"><a href="#一致性哈希的数据倾斜问题" class="headerlink" title="一致性哈希的数据倾斜问题"></a>一致性哈希的数据倾斜问题</h2><p>一致性Hash算法在服务节点太少时，容易因为节点分部不均匀而造成数据倾斜（被缓存的对象大部分集中缓存在某一台服务器上）问题。比如只有 2 台机器，这 2 台机器离的很近，那么顺时针第一个机器节点上将存在大量的数据，第二个机器节点上数据会很少。如下图所示，D0 机器承载了绝大多数的数据<br><img src="https://img-blog.csdnimg.cn/20200629231447277.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="虚拟节点解决数据倾斜问题"><a href="#虚拟节点解决数据倾斜问题" class="headerlink" title="虚拟节点解决数据倾斜问题"></a>虚拟节点解决数据倾斜问题</h2><p>为了避免出现数据倾斜问题，一致性 Hash 算法引入了虚拟节点的机制，也就是每个机器节点会进行多次哈希，最终每个机器节点在哈希环上会有多个虚拟节点存在，使用这种方式来大大削弱甚至避免数据倾斜问题。同时数据定位算法不变，只是多了一步虚拟节点到实际节点的映射，例如定位到“D1#1”、“D1#2”、“D1#3”三个虚拟节点的数据均定位到 D1 上。这样就解决了服务节点少时数据倾斜的问题。在实际应用中，通常将虚拟节点数设置为32甚至更大，因此即使很少的服务节点也能做到相对均匀的数据分布。这也是 Dubbo 负载均衡中有一种一致性哈希负载均衡的实现思想。<br><img src="https://img-blog.csdnimg.cn/20200629231459476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="一致性哈希的应用案例"><a href="#一致性哈希的应用案例" class="headerlink" title="一致性哈希的应用案例"></a>一致性哈希的应用案例</h2><p>一致性哈希用到的地方很多，特别是中间件里面，比如 Dubbo 的负载均衡也有一种策略是一致性哈希策略，使用的就是虚拟节点实现的。Redis 集群中也用到了相关思想但是没有用它而是根据实际情况改进了一下。而对于存储数据的节点水平切分的时候它的作用就更不可代替了。and so on···</p>
+<h1 id="Redis-集群分槽的实现"><a href="#Redis-集群分槽的实现" class="headerlink" title="Redis 集群分槽的实现"></a>Redis 集群分槽的实现</h1><p>Redis 集群并没有直接使用一致性哈希，而是使用了哈希槽 （slot） 的概念，Redis 没有直接使用哈希算法 hash()，而是使用了crc16校验算法。槽位其实就是一个个的空间的单位。其实哈希槽的本质和一致性哈希算法非常相似，不同点就是对于哈希空间的定义。一致性哈希的空间是一个圆环，节点分布是基于圆环的，无法很好的控制数据分布，可能会产生数据倾斜问题。而 Redis 的槽位空间是自定义分配的，类似于Windows盘分区的概念。这种分区是可以自定义大小，自定义位置的。Redis 集群包含了 16384 个哈希槽，每个 Key 经过计算后会落在一个具体的槽位上，而槽位具体在哪个机器上是用户自己根据自己机器的情况配置的，机器硬盘小的可以分配少一点槽位，硬盘大的可以分配多一点。如果节点硬盘都差不多则可以平均分配。所以哈希槽这种概念很好地解决了一致性哈希的弊端。<br>另外在容错性和扩展性上与一致性哈希一样，都是对受影响的数据进行转移而不影响其它的数据。而哈希槽本质上是对槽位的转移，把故障节点负责的槽位转移到其他正常的节点上。扩展节点也是一样，把其他节点上的槽位转移到新的节点上。</p>
+<p>需要注意的是，对于槽位的转移和分派，Redis集群是不会自动进行的，而是需要人工配置的。所以Redis集群的高可用是依赖于节点的主从复制与主从间的自动故障转移。<br><img src="https://img-blog.csdnimg.cn/20200629231814902.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+    </div>
+
+    
+    
+    
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8E%E9%9B%86%E7%BE%A4/" rel="tag"># 分布式与集群</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/04/22/springboot%E4%B8%AD%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="next" title="SpringBoot中的日志框架">
+                  <i class="fa fa-chevron-left"></i> SpringBoot中的日志框架
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/04/22/java%E4%B8%AD%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86/" rel="prev" title="Java中集合的遍历">
+                  Java中集合的遍历 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单哈希"><span class="nav-number">2.</span> <span class="nav-text">简单哈希</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一致性哈希"><span class="nav-number">3.</span> <span class="nav-text">一致性哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性hash介绍"><span class="nav-number">3.1.</span> <span class="nav-text">一致性hash介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性hash分析"><span class="nav-number">3.2.</span> <span class="nav-text">一致性hash分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#某节点宕机"><span class="nav-number">3.2.1.</span> <span class="nav-text">某节点宕机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增节点"><span class="nav-number">3.2.2.</span> <span class="nav-text">新增节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希的数据倾斜问题"><span class="nav-number">3.3.</span> <span class="nav-text">一致性哈希的数据倾斜问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟节点解决数据倾斜问题"><span class="nav-number">3.4.</span> <span class="nav-text">虚拟节点解决数据倾斜问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希的应用案例"><span class="nav-number">3.5.</span> <span class="nav-text">一致性哈希的应用案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis-集群分槽的实现"><span class="nav-number">4.</span> <span class="nav-text">Redis 集群分槽的实现</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="youngyang"
+    src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">youngyang</p>
+  <div class="site-description" itemprop="description">Record what you want!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xyoungyang" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;xyoungyang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_42013590" title="CSDN &amp;rarr; https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_42013590" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngyang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">216k</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
