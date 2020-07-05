@@ -54,13 +54,13 @@
   <meta name="description" content="Record what you want!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yang&#39;s Blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;page&#x2F;4&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;page&#x2F;7&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="Record what you want!">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://youngyang.top/page/4/">
+<link rel="canonical" href="https://youngyang.top/page/7/">
 
 
 <script id="page-configurations">
@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Linux%E4%B8%AD%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7vim/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/Linux%E4%B8%AD%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7vim/" class="post-title-link" itemprop="url">Linux中编辑工具vi</a>
+            <a href="/2019/04/22/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/" class="post-title-link" itemprop="url">同步组建的基础之队列同步器AQS</a>
         </h1>
 
         <div class="post-meta">
@@ -219,7 +219,97 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 20:40:37" itemprop="dateModified" datetime="2020-07-04T20:40:37+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-04 21:10:03" itemprop="dateModified" datetime="2020-07-04T21:10:03+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-AQS-简单介绍"><a href="#1-AQS-简单介绍" class="headerlink" title="1 AQS 简单介绍"></a>1 AQS 简单介绍</h1><p>AQS的全称为（AbstractQueuedSynchronizer），这个类在java.util.concurrent.locks包下面。<br><img src="https://img-blog.csdnimg.cn/20200623111101483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>AQS是一个用来构建锁和同步器的框架，使用AQS能简单且高效地构造出应用广泛的大量的同步器，比如我们提到的ReentrantLock，Semaphore，其他的诸如ReentrantReadWriteLock，SynchronousQueue，FutureTask等等皆是基于AQS的。当然，我们自己也能利用AQS非常轻松容易地构造出符合我们自己需求的同步器。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">如何在Linux中安装MySQL数据库</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-31 12:33:02" itemprop="dateModified" datetime="2019-10-31T12:33:02+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +329,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
+              <span>2.1k</span>
             </span>
 
         </div>
@@ -251,10 +341,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="vi与vim"><a href="#vi与vim" class="headerlink" title="vi与vim"></a>vi与vim</h1><p>vi编辑器是所有Unix及Linux系统下标准的编辑器，他就相当于windows系统中的记事本一样，它的强大不逊色于任何最新的文本编辑器。他是我们使用Linux系统不能缺少的工具。由于对Unix及Linux系统的任何版本，vi编辑器是完全相同的，学会它后，您将在Linux的世界里畅行无阻。</p>
+          <p>最近在阿里云买了一个云服务器，centos 7.3。打算把自己写的项目部署进去来玩一玩，熟悉线上部署的流程。部署项目之前肯定要搭建好环境，比如jdk、tomcat、maven、mysql等等的安装。因为之前没有用过linux系统，对其中的原理和各种命令不尽熟悉，所以遇到了许多困难。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/Linux%E4%B8%AD%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7vim/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -278,7 +368,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%B0%8F%E7%99%BD%E9%83%BD%E7%9C%8B%E5%BE%97%E6%87%82%E7%9A%84%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -292,7 +382,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Java虚拟机类的加载过程</a>
+            <a href="/2019/04/22/%E5%B0%8F%E7%99%BD%E9%83%BD%E7%9C%8B%E5%BE%97%E6%87%82%E7%9A%84%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">小白都看得懂的快速排序</a>
         </h1>
 
         <div class="post-meta">
@@ -309,7 +399,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 20:37:39" itemprop="dateModified" datetime="2020-07-04T20:37:39+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-04 21:08:05" itemprop="dateModified" datetime="2020-07-04T21:08:05+08:00">2020-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -317,8 +407,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JVM/" itemprop="url" rel="index">
-                    <span itemprop="name">JVM</span>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
                   </a>
                 </span>
             </span>
@@ -329,7 +419,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
+              <span>3.2k</span>
             </span>
 
         </div>
@@ -341,11 +431,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本篇博客主要讲解Java虚拟机加载类的过程。</p>
-<p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过<strong>加载，连接，初始化</strong>三步来实现这个类进行初始化。其中连接又包括三步：验证、准备和解析。</p>
+          <p>时隔多日，我又开始了我的博客之旅。。。准备面试的时候真的发现心里一万只xxx在奔腾→_→。</p>
+<p>今天学习了快排，这应该是比较常见的排序方法了，冒泡排序的时间复杂度为O(n2)，相对于冒泡排序而言，快排的<strong>平均时间复杂度为O(nlogn)。</strong></p>
+<p><strong>快排，说白了就是给基准数据找到正确索引位置的过程。不断二分迭代，从而将所有的基准数据都放到正确的位置。</strong></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/%E5%B0%8F%E7%99%BD%E9%83%BD%E7%9C%8B%E5%BE%97%E6%87%82%E7%9A%84%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -369,7 +460,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/SpringDataJpa%E5%AD%A6%E4%B9%A0%E4%B8%80/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -383,7 +474,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/SpringDataJpa%E5%AD%A6%E4%B9%A0%E4%B8%80/" class="post-title-link" itemprop="url">SpringDataJpa学习</a>
+            <a href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/" class="post-title-link" itemprop="url">如何实现http协议中的重定向？</a>
         </h1>
 
         <div class="post-meta">
@@ -400,7 +491,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 20:53:49" itemprop="dateModified" datetime="2020-07-04T20:53:49+08:00">2020-07-04</time>
+                <time title="修改时间：2019-10-31 12:32:39" itemprop="dateModified" datetime="2019-10-31T12:32:39+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -408,8 +499,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringDataJpa/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringDataJpa</span>
+                  <a href="/categories/java-web/" itemprop="url" rel="index">
+                    <span itemprop="name">java web</span>
                   </a>
                 </span>
             </span>
@@ -420,7 +511,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>38k</span>
+              <span>2.1k</span>
             </span>
 
         </div>
@@ -432,13 +523,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>学springdatajpa之前，我觉得非常有必要复习一下Jpa规范和orm思想。</p>
-<h1 id="JPA入门"><a href="#JPA入门" class="headerlink" title="JPA入门"></a>JPA入门</h1><h2 id="orm概述"><a href="#orm概述" class="headerlink" title="orm概述"></a>orm概述</h2><p>ORM（Object-Relational Mapping） 表示对象关系映射。在面向对象的软件开发中，通过ORM，就可以把对象映射到关系型数据库中。只要有一套程序能够做到建立对象与数据库的关联，操作对象就可以直接操作数据库数据，就可以说这套程序实现了ORM对象关系映射。</p>
-<p>简单的说：<strong>ORM就是建立实体类和数据库表之间的关系，从而达到操作实体类就相当于操作数据库表的目的。</strong></p>
-<p>常见的orm框架：Mybatis（ibatis）、Hibernate、Jpa。</p>
+          <p>我是一个新的java学习爱好者，业余的时候写一些简单的技术博客供大家一起学习交流，欢迎大家互相学习，共同进步。如果有什么不正确或者有什么建议欢迎指教！！</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/SpringDataJpa%E5%AD%A6%E4%B9%A0%E4%B8%80/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0HTTP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E9%87%8D%E5%AE%9A%E5%90%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -462,7 +550,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -476,7 +564,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">SpringBoot中对MVC进行扩展</a>
+            <a href="/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">夯实Java基础系列：深入理解Java内部类及其实现原理</a>
         </h1>
 
         <div class="post-meta">
@@ -493,7 +581,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 20:59:16" itemprop="dateModified" datetime="2020-07-04T20:59:16+08:00">2020-07-04</time>
+                <time title="修改时间：2019-10-31 12:36:16" itemprop="dateModified" datetime="2019-10-31T12:36:16+08:00">2019-10-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -501,8 +589,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringBoot</span>
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">实现原理</span>
                   </a>
                 </span>
             </span>
@@ -513,7 +607,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>9.8k</span>
             </span>
 
         </div>
@@ -525,103 +619,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>@[TOC]<br>声明：本篇文章所有的内容都是基于<strong><em>springboot2.2.5</em></strong>的。</p>
-<p>关于springboot对mvc的自动配置见我的另一篇博客：<a href="https://blog.csdn.net/qq_42013590/article/details/104879704" target="_blank" rel="noopener">https://blog.csdn.net/qq_42013590/article/details/104879704</a></p>
-<p>对于已经有的自动配置显然很多时候并不能满足我们的需求，那么我们如何实现对mvc的扩展呢？</p>
-<p><strong>观看其他博客结合看源码发现：<br>1）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置<br> 2）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（如：ViewResolver），sprngboot就会将用户配置的和自己默认的组合起来；<br> 3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置</strong></p>
+          <p>这是我在一个公众号上看到的关于java基础的一些内容，我觉得对于java基础掌握不牢固的小伙伴的帮助应该会很大，所以搬运过来供大家学习交流。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/activeMQ%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/22/activeMQ%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">activeMQ简单介绍</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 22:34:35" itemprop="dateModified" datetime="2020-07-04T22:34:35+08:00">2020-07-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index">
-                    <span itemprop="name">消息队列</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="为什么要使用消息中间件？"><a href="#为什么要使用消息中间件？" class="headerlink" title="为什么要使用消息中间件？"></a>为什么要使用消息中间件？</h1><h2 id="系统解耦"><a href="#系统解耦" class="headerlink" title="系统解耦"></a>系统解耦</h2><p>假设你有个系统A，这个系统A会产出一个核心数据，现在下游有系统B和系统C需要这个数据。<br>那简单，系统A就是直接调用系统B和系统C的接口发送数据给他们就好了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/activeMQ%E5%85%A5%E9%97%A8/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/%E5%A4%AF%E5%AE%9EJava%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E5%86%85%E9%83%A8%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -645,7 +646,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 

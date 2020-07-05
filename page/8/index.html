@@ -54,27 +54,27 @@
   <meta name="description" content="Record what you want!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Yang&#39;s Blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;archives&#x2F;page&#x2F;3&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;youngyang.top&#x2F;page&#x2F;8&#x2F;index.html">
 <meta property="og:site_name" content="Yang&#39;s Blog">
 <meta property="og:description" content="Record what you want!">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://youngyang.top/archives/page/3/">
+<link rel="canonical" href="https://youngyang.top/page/8/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
+    isHome: true,
     isPost: false,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | Yang's Blog</title>
+  <title>Yang's Blog</title>
   
 
 
@@ -183,191 +183,197 @@
           <div class="content">
             
 
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
+  <div class="posts-expand">
         
-        <span class="collection-header">还行! 目前共计 37 篇日志。 继续努力。</span>
-      </div>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">线程池的五种状态详解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 21:09:03" itemprop="dateModified" datetime="2020-07-04T21:09:03+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">并发编程</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+          <p>线程池的5种状态：Running、ShutDown、Stop、Tidying、Terminated。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E8%AF%A6%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">Java虚拟机类的加载过程</span>
-          </a>
-      </h2>
-
-    </header>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
+  
+  
+  
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E6%B5%85%E6%9E%90mysql%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/">
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/SpringDataJpa%E5%AD%A6%E4%B9%A0%E4%B8%80/" itemprop="url">
-            <span itemprop="name">SpringDataJpa学习</span>
-          </a>
-      </h2>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/%E6%B5%85%E6%9E%90mysql%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">浅析MySQL中的事务</a>
+        </h1>
 
-    </header>
-  </article>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 22:32:23" itemprop="dateModified" datetime="2020-07-04T22:32:23+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+            </span>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" itemprop="url">
-            <span itemprop="name">SpringBoot中对MVC进行扩展</span>
-          </a>
-      </h2>
+        </div>
+      </header>
 
-    </header>
-  </article>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/activeMQ%E5%85%A5%E9%97%A8/" itemprop="url">
-            <span itemprop="name">activeMQ简单介绍</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/docker%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%B8%80/" itemprop="url">
-            <span itemprop="name">Docker学习内容之一</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/Spring%E4%B8%AD%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B/" itemprop="url">
-            <span itemprop="name">Spring中开启事务的方式有哪些</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/" itemprop="url">
-            <span itemprop="name">Docker学习之二</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-04-22T14:47:40+08:00"
-              content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/04/22/java%E4%B8%AD%E9%9B%86%E5%90%88%E7%9A%84%E9%81%8D%E5%8E%86/" itemprop="url">
-            <span itemprop="name">Java中集合的遍历</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-
+      
+          <p>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。</p>
+<h1 id="事务的四大特性"><a href="#事务的四大特性" class="headerlink" title="事务的四大特性"></a>事务的四大特性</h1><p>一般来说，事务是必须满足4个条件（ACID）：：<strong>原子性（Atomicity，或称不可分割性）、一致性（Consistency）、隔离性（Isolation，又称独立性）、持久性（Durability）。</strong></p>
+<p><strong>原子性</strong>：一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p>
+<p><strong>一致性</strong>：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p>
+<p><strong>隔离性</strong>：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括<strong>读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）</strong>。</p>
+<p><strong>持久性</strong>：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/%E6%B5%85%E6%9E%90mysql%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
   </nav>
 
 
