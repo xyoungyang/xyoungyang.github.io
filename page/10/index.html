@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/%E6%B5%85%E6%9E%90mysql%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/" class="post-title-link" itemprop="url">同步组建的基础之队列同步器AQS</a>
+            <a href="/2019/04/22/%E6%B5%85%E6%9E%90mysql%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">浅析MySQL中的事务</a>
         </h1>
 
         <div class="post-meta">
@@ -219,7 +219,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 21:10:03" itemprop="dateModified" datetime="2020-07-04T21:10:03+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-04 22:32:23" itemprop="dateModified" datetime="2020-07-04T22:32:23+08:00">2020-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,8 +227,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">并发编程</span>
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
             </span>
@@ -239,7 +239,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>15k</span>
+              <span>2.6k</span>
             </span>
 
         </div>
@@ -251,10 +251,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-AQS-简单介绍"><a href="#1-AQS-简单介绍" class="headerlink" title="1 AQS 简单介绍"></a>1 AQS 简单介绍</h1><p>AQS的全称为（AbstractQueuedSynchronizer），这个类在java.util.concurrent.locks包下面。<br><img src="https://img-blog.csdnimg.cn/20200623111101483.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyMDEzNTkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>AQS是一个用来构建锁和同步器的框架，使用AQS能简单且高效地构造出应用广泛的大量的同步器，比如我们提到的ReentrantLock，Semaphore，其他的诸如ReentrantReadWriteLock，SynchronousQueue，FutureTask等等皆是基于AQS的。当然，我们自己也能利用AQS非常轻松容易地构造出符合我们自己需求的同步器。</p>
+          <p>在 MySQL 中只有使用了 Innodb 数据库引擎的数据库或表才支持事务。</p>
+<h1 id="事务的四大特性"><a href="#事务的四大特性" class="headerlink" title="事务的四大特性"></a>事务的四大特性</h1><p>一般来说，事务是必须满足4个条件（ACID）：：<strong>原子性（Atomicity，或称不可分割性）、一致性（Consistency）、隔离性（Isolation，又称独立性）、持久性（Durability）。</strong></p>
+<p><strong>原子性</strong>：一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p>
+<p><strong>一致性</strong>：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p>
+<p><strong>隔离性</strong>：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括<strong>读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）</strong>。</p>
+<p><strong>持久性</strong>：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/%E5%90%8C%E6%AD%A5%E7%BB%84%E5%BB%BA%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B9%8B%E9%98%9F%E5%88%97%E5%90%8C%E6%AD%A5%E5%99%A8AQS/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/%E6%B5%85%E6%9E%90mysql%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
