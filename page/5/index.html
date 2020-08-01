@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Java%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E8%99%9A%E5%BC%95%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/Java%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E8%99%9A%E5%BC%95%E7%94%A8/" class="post-title-link" itemprop="url">Java的四种引用：强引用、软引用、弱引用、虚引用</a>
+            <a href="/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Java虚拟机类的加载过程</a>
         </h1>
 
         <div class="post-meta">
@@ -219,7 +219,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 20:36:25" itemprop="dateModified" datetime="2020-07-04T20:36:25+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-04 20:37:39" itemprop="dateModified" datetime="2020-07-04T20:37:39+08:00">2020-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,8 +227,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
             </span>
@@ -239,7 +239,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>2.6k</span>
             </span>
 
         </div>
@@ -251,103 +251,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="整体引用架构"><a href="#整体引用架构" class="headerlink" title="整体引用架构"></a>整体引用架构</h2><p>Java中包括四种引用，分别是强引用、软引用、弱引用、虚引用。这些引用关系也对对象的生命周期有着重要的联系。</p>
+          <p>本篇博客主要讲解Java虚拟机加载类的过程。</p>
+<p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过<strong>加载，连接，初始化</strong>三步来实现这个类进行初始化。其中连接又包括三步：验证、准备和解析。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/Java%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%BA%E5%BC%95%E7%94%A8%E3%80%81%E8%BD%AF%E5%BC%95%E7%94%A8%E3%80%81%E5%BC%B1%E5%BC%95%E7%94%A8%E3%80%81%E8%99%9A%E5%BC%95%E7%94%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="youngyang">
-      <meta itemprop="description" content="Record what you want!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">SpringBoot中对MVC进行扩展</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 20:59:16" itemprop="dateModified" datetime="2020-07-04T20:59:16+08:00">2020-07-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringBoot</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>@[TOC]<br>声明：本篇文章所有的内容都是基于<strong><em>springboot2.2.5</em></strong>的。</p>
-<p>关于springboot对mvc的自动配置见我的另一篇博客：<a href="https://blog.csdn.net/qq_42013590/article/details/104879704" target="_blank" rel="noopener">https://blog.csdn.net/qq_42013590/article/details/104879704</a></p>
-<p>对于已经有的自动配置显然很多时候并不能满足我们的需求，那么我们如何实现对mvc的扩展呢？</p>
-<p><strong>观看其他博客结合看源码发现：<br>1）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置<br> 2）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（如：ViewResolver），sprngboot就会将用户配置的和自己默认的组合起来；<br> 3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E8%BF%87%E7%A8%8B/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -464,7 +372,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Spring%E4%B8%AD%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B/">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -478,7 +386,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/22/Spring%E4%B8%AD%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B/" class="post-title-link" itemprop="url">Spring中开启事务的方式有哪些</a>
+            <a href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/" class="post-title-link" itemprop="url">SpringBoot中对MVC进行扩展</a>
         </h1>
 
         <div class="post-meta">
@@ -495,7 +403,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-04 21:00:59" itemprop="dateModified" datetime="2020-07-04T21:00:59+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-04 20:59:16" itemprop="dateModified" datetime="2020-07-04T20:59:16+08:00">2020-07-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -503,8 +411,8 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringBoot</span>
                   </a>
                 </span>
             </span>
@@ -515,7 +423,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>20k</span>
+              <span>1.5k</span>
             </span>
 
         </div>
@@ -527,10 +435,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Spring中开启事务的方式主要有两种：<strong>编程式事务和声明式事务</strong>。</p>
+          <p>@[TOC]<br>声明：本篇文章所有的内容都是基于<strong><em>springboot2.2.5</em></strong>的。</p>
+<p>关于springboot对mvc的自动配置见我的另一篇博客：<a href="https://blog.csdn.net/qq_42013590/article/details/104879704" target="_blank" rel="noopener">https://blog.csdn.net/qq_42013590/article/details/104879704</a></p>
+<p>对于已经有的自动配置显然很多时候并不能满足我们的需求，那么我们如何实现对mvc的扩展呢？</p>
+<p><strong>观看其他博客结合看源码发现：<br>1）、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置<br> 2）、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（如：ViewResolver），sprngboot就会将用户配置的和自己默认的组合起来；<br> 3）、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置</strong></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/22/Spring%E4%B8%AD%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/Springboot%E4%B8%AD%E5%AF%B9mvc%E8%BF%9B%E8%A1%8C%E6%89%A9%E5%B1%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://youngyang.top/2019/04/22/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="youngyang">
+      <meta itemprop="description" content="Record what you want!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/" class="post-title-link" itemprop="url">Docker学习之二</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 14:47:40" itemprop="dateCreated datePublished" datetime="2019-04-22T14:47:40+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-04 22:29:31" itemprop="dateModified" datetime="2020-07-04T22:29:31+08:00">2020-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="docker镜像"><a href="#docker镜像" class="headerlink" title="docker镜像"></a>docker镜像</h1><p>镜像是一种轻量级、可执行的独立软件包，<strong>用来打包软件运行环境和基于运行环境开发的软件</strong>，它包含运行某个软件所需的所有内容，包括代码、运行时、库、环境变量和配置文件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/docke%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9%E4%B9%8B%E4%BA%8C/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
